@@ -1,3 +1,6 @@
+% MEETING NUMBER
+\newcommand{\meet}{2}
+% MEETING NUMBER
 \documentclass[12pt]{article}
 \usepackage[dvipsnames,rgb,dvips]{xcolor}
 \usepackage{graphicx}
@@ -17,21 +20,10 @@
 \addtolength{\oddsidemargin}{-1.2cm}
 \addtolength{\textwidth}{2cm}
 \pagestyle{myheadings}
+\markright{{\small Meeting \meet, \today \hfill (Group 11) Page \,}}
 
-% ASSIGNMENT NUMBER
-\newcommand{\ass}{1}
-\newcommand{\assname}{Pre-study}
-\markright{{\small Group 11\,}}
-\parindent=0cm
-\title{Assignment \ass \ - \assname \\ \large{Group 11}}
-\author{ \and Svante Bennhage \and
- Sebastian Fransson \and
- Victor Johansson \and
- Sofia Larborn \and
- William Levén \and
- Philip Nord \and
- Snezhina Racheva}
 \begin{document}
-\maketitle \vspace*{1in} \newpage \setcounter{page}{1} \pagenumbering{arabic}
-\include{\ass}
+\setcounter{page}{1} \pagenumbering{arabic}
+ 
+\include{\meet/notes}
 \end{document}

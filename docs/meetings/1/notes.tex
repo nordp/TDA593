@@ -34,12 +34,14 @@ Comments: \begin{enumerate}
     \item We consider Rovers to be instances of Robots
     \item Sensors and actuators are parts of a robot
     \item The environment is sort of the whole model, so in a way everything is connected to it (Could be converted to Area and removed)
-    \item Operators (both technical and non-technical), - Not yet defined 
-    \item Missions and robots can coupled by an assignment (Not defined wether or not a mission owns a mission or the other way around)
+    \item Operators (both technical and non-technical) are humans that can interact with the system through the interface of the central station. In our domain, they classify as actors and therefore are not part of the domain model itself.
+    \item Missions and robots can coupled by an assignment (Not defined whether or not a mission owns a mission or the other way around)
     \item Networking device - Connects the central station and the robot.
     \item Reward points are stored/calculated in the central station for each robot according to the procedure as well as robot location.
-    \item Procedure 
+    \item The reward procedure (A and B) decides how points are rewarded and is updated over time.
+    \item The time for rewarding points isn't modelled in the domain model but is something handled by a specific part of the system which relays the current timer from a central point.
+	\item Obstacles entail both static and dynamic physical objects which are present within the environment and its areas.
 \end{enumerate} 
 
 NOTE: Check aggregation and so forth with networking devices, sensors, and actuators.
-Words left: Event, fault, mission change, Time, moving capabilities, Obstacles, Moving capabilities,
+Words left: Monitor

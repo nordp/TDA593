@@ -1,0 +1,51 @@
+
+\section{Model simplifications}
+Robots communicating with other robots should be done through the control station. Dismisses issues when many robots try and work out a situation. Should be the only point of connection between rovers? Used to identify other rover obstacles?
+
+Simplify through making the calculation of the strategy done in the control station? Different strategy options? (Could potentially break our one algorithm down into a few different ones that each deals with one separate strategy)
+
+Simplify the robot by doing the calculation of strategies in the control station. "Assign" mission in station and calculate it THEN send it to the robot for execution of navigation?
+
+Strategy could be any type of pathing.
+
+The reward points should be a total, each robot does not have a separate score.
+
+Change the use case diagram as strategies now are decided by the control station
+
+Change use-case diagram by removing the include relation between the navigate to point and the calculate strategy.
+
+Generalize "Assign mission" use case to include all event transmissions from control station to the robot.
+
+Reward procedures should be changed to only be used by the control station now that the strategies are calculated there instead of in the robot.
+
+
+
+\section{System responsibility breakdown}
+\subsection{Robot}
+The robot has to be able to execute the latest strategy without being connected to the control station. 
+
+\subsection{Control Station}
+Stores some information. Elementary calculations
+
+\subsection{Interface}
+
+
+
+
+
+
+
+
+
+\section*{Supervision notes}
+Looks like a networking device is communicating between many network devices
+
+Our choice if we want the robot to care about points or not (Wi-Fi down) etc
+
+Drop "execute strategy" from "calculate" strategy
+
+Clarify that emergency stop is part of assign mission..? (Generalize to Assign Event?)
+
+Decompose the different use cases
+
+Sergio? (Simulator Questions)

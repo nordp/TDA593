@@ -1,0 +1,41 @@
+\section{Control station}
+\subsection{Sender}
+The Sender receives dispatch instructions from either the Conductor or directly from the Action Handler and dispatches this to a Robot.
+\subsection{Receiver}
+The Receiver receives information related to a Robot. It stores this in the Robot Tracker.
+\subsection{Strategy Planner}
+Uses the Robot Tracker to calculate certain strategies. Dispatches an instructions to the Communication Device
+\subsection{Input Provider}
+Receives input from the actors interface (Mission/Strategy). Provides details on which Mission and Strategy the Conductor will use to decide the instruction
+\subsection{Point Rewarder}
+Component to decide when points are rewarded, sends these points forward to the user interface
+\subsection{Robot Tracker}
+Receives information from the Communication Device, stores all data related to the Robots. Relays data to Point Rewarder, Info Provider, and Strategy Planner
+\subsection{Conductor}
+Takes different kinds of inputs and conducts which instruction should be applied to a robot.
+\subsection{Info provider}
+Sends information such as points collected by the robots to the Interface
+
+\section{Robot}
+\subsection{GPS}
+Separate component, connected to the robot subsystem. Connected to an interface "Location" which requires methods to provide the information from the GPS to the Robot Controller class.
+\subsection{Proximity}
+Separate component, connected to the robot subsystem. Connected to an interface "Distance" which requires methods to provide the data from the Proximity sensor to the Robot Controller class.
+\subsection{Camera}
+Separate component, connected to the robot subsystem. Connected to an interface "Stream" which requires methods to provide the data from the Camera to the Robot Controller class.
+\subsection{Actuators}
+Separate component. Connected to the robot subsystem through an interface "Movement". Requires methods to provide movement actions for the robot itself.
+\subsection{Networking device}
+Singular interface for dispatching and receiving data between the Control Station (Package delivery/recipient). NOTE: This is to be connected to something that handles the data.
+
+\subsection{Controller}
+Brain of the robot.
+
+\section{Interface}
+\subsection{Display}
+Component to display certain information and provide a graphical way to initiate robots through some functionality.
+\subsection{Action button}
+A way to dispatch emergent actions (such as emergency stop for example).
+\subsection{Mission Composer}
+A graphical way to select combinations of options for missions and strategies.
+\subsection{}

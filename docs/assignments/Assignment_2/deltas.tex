@@ -1,12 +1,23 @@
 
-\section{Deltas for Domain}
 Any Deltas that might appear during the formation of the component diagram:
 
+\subsection*{Domain updates}
 \begin{enumerate}
-    \item Generalize wheels to be only actuators so as to encompass all things like motors etc..
-    \item Controller something we need to model in domain? too low level?
-    \item Network device between interface and control station?
-    \item Add the robot tracker? Connected to robot and Station?
-    \item 
+    \item Generalise wheels to be only actuators so as to encompass all things like motors, odometers, etc.
+    \item Move strategy calculation to control station in Use Case "Calculate Strategy".
+    \item Reward points should not be connected to the robot since it is no longer aware of them in our current design.
+    \item The robot should no longer be aware of the Point Strategy since the points are now calculated in the control station.
+    \item The robot no longer knows about the mission since the entire calculation is done from the side of the control station.
+    \item Typo fixed: a robot is only connected to a single networking device.
 \end{enumerate}
+
+\subsection*{Use-case Updates}
+\begin{enumerate}
+    \item Use Case - Assign Mission - Change robot reference to control station since the strategies are calculated there now.
+    \item Use-Case - Calculate Strategy - Calculation is now done in the control station.
+    \item Use-Case - Reward Points - Change any assumptions of individual point tracking - points are a sum as of now. An assumption is made that the point counter will be periodically reset - ex. weekly.
+    \item Use-Case - Update Procedure - the robot should not know about the procedure anymore since the control station handles everything that has to do with points. 
+\end{enumerate}
+
+
     

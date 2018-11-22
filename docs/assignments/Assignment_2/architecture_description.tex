@@ -1,0 +1,25 @@
+When breaking our domain model down into a component diagram, we aimed to first and foremost separate the different areas of our work into layers. Following the Layered Architecture pattern, we divided the system's components into three categories - those responsible for visualisation (Interface), those belonging to the logic and connection between operators and robots (Control station), and those belonging to every instance of a robot - Robot.\\
+
+
+This division worked to clarify each component's role in the system even further, and caused us to tweak some of our definitions in Assignment 1, as we found more practical ways to structure the system. These changes are detailed in the next section.\\
+
+
+Although the system has a layered architecture style, the overall system view has been set up in a way that it implements the client-server pattern with the structure of having both the interface and the robots act as clients. The control station acts as a server with two different end points due to the different natures of the clients, which means it provides or deals with two different services.\\
+
+
+Throughout the system we also frequently tend to make use of the Adapter Pattern. For example, the GPS implements the simulators interface to convert simulator data into other types data that we can make use of in other parts of the program.\\
+
+
+Another pattern seen inside of the system is the State Pattern. This can be clearly seen in the way that we have a global procedure which determines the reward points being awarded at certain times. As a result, they depend on the procedure(state) which is currently in place. \\
+
+
+We also make use of the Strategy Pattern. Strategies is in our case different ways on deciding an optimal route for a robot to visit its points. The strategies are used by the "Conductor" to formulate an instruction that the robot can make use of.
+%client-broker-server pattern with the structure of having the Interface (Client) sending data. The data is then managed and calculated by the control station (broker), which separates it according to intended receiver, in this case - the robot (a ).% 
+
+
+
+
+
+
+
+

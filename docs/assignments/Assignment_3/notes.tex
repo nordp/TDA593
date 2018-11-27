@@ -1,0 +1,37 @@
+The control station tells the robots to visit one point at a time, to be able to tell all robots in an area to stop if an area is deemed inaccessible for example.
+
+Sender: Communicator should be a different parameter, a robot for example
+
+Action:
+stop
+setDestination
+
+Routine:
+Emergency stop, uses action 'stop'
+Robot Failure, uses action 'stop'
+collisionPrevention
+reachMission, uses action 'stop'
+navigateToNext, uses action 'setDestination'
+
+Models package which holds status and Instruction structures.
+
+Procedure provided as an interface through point rewarder.
+
+Actuators and sensors are removed from Implementation stage as they are already composed through the simulator and as such is not within the scope of our system.?
+
+--Decision to create a storage "package" where we store all the relevant data so that we can easily fetch it wherever we would need it. Both currently and for future additions.--
+
+-Point clarification:
+  Points are global and are added to a "pool" stored in the storage inner-"package".
+ 
+-Need to make a strategized mission subclass to mission. Makes things clearer in the UML Class Diagram
+
+-Info Provider changed to Operator interface and is made to be extensible. Interface decided to be the one asking for updates. (eg. every 10 seconds or even manual depending on interface)
+
+-Sender and receiver is generalised as 'Robot Interface' which now handles connection between Control Station and Robot.
+
+-Decided upon having a command-line interface with some sort of update function to update the display so that the Operator can know about the current score. Maps are visualised in a simple way through some form of ascii characters.
+
+The model "package" is composed out of the different types of data that is held and exchanged within the system so as to represent it in the diagram. (Not yet specified what role it will have in the diagram).
+
+Describe deviations in form of eg. the missing 'MAIN' which is tied to the simulator. As well as thing that might be within implementation. 

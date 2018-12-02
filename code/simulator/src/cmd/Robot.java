@@ -1,4 +1,4 @@
-package simulator;
+package cmd;
 
 import project.AbstractRobotSimulator;
 import project.Point;

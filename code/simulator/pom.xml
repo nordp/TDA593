@@ -24,7 +24,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>simulator.Main</mainClass>
+                            <mainClass>cmd.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -35,7 +35,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>simulator.Main</mainClass>
+                            <mainClass>cmd.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

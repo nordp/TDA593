@@ -1,6 +1,5 @@
 package user_interface;
 import model.Mission;
-import model.Action;
 import model.Coordinate;
 import java.util.List;
 import java.util.Scanner;
@@ -25,7 +24,6 @@ public class Display {
             System.out.println("3 - Assign an action");
             System.out.println("4 - Update interface");
             System.out.println("**************************");
-
             // Options go here
             switch(input.nextInt()){
 

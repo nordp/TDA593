@@ -14,7 +14,7 @@ public class Conductor {
         //Should this class maybe be static?
     }
 
-    void setMission(Mission mission, Strategy strategy,Robot robot/*Should this take a robot status instead?*/){
+    void setMission(Mission mission, Strategy strategy,int robot){
         //Is this used to store the current mission for a robot in the storage?
         //If so, this method should already exist in the storage package
     }

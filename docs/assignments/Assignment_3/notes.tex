@@ -34,4 +34,11 @@ Actuators and sensors are removed from Implementation stage as they are already 
 
 The model "package" is composed out of the different types of data that is held and exchanged within the system so as to represent it in the diagram. (Not yet specified what role it will have in the diagram).
 
-Describe deviations in form of eg. the missing 'MAIN' which is tied to the simulator. As well as thing that might be within implementation. 
+Describe deviations in form of eg. the missing 'MAIN' which is tied to the simulator. As well as thing that might be within implementation but not in the model.
+
+Added a controlStation interface within the robot package. which communicates with the robotInterface and makes up this link.
+
+Operator interface will now relay the actions from the operator interface to the robot instead of direcly linking the Robot Interface and the display.
+
+GeoPoints are now renamed to Coordinates to follow the API.
+

@@ -9,8 +9,13 @@ import model.Instruction;
  */
 public class OperatorInterface {
 
-    OperatorInterface(){
+    private static final OperatorInterface instance = new OperatorInterface();
 
+    OperatorInterface(){
+    }
+
+    public static OperatorInterface getInstance(){
+        return instance;
     }
 
     Status getStatuses(){

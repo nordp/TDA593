@@ -1,1 +1,90 @@
-HELO
+\section{Design patterns}
+Our system is using the following design patterns:
+\begin{enumerate}
+\item Strategy pattern for reward procedures which are centralised to the control station package. The process of rewarding points depends on which state the program resides in (currently either A or B), and this may change during runtime.
+\item In order to hide the implementation of the stored data in the control station, the data access object pattern has been applied by specifying a DAO interface for each kind of data needed in the control station package.
+\item Access to the storage is handled by a broker which is located within the control station package. The storageBroker is used so as to be able to cater the different types of data through a single point from the storage class to the different requesting source. 
+\item SimulatorRobot is used as an adapter for the simulator. By using the adapter pattern we could use the same software for another simulator or real robots.
+\item Client server pattern between both robot and control station as well as between control station and user-interface. Both occasions which the control station acts as the "server" (robot CS and interface CS).
+\end{enumerate}
+
+\section{Consistency between models and code}
+This section lists inconsistencies between the different models and the code. This is done in the fashion of describing what should be changed in the earlier models for them to be consistent the later models.
+\subsection{Changes to domain model}
+Actuators as well as the different sensors might no longer be a part of our domain since they are provided from an external simulation system which we use in order for our robots to perform functions that require these components,
+There have been no additional changes to the domain model during this assignment. (So far)
+
+\subsection{Changes to use cases}
+Input and output of the use cases have not changed, but the descriptions of the use cases made some assumptions regarding the implementation which has changed.
+\begin{enumerate}
+    \item The use case regarding the rewarding of points and updating the interface has been changed. Since we decided on storing each individual robots points, we no longer "reward" them to the operator. We also decided on having the operator manually request updates to the points.
+    \item The calculate strategy use-case needs to change actor from robot to the control station since the calculation is not done in the robot any longer but instead in the control station. As such the robot is relieved from this responsibility.
+\end{enumerate}
+
+
+\subsection{Changes to component diagram}
+\begin{enumerate}
+    \item The class diagram we worked on was largely based on the component diagram from the different assignment so any changes were minor.
+    %\item Based on feedback from the teaching assistant during the lab session, we structured our general style into a more MVC-like structure. As we have the user-interface(View), the control station and robot(Controller) and now a separate Model package.     
+    \item Based on feedback from the TA, we generalised the sending and receiving between both control station and robot as well as between control station and user-interface.
+    \item A new storage point was created in the control station which implements a number of interfaces which would need to be added to the current component diagram for an accurate representation.
+    \item The sensors described in the component diagram should no-longer be present as they are not part of our system, but instead used from an outside source. That source is the simbad robot simulator depicted in the class diagram.
+    \item The actions/instructions sent by the operator now goes through an operator interface component within the control station which relays the relevant information to either the conductor or through the robotInterface to the robot such as the emergencyStop function.
+\end{enumerate}
+
+
+\subsection{Changes to class diagram}
+There were no changes to the class diagram as all code so far only consists of skeleton classes created from the class diagram.
+
+\section{Implementation of mission}
+%Describe how we would implement the mission described in the assignment.
+As we only have the skeleton for the code the mission has not been implemented but could be implemented in the future without too many (or any) changes to our class structure.
+
+To clarify our current mission design: a mission consists of a set of coordinates for a robot to reach, as determined by a user/operator. The set of points is stored as-is in a Mission object, which can then go through one of several possible strategy calculations once passed to the Control Station Conductor.
+
+As our implementation allows for control over singular robots, controlling Robot 1-4 within the constraints given in the assignment description is fully possible. We have predicted the option for possibly expanding our definition of Instruction with more advanced constraints as well.
+
+Furthermore, we have access to the concepts of a map, walls and individual coordinates.
+
+Regarding the second constraint - the conductor can orchestrate the robots to make sure that there is only one robot in each room at any time.
+
+\section{Contribution}
+
+\begin{itemize}
+    \item Collaborative 
+      \begin{itemize}
+          \item Decide on the overall structure of the class diagram.
+          \item Find design patterns in our class diagram.
+          \item Write the report.
+      \end{itemize}
+    \item Philip Nord 
+       \begin{itemize}
+           \item Find a solution for data access in the control station in the class-diagram.
+           \item Implementation of the skeleton for the storage package.
+       \end{itemize}
+    \item William Lev\'{e}n
+       \begin{itemize}
+           \item Finalize the Robot package in the class-diagram.
+           \item Implementation of the skeleton for the robot package.
+       \end{itemize}
+    \item Svante Bennhage
+       \begin{itemize}
+           \item Find a solution for data access in the control station in the class-diagram.
+           \item Implementation of the skeleton for the control station.
+       \end{itemize}
+    \item Sebastian Fransson
+       \begin{itemize}
+           \item Finalize the user\_interface package in the class-diagram.
+           \item Implementation of the skeleton for the user\_interface package.
+       \end{itemize}
+    \item Victor Johansson
+       \begin{itemize}
+           \item Finalize the control\_station package in the class-diagram.
+           \item Implement methods for sending emergency stop instruction from the user interface to the simulator.
+       \end{itemize}
+    \item Snezhina Racheva
+       \begin{itemize}
+           \item Finalize the model package in the class-diagram.
+           \item Implementation of the skeleton for the model package.
+       \end{itemize}
+\end{itemize}

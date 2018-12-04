@@ -1,7 +1,7 @@
 package control_station.storage;
 
 public interface RewardDAO {
-    public int getReward();
-    public void addReward(int points);
-    public void resetReward();
+    int getReward();
+    void addReward(int points);
+    void resetReward();
 }

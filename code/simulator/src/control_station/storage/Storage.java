@@ -4,33 +4,31 @@ import model.Environment;
 import model.Mission;
 import model.Status;
 
-// TODO import model.Wall
-import simbad.sim.Wall;
-
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.Map;
 
 public class Storage implements StatusDAO, MissionDAO, EnvironmentDAO, RewardDAO {
 
-    HashMap<Integer, Status> robots;
-    HashSet<Mission> missions;
-    int reward;
-    Collection<Wall> map;
+    private final Map<Integer, Status> robots = new HashMap<>();
+    private final Map<Integer, Mission> missions = new HashMap<>();
+    private int reward;
+    private Environment map;
 
     @Override
     public void store(Mission mission) {
-        missions.add(mission);
+        missions.put(mission.getAssignedRobot(), mission);
     }
 
     @Override
     public Collection<Mission> getMissions() {
-        return null;
+        return new ArrayList<>(missions.values());
     }
 
     @Override
     public Mission getMission(int assignedRobot) {
-        return null;
+        return missions.get(assignedRobot);
     }
 
     @Override
@@ -50,8 +48,7 @@ public class Storage implements StatusDAO, MissionDAO, EnvironmentDAO, RewardDAO
 
     @Override
     public void store(Status robot) {
-        int id = 0; // TODO id = robot.id
-        robots.put(id, robot);
+        robots.put(robot.getId(), robot);
     }
 
     @Override
@@ -60,17 +57,22 @@ public class Storage implements StatusDAO, MissionDAO, EnvironmentDAO, RewardDAO
     }
 
     @Override
-    public Collection<Integer> getRobotIds() {
-        return robots.keySet();
+    public Collection<Status> getStatuses() {
+        return new ArrayList<>(robots.values());
     }
 
     @Override
-    public void store(Environment environment) {
+    public Collection<Integer> getRobotIds() {
+        return new ArrayList<>(robots.keySet());
+    }
 
+    @Override
+    public void store(Environment current) {
+        map = current;
     }
 
     @Override
     public Environment getEnvironment() {
-        return null;
+        return map;
     }
 }

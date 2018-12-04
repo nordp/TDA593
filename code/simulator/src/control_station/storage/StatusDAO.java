@@ -5,7 +5,8 @@ import model.Status;
 import java.util.Collection;
 
 public interface StatusDAO {
-    public void store(Status robot);
-    public Status getStatus(int id);
-    public Collection<Integer> getRobotIds();
+    void store(Status robot);
+    Status getStatus(int id);
+    Collection<Status> getStatuses();
+    Collection<Integer> getRobotIds();
 }

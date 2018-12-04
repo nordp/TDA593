@@ -8,5 +8,4 @@ public interface MissionDAO {
     void store(Mission mission);
     Collection<Mission> getMissions();
     Mission getMission(int assignedRobot);
-    // TODO should have some way of accessing mission data
 }

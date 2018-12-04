@@ -30,7 +30,7 @@ import java.awt.Color;
 public class Main {
 
 	@SuppressWarnings("unused")
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) {
 
 		Instruction i = new EmergencyInstruction(true);
 

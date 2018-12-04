@@ -18,7 +18,7 @@ public class StorageBroker {
         return store;
     }
 
-    public MapDAO getMapDAO() {
+    public EnvironmentDAO getMapDAO() {
         return store;
     }
 

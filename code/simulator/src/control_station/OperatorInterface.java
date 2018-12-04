@@ -1,11 +1,9 @@
 package control_station;
-import model.Map;
+import model.Environment;
 import model.Status;
 import model.Mission;
 import model.Instruction;
-
-import java.util.HashMap;
-//import model.Map
+//import model.Environment
 
 /**
  * Created by svante on 2018-12-01.
@@ -35,7 +33,7 @@ public class OperatorInterface {
         robotInterface.dispatch(id,instruction);
     }
 
-    Map getMap(){
+    Environment getMap(){
         return null;
     }
 

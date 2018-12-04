@@ -1,17 +1,14 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Mission {
+
+    private int assignedRobot;
     private List<Coordinate> missionPoints;
 
-    public Mission(){
-        //FIXME: ok how is arraylist is it ok
-        this.missionPoints = new ArrayList<Coordinate>();
-    }
-
-    public Mission(List<Coordinate> missionPoints){
+    public Mission(int robotId, List<Coordinate> missionPoints){
+        this.assignedRobot = robotId;
         this.missionPoints = missionPoints;
     }
 
@@ -19,7 +16,7 @@ public class Mission {
         return missionPoints;
     }
 
-    public void addPoint(Coordinate point){
-        this.missionPoints.add(point);
+    public int getAssignedRobot(){
+        return assignedRobot;
     }
 }

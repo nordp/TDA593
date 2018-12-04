@@ -1,5 +1,6 @@
 package control_station.storage;
 
+import model.Environment;
 import model.Mission;
 import model.Status;
 
@@ -10,27 +11,26 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class Storage implements StatusDAO, MissionDAO, MapDAO, RewardDAO {
+public class Storage implements StatusDAO, MissionDAO, EnvironmentDAO, RewardDAO {
 
     HashMap<Integer, Status> robots;
     HashSet<Mission> missions;
     int reward;
     Collection<Wall> map;
 
-
-    @Override
-    public void add(Wall wall) {
-        map.add(wall);
-    }
-
-    @Override
-    public Collection<Wall> getWalls() {
-        return map;
-    }
-
     @Override
     public void store(Mission mission) {
         missions.add(mission);
+    }
+
+    @Override
+    public Collection<Mission> getMissions() {
+        return null;
+    }
+
+    @Override
+    public Mission getMission(int assignedRobot) {
+        return null;
     }
 
     @Override
@@ -62,5 +62,15 @@ public class Storage implements StatusDAO, MissionDAO, MapDAO, RewardDAO {
     @Override
     public Collection<Integer> getRobotIds() {
         return robots.keySet();
+    }
+
+    @Override
+    public void store(Environment environment) {
+
+    }
+
+    @Override
+    public Environment getEnvironment() {
+        return null;
     }
 }

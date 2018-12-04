@@ -2,14 +2,14 @@ package model;
 
 import java.util.Collection;
 
-public class Map {
+public class Environment {
     private float height;
     private float width;
     private Collection<Wall> walls;
 
     //FIXME: Maybe default constructor?
 
-    public Map(float height, float width, Collection<Wall> walls){
+    public Environment(float height, float width, Collection<Wall> walls){
         this.height = height;
         this.width = width;
         this.walls = walls;

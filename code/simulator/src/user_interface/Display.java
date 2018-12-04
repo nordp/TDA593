@@ -1,5 +1,6 @@
 package user_interface;
 import control_station.OperatorInterface;
+import model.EmergencyInstruction;
 import model.Instruction;
 import model.Mission;
 import model.Coordinate;
@@ -8,7 +9,6 @@ import java.util.Scanner;
 
 public class Display {
     private int points;
-    private Action action = new Action();
     private Scanner input = new Scanner(System.in);
     private List<Coordinate> missionList;
     private MissionComposer missionComp = new MissionComposer();
@@ -47,9 +47,8 @@ public class Display {
                     System.out.println("PLACEHOLDER");
                     switch (input.nextInt()){
                         case 1:
-                        Instruction stop = action.emergencyStop();
                         System.out.println("Choose which robot you want to assign this action to");
-                        operatorInterface.assignAction(input.nextInt(),stop);
+                        operatorInterface.assignAction(input.nextInt(),new EmergencyInstruction(true));
                     }
 
                     break;

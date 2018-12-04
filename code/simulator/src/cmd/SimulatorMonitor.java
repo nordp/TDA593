@@ -17,8 +17,8 @@ public class SimulatorMonitor extends AbstractSimulatorMonitor<SimulatorRobot> {
 
 	@Override
 	public void update(SimulatorRobot arg0) {
-		System.out.println(arg0.getName());
-		System.out.println(arg0.getPosition());
+		//System.out.println(arg0.getName());
+		//System.out.println(arg0.getPosition());
 	}
 
 }

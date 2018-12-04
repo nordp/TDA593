@@ -37,7 +37,11 @@ public class Controller implements Runnable {
 	}
 
 	void setInstruction(Instruction instruction) {
-		throw new NotImplementedException();
+		switch (instruction){
+			case emergencyInstruction:
+				EmergencyStopRoutine emergencyStopRoutine = new EmergencyStopRoutine();
+				emergencyStopRoutine.calculateAction(getStatus()).execute(actuator);
+		}
 	}
 
 	@Override

@@ -24,7 +24,7 @@ public class SimulatorRobot extends AbstractRobotSimulator implements Actuator, 
 
 	@Override
 	public void stop() {
-		throw new NotImplementedException();
+		resetPosition(getPosition());
 	}
 
 	@Override

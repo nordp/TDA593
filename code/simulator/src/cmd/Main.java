@@ -2,6 +2,7 @@ package cmd;
 import java.util.HashSet;
 import java.util.Set;
 
+import control_station.Conductor;
 import project.AbstractRobotSimulator;
 import project.Point;
 import project.AbstractSimulatorMonitor;
@@ -14,6 +15,8 @@ import simbad.sim.HorizontalBoundary;
 import simbad.sim.HorizontalWall;
 import simbad.sim.VerticalBoundary;
 import simbad.sim.VerticalWall;
+import user_interface.Display;
+
 import java.awt.Color;
 @SuppressWarnings("unused")
 public class Main {
@@ -51,6 +54,8 @@ public class Main {
 		// Set up the monitor
 		AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
 
+		Display display = new Display();
+		display.displayView();
 	}
 
 }

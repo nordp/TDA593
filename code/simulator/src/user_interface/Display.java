@@ -1,4 +1,6 @@
 package user_interface;
+import control_station.OperatorInterface;
+import model.Instruction;
 import model.Mission;
 import model.Coordinate;
 import java.util.List;
@@ -36,6 +38,14 @@ public class Display {
                     break;
 
                 case 3:
+                    System.out.println("1 - Emergency Stop");
+                    System.out.println("PLACEHOLDER");
+                    switch (input.nextInt()){
+                        case 1:
+                        Instruction stop = action.emergencyStop();
+                        System.out.println("Choose which robot you want to assign this action to");
+                        OperatorInterface.getInstance().assignAction(input.nextInt(),stop);
+                    }
 
                     break;
 

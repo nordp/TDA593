@@ -1,5 +1,6 @@
 package control_station;
 //import model;
+import control_station.storage.Storage;
 import model.Instruction;
 import robot.ControlStationInterface;
 
@@ -19,6 +20,7 @@ public class RobotInterface {
 
     private RobotInterface(HashMap<Integer, ControlStationInterface> robots){
         this.robots = robots;
+
     }
 
     /**
@@ -28,6 +30,7 @@ public class RobotInterface {
      * Dispatches an instruction to a robot with the identification 'id'
      */
     void dispatch(int id, Instruction instruction){
+        Storage storage = new Storage();
 
     }
 

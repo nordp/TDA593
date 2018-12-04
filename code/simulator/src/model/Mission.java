@@ -1,19 +1,20 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Mission {
 
-    private int assignedRobot;
-    private List<Coordinate> missionPoints;
+    private final int assignedRobot;
+    private final List<Coordinate> missionPoints;
 
     public Mission(int robotId, List<Coordinate> missionPoints){
         this.assignedRobot = robotId;
-        this.missionPoints = missionPoints;
+        this.missionPoints = missionPoints == null ? new ArrayList<>() : new ArrayList<>(missionPoints);
     }
 
     public List<Coordinate> getPoints() {
-        return missionPoints;
+        return new ArrayList<>(missionPoints);
     }
 
     public int getAssignedRobot(){

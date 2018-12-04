@@ -1,8 +1,8 @@
 package model;
 
 public class Coordinate {
-    private float x;
-    private float y;
+    private final float x;
+    private final float y;
 
     public Coordinate(float x, float y){
         this.x = x;

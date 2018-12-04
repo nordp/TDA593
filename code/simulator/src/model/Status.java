@@ -4,21 +4,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Status {
-    private int id;
-    private Coordinate location;
-    private boolean inMotion;
-    private Set<Instruction> instructions;
-
-    public Status(){
-        // TODO: default constructor
-        this.instructions = new HashSet<>();
-    }
+    private final int id;
+    private final Coordinate location;
+    private final boolean inMotion;
+    private final Set<Instruction> instructions;
 
     public Status(int id, Coordinate location, boolean inMotion, Set<Instruction> instructions){
         this.id = id;
         this.location = location;
         this.inMotion = inMotion;
-        this.instructions = instructions;
+        this.instructions = instructions == null ? new HashSet<>() : new HashSet<>(instructions);
     }
 
     public Coordinate getLocation() {
@@ -30,7 +25,7 @@ public class Status {
     }
 
     public Set<Instruction> getInstructions() {
-        return instructions;
+        return new HashSet<>(instructions);
     }
 
     public int getId() {

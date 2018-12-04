@@ -6,14 +6,14 @@ import model.Instruction;
 import model.Status;
 import robot.routines.*;
 import robot.routines.actions.Action;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class Controller implements Runnable {
 	private List<Routine> routines = new LinkedList<>();
-	private Status lastStatus = null;
+	private Status lastStatus;
 	private Actuator actuator;
 	private Sensor sensor;
 	//TODO TEMP
@@ -34,7 +34,7 @@ public class Controller implements Runnable {
 
 		actuator.goTo(new Coordinate(2,2));
 
-		lastStatus = new Status();
+		lastStatus = new Status(0, null, false, null);
 
 		// TODO start the run loop
 		Thread t = new Thread(this);
@@ -48,7 +48,10 @@ public class Controller implements Runnable {
 	}
 
 	void setInstruction(Instruction instruction) {
-		lastStatus.getInstructions().add(instruction);
+		Set<Instruction> instructions = lastStatus.getInstructions();
+		instructions.remove(instruction);
+		instructions.add(instruction);
+		lastStatus = new Status(lastStatus.getId(), lastStatus.getLocation(), lastStatus.isInMotion(), instructions);
 
 	}
 

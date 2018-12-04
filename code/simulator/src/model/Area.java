@@ -2,8 +2,8 @@ package model;
 
 public class Area {
 
-    private Coordinate start;
-    private Coordinate end;
+    private final Coordinate start;
+    private final Coordinate end;
 
     public Area(Coordinate start, Coordinate end){
         this.start = start;

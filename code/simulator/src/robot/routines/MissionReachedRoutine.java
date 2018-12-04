@@ -5,8 +5,9 @@ import robot.routines.actions.Action;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class MissionReachedRoutine implements Routine {
+	//TODO Implement
 	@Override
 	public Action calculateAction(Status status) {
-		throw new NotImplementedException();
+		return null;
 	}
 }

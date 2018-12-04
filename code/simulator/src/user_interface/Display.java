@@ -13,6 +13,11 @@ public class Display {
     private List<Coordinate> missionList;
     private MissionComposer missionComp = new MissionComposer();
     private Mission mission;
+    private OperatorInterface operatorInterface;
+
+    public Display(OperatorInterface operatorInterface){
+        this.operatorInterface = operatorInterface;
+    }
 
     public void displayView(){
 
@@ -44,7 +49,7 @@ public class Display {
                         case 1:
                         Instruction stop = action.emergencyStop();
                         System.out.println("Choose which robot you want to assign this action to");
-                        OperatorInterface.getInstance().assignAction(input.nextInt(),stop);
+                        operatorInterface.assignAction(input.nextInt(),stop);
                     }
 
                     break;

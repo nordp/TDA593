@@ -7,9 +7,6 @@ public class MovementInstruction extends Instruction {
         this.nextStep = nextStep;
     }
 
-    public MovementInstruction(){
-        this.nextStep = new Coordinate();
-    }
 
     public Coordinate getNextStep() {
         return nextStep;

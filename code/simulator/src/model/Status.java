@@ -1,5 +1,6 @@
 package model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Status {
@@ -10,6 +11,7 @@ public class Status {
 
     public Status(){
         // TODO: default constructor
+        this.instructions = new HashSet<>();
     }
 
     public Status(int id, Coordinate location, boolean inMotion, Set<Instruction> instructions){

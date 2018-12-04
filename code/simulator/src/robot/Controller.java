@@ -1,9 +1,11 @@
 package robot;
 
 import control_station.RobotInterface;
+import model.Coordinate;
 import model.Instruction;
 import model.Status;
 import robot.routines.*;
+import robot.routines.actions.Action;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.LinkedList;
@@ -14,8 +16,10 @@ public class Controller implements Runnable {
 	private Status lastStatus = null;
 	private Actuator actuator;
 	private Sensor sensor;
+	//TODO TEMP
+	public ControlStationInterface controlStationInterface;
 
-	public Controller(Actuator actuator, Sensor sensor, RobotInterface contolStation) {
+	public Controller(Actuator actuator, Sensor sensor, RobotInterface controlStation) {
 		this.actuator = actuator;
 		this.sensor = sensor;
 
@@ -26,10 +30,17 @@ public class Controller implements Runnable {
 		routines.add(new MissionReachedRoutine());
 		routines.add(new NavigateToNextRoutine());
 
-		new ControlStationInterface(this, contolStation);
+		controlStationInterface = new ControlStationInterface(this, controlStation);
+
+		actuator.goTo(new Coordinate(2,2));
+
+		lastStatus = new Status();
 
 		// TODO start the run loop
-		new Thread(this).setDaemon(true);
+		Thread t = new Thread(this);
+		t.setDaemon(true);
+		t.start();
+
 	}
 
 	Status getStatus() {
@@ -37,15 +48,28 @@ public class Controller implements Runnable {
 	}
 
 	void setInstruction(Instruction instruction) {
-		switch (instruction){
-			case emergencyInstruction:
-				EmergencyStopRoutine emergencyStopRoutine = new EmergencyStopRoutine();
-				emergencyStopRoutine.calculateAction(getStatus()).execute(actuator);
-		}
+		lastStatus.getInstructions().add(instruction);
+
 	}
 
 	@Override
 	public void run() {
-		throw new NotImplementedException();
+		while(true){
+			System.out.println(lastStatus.getInstructions().size());
+			for(Routine routine : routines){
+				Action a = routine.calculateAction(lastStatus);
+				if(a != null){
+					System.out.println("EMERGENCY");
+					a.execute(actuator);
+					break;
+				}
+			}
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+		}
 	}
 }

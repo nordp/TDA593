@@ -1,11 +1,19 @@
 package cmd;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import control_station.Conductor;
+import control_station.OperatorInterface;
+import control_station.RobotInterface;
+import model.EmergencyInstruction;
+import model.Instruction;
+import model.MovementInstruction;
 import project.AbstractRobotSimulator;
 import project.Point;
 import project.AbstractSimulatorMonitor;
+import robot.ControlStationInterface;
 import robot.Controller;
 import robot.SimulatorRobot;
 import simbad.sim.AbstractWall;
@@ -23,6 +31,11 @@ public class Main {
 
 	@SuppressWarnings("unused")
 	public static void main(String[] args) throws InterruptedException {
+
+		Instruction i = new EmergencyInstruction(true);
+
+		System.out.println(i.equals(new EmergencyInstruction(true)));
+
 
 		EnvironmentDescription e = new EnvironmentDescription();
 		
@@ -42,19 +55,24 @@ public class Main {
 
 		// Create robots
 		Set<SimulatorRobot> robots = new HashSet<>();
+		Map<Integer,ControlStationInterface> controlStationInterfaces = new HashMap<>();
+
 
 		SimulatorRobot robot1 = new SimulatorRobot(new Point(0, 0), "Robot 1");
-		new Controller(robot1, robot1, null);
+		controlStationInterfaces.put(1 ,new Controller(robot1, robot1, null).controlStationInterface);
 		robots.add(robot1);
 
+
 		SimulatorRobot robot2 = new SimulatorRobot(new Point(1, 3), "Robot 2");
-		new Controller(robot1, robot2, null);
+		controlStationInterfaces.put(2, new Controller(robot2, robot2, null).controlStationInterface);
 		robots.add(robot2);
 
 		// Set up the monitor
 		AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
 
-		Display display = new Display();
+		Conductor conductor = new Conductor(controlStationInterfaces);
+
+		Display display = new Display(conductor.operatorInterface);
 		display.displayView();
 	}
 

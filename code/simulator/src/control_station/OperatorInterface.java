@@ -1,4 +1,5 @@
 package control_station;
+import model.Map;
 import model.Status;
 import model.Mission;
 import model.Instruction;
@@ -11,17 +12,16 @@ import java.util.HashMap;
  */
 public class OperatorInterface {
 
-    private static final OperatorInterface instance = new OperatorInterface();
     private RobotInterface robotInterface;
 
 
-    OperatorInterface(){
-        //robotInterface = new RobotInterface(new HashMap<>(1));
+    OperatorInterface(RobotInterface robotInterface){
+        this.robotInterface = robotInterface;
     }
 
-    public static OperatorInterface getInstance(){
+    /*public static OperatorInterface getInstance(){
         return instance;
-    }
+    }*/
 
     Status getStatuses(){
         return null;
@@ -35,9 +35,9 @@ public class OperatorInterface {
         robotInterface.dispatch(id,instruction);
     }
 
-    /*Map getMap(){
+    Map getMap(){
         return null;
-    }*/
+    }
 
     int getPoints(){
         return 1;

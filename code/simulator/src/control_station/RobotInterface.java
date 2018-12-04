@@ -1,10 +1,9 @@
 package control_station;
 //import model;
-import control_station.storage.Storage;
 import model.Instruction;
 import robot.ControlStationInterface;
 
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by svante on 2018-12-01.
@@ -15,10 +14,10 @@ import java.util.HashMap;
  */
 public class RobotInterface {
 
-    private HashMap robots;
+    private Map<Integer,ControlStationInterface> robots;
     //private RobotInterface instance; Might need to implement as a singleton, don't want more than one RobotInterface
 
-    private RobotInterface(HashMap<Integer, ControlStationInterface> robots){
+    RobotInterface(Map<Integer, ControlStationInterface> robots){
         this.robots = robots;
 
     }
@@ -30,7 +29,7 @@ public class RobotInterface {
      * Dispatches an instruction to a robot with the identification 'id'
      */
     void dispatch(int id, Instruction instruction){
-        Storage storage = new Storage();
+        robots.get(id).notify(instruction);
 
     }
 

@@ -1,6 +1,8 @@
 package control_station;
 import model.Mission;
-//import model.Strategy;
+import model.Strategy;
+import robot.ControlStationInterface;
+import java.util.Map;
 
 
 /**
@@ -9,8 +11,12 @@ import model.Mission;
  * Responsible for calculating optimal routes for robots, commands them when necessary
  */
 public class Conductor {
+    private RobotInterface robotInterface;
+    public OperatorInterface operatorInterface;
 
-    Conductor(){
+    public Conductor(Map<Integer,ControlStationInterface> robots){
+        this.robotInterface = new RobotInterface(robots);
+        operatorInterface = new OperatorInterface(robotInterface);
         //Should this class maybe be static?
     }
 

@@ -6,7 +6,8 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class CollisionPreventionRoutine implements Routine {
 	@Override
+	//TODO Implement
 	public Action calculateAction(Status status) {
-		throw new NotImplementedException();
+		return null;
 	}
 }

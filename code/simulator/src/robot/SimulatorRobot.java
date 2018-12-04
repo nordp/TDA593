@@ -19,12 +19,12 @@ public class SimulatorRobot extends AbstractRobotSimulator implements Actuator, 
 
 	@Override
 	public void goTo(Coordinate coordinate) {
-		throw new NotImplementedException();
+		this.setDestination(new Point(coordinate.getX(),coordinate.getY()));
 	}
 
 	@Override
 	public void stop() {
-		resetPosition(getPosition());
+		this.setDestination(this.getPosition());
 	}
 
 	@Override

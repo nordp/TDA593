@@ -32,11 +32,6 @@ public class Main {
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 
-		Instruction i = new EmergencyInstruction(true);
-
-		System.out.println(i.equals(new EmergencyInstruction(true)));
-
-
 		EnvironmentDescription e = new EnvironmentDescription();
 		
 		Color color = Color.GRAY;

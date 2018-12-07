@@ -10,6 +10,17 @@ public class Area {
         this.end = end;
     }
 
+    /**
+     * With the coordinate of a robot, check if said robot
+     * resides within the area.
+     * @param coordinate
+     * @return
+     */
+    public boolean isRobotInArea(Coordinate coordinate){
+        return (coordinate.getX() >= start.getX() || coordinate.getX() <= end.getX()) &&
+                (coordinate.getY() >= start.getY() || coordinate.getY() <= end.getY());
+    }
+
     public Coordinate getStart(){
         return start;
     }

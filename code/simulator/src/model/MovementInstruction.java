@@ -1,6 +1,6 @@
 package model;
 
-public class MovementInstruction extends Instruction {
+public class MovementInstruction extends ToggleableInstruction {
     private final Coordinate nextStep;
 
     public MovementInstruction(boolean active, Coordinate nextStep){

@@ -3,14 +3,14 @@ package robot.routines.actions;
 import robot.Actuator;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-public class MoveAction implements Action {
+public class ChangeColourAction implements Action {
 	@Override
 	public void execute(Actuator actuator) {
-		throw new NotImplementedException();
+		actuator.changeColour();
 	}
 
 	@Override
 	public boolean blocking() {
-		return true;
+		return false;
 	}
 }

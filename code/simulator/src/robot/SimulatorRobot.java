@@ -5,6 +5,8 @@ import project.AbstractRobotSimulator;
 import project.Point;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import javax.vecmath.Color3f;
+
 public class SimulatorRobot extends AbstractRobotSimulator implements Actuator, Sensor {
 	// Constructor takes cmd point because its implementation specific
 	public SimulatorRobot(Point position, String name) {
@@ -40,5 +42,10 @@ public class SimulatorRobot extends AbstractRobotSimulator implements Actuator, 
 	@Override
 	public Boolean checkCamera() {
 		throw new NotImplementedException();
+	}
+
+	@Override
+	public void changeColour() {
+		this.changeColor(new Color3f((float)Math.random(), (float)Math.random(), (float)Math.random()));
 	}
 }

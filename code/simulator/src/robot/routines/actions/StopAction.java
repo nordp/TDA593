@@ -8,4 +8,9 @@ public class StopAction implements Action {
 	public void execute(Actuator actuator) {
 		actuator.stop();
 	}
+
+	@Override
+	public boolean blocking() {
+		return true;
+	}
 }

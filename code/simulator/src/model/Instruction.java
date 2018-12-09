@@ -2,16 +2,6 @@ package model;
 
 public abstract class Instruction {
 
-	private final boolean active;
-
-	Instruction(boolean active) {
-		this.active = active;
-	}
-
-	public boolean getActive() {
-		return active;
-	}
-
 	/*
 	* Equals implementation that only compares class name
 	* This is important for the set of given instructions to work

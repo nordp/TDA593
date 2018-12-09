@@ -27,6 +27,7 @@ public class Controller implements Runnable {
 		routines.add(new EmergencyStopRoutine());
 		routines.add(new RobotFailureRoutine());
 		routines.add(new CollisionPreventionRoutine());
+		routines.add(new ColourRoutine());
 		routines.add(new MissionReachedRoutine());
 		routines.add(new NavigateToNextRoutine());
 
@@ -58,17 +59,17 @@ public class Controller implements Runnable {
 	@Override
 	public void run() {
 		while(true){
-			System.out.println(lastStatus.getInstructions().size());
 			for(Routine routine : routines){
 				Action a = routine.calculateAction(lastStatus);
 				if(a != null){
-					System.out.println("EMERGENCY");
 					a.execute(actuator);
-					break;
+					if (a.blocking()) {
+						break;
+					}
 				}
 			}
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

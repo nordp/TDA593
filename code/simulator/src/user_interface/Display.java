@@ -1,9 +1,7 @@
 package user_interface;
 import control_station.OperatorInterface;
-import model.EmergencyInstruction;
-import model.Instruction;
-import model.Mission;
-import model.Coordinate;
+import model.*;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -70,6 +68,9 @@ public class Display {
 				    } else if (parts.length > 0 && "start".equals(parts[0])) {
 					    System.out.printf("Starting robot %s%n", robot);
 					    operatorInterface.assignAction(robot, new EmergencyInstruction(false));
+				    } else if (parts.length > 0 && ("color".equals(parts[0]) || "colour".equals(parts[0]))) {
+					    System.out.printf("Changing colo(u)r of robot %s%n", robot);
+					    operatorInterface.assignAction(robot, new ChangeColourInstruction());
 				    } else if (parts.length > 0 && "mission".equals(parts[0])) {
 				    	// TODO parse mission
 				    } else if (parts.length > 0 && "exit".equals(parts[0])) {
@@ -83,6 +84,7 @@ public class Display {
 							    "map                                    - show the current map",
 							    "q                                      - deselect the robot",
 							    "help                                   - show this help text",
+							    "colour || color                        - makes the robot change colo(u)r",
 				    	};
 					    System.out.printf(String.join("%n", commands) + "%n");
 				    } else if (parts.length > 0 && "map".equals(parts[0])) {

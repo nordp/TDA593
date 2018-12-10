@@ -5,12 +5,8 @@ import java.util.Map;
 import java.util.Set;
 
 import control_station.Conductor;
-import control_station.OperatorInterface;
-import control_station.RobotInterface;
 import model.EmergencyInstruction;
 import model.Instruction;
-import model.MovementInstruction;
-import project.AbstractRobotSimulator;
 import project.Point;
 import project.AbstractSimulatorMonitor;
 import robot.ControlStationInterface;
@@ -54,12 +50,12 @@ public class Main {
 
 
 		SimulatorRobot robot1 = new SimulatorRobot(new Point(0, 0), "Robot 1");
-		controlStationInterfaces.put(1 ,new Controller(robot1, robot1, null).controlStationInterface);
+		controlStationInterfaces.put(1, new ControlStationInterface(new Controller(robot1, robot1)));
 		robots.add(robot1);
 
 
 		SimulatorRobot robot2 = new SimulatorRobot(new Point(1, 3), "Robot 2");
-		controlStationInterfaces.put(2, new Controller(robot2, robot2, null).controlStationInterface);
+		controlStationInterfaces.put(2, new ControlStationInterface(new Controller(robot2, robot2)));
 		robots.add(robot2);
 
 		// Set up the monitor

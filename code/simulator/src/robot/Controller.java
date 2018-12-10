@@ -1,6 +1,5 @@
 package robot;
 
-import control_station.RobotInterface;
 import model.Coordinate;
 import model.Instruction;
 import model.Status;
@@ -16,10 +15,8 @@ public class Controller implements Runnable {
 	private Status lastStatus;
 	private Actuator actuator;
 	private Sensor sensor;
-	//TODO TEMP
-	public ControlStationInterface controlStationInterface;
 
-	public Controller(Actuator actuator, Sensor sensor, RobotInterface controlStation) {
+	public Controller(Actuator actuator, Sensor sensor) {
 		this.actuator = actuator;
 		this.sensor = sensor;
 
@@ -31,17 +28,11 @@ public class Controller implements Runnable {
 		routines.add(new MissionReachedRoutine());
 		routines.add(new NavigateToNextRoutine());
 
-		controlStationInterface = new ControlStationInterface(this, controlStation);
-
-		actuator.goTo(new Coordinate(2,2));
-
 		lastStatus = new Status(0, null, false, null);
 
-		// TODO start the run loop
 		Thread t = new Thread(this);
 		t.setDaemon(true);
 		t.start();
-
 	}
 
 	Status getStatus() {
@@ -49,12 +40,10 @@ public class Controller implements Runnable {
 	}
 
 	void setInstruction(Instruction instruction) {
-		Set<Instruction> instructions = lastStatus.getInstructions();
-		instructions.remove(instruction);
-		instructions.add(instruction);
-		lastStatus = new Status(lastStatus.getId(), lastStatus.getLocation(), lastStatus.isInMotion(), instructions);
-
-	}
+        Set<Instruction> instructions = lastStatus.getInstructions();
+        instructions.remove(instruction);
+        instructions.add(instruction);
+        lastStatus = new Status(lastStatus.getId(), lastStatus.getLocation(), lastStatus.isInMotion(), instructions);	}
 
 	@Override
 	public void run() {

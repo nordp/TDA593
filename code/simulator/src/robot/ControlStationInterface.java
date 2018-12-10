@@ -5,14 +5,10 @@ import model.Instruction;
 import model.Status;
 
 public class ControlStationInterface {
-	private RobotInterface controlStation;
 	private Controller robot;
 
-	ControlStationInterface (Controller robot, RobotInterface controlStation) {
-		this.controlStation = controlStation;
+	public ControlStationInterface (Controller robot) {
 		this.robot = robot;
-
-		// Maybe signal the controlstation that we exists here?
 	}
 
 	public Status getStatus() {

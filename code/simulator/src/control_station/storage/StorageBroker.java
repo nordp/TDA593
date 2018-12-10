@@ -2,13 +2,7 @@ package control_station.storage;
 
 public class StorageBroker {
 
-    private static Storage store;
-
-    public StorageBroker() {
-        if (store == null) {
-            store = new Storage();
-        }
-    }
+    private static final Storage store = new Storage();
 
     public StatusDAO getStatusDAO() {
         return store;

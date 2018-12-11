@@ -1,4 +1,4 @@
-package cmd;
+package user_interface.graphical_interface;
 
 import control_station.Conductor;
 import control_station.OperatorInterface;
@@ -16,6 +16,8 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+//import model.ChangeColourInstruction;
+import model.EmergencyInstruction;
 import project.AbstractSimulatorMonitor;
 import project.Point;
 import robot.ControlStationInterface;
@@ -31,45 +33,6 @@ import java.util.Set;
 
 public class MainWindow extends Application {
 
-    static Conductor conductor;
-
-    public static void main(String[] args) {
-        EnvironmentDescription e = new EnvironmentDescription();
-
-        Color color = Color.GRAY;
-
-        // Set map
-        Boundary w1 = new HorizontalBoundary(-5.0f, -5.0f, 5.0f, e, color);
-        Boundary w2 = new HorizontalBoundary(5.0f, -5.0f, 5.0f, e, color);
-        Boundary w3 = new VerticalBoundary(5.0f, -5.0f, 5.0f, e, color);
-        Boundary w4 = new VerticalBoundary(-5.0f, -5.0f, 5.0f, e, color);
-
-        // Build room
-        AbstractWall roomWall1 = new HorizontalWall(-1f, 4.5f, 3.5f, e, color);
-        AbstractWall roomWall2 = new HorizontalWall(-4.5f, 4.5f, 1f, e, color);
-        AbstractWall roomWall3 = new VerticalWall(4.5f, -4.5f, -1f, e, color);
-        AbstractWall roomWall4 = new VerticalWall(1f, -4.5f, -1f, e, color);
-
-        // Create robots
-        Set<SimulatorRobot> robots = new HashSet<>();
-        Map<Integer, ControlStationInterface> controlStationInterfaces = new HashMap<>();
-
-
-        SimulatorRobot robot1 = new SimulatorRobot(new project.Point(0, 0), "Robot 1");
-        controlStationInterfaces.put(1 ,new Controller(robot1, robot1, null).controlStationInterface);
-        robots.add(robot1);
-
-
-        SimulatorRobot robot2 = new SimulatorRobot(new Point(1, 3), "Robot 2");
-        controlStationInterfaces.put(2, new Controller(robot2, robot2, null).controlStationInterface);
-        robots.add(robot2);
-
-        // Set up the monitor
-        AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
-
-        conductor = new Conductor(controlStationInterfaces);
-        launch(args);
-    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -121,10 +84,18 @@ public class MainWindow extends Application {
                 if(button.getText()=="GO!"){
                     button.setText("STOP!");
                     missionComboBox.setVisible(false);
+
+                    //FIXME: shouldnt be hardcoded
+                    int robot = Integer.parseInt(robotsComboBox.getValue().toString().substring(6));
+                    System.out.println("Starting Robot #"+robot);
                 }
                 else{
                     button.setText("GO!");
                     missionComboBox.setVisible(true);
+
+                    //FIXME: shouldnt be hardcoded
+                    int robot = Integer.parseInt(robotsComboBox.getValue().toString().substring(6));
+                    System.out.println("Stopping Robot #"+robot);
                 }
             }
         });
@@ -138,7 +109,6 @@ public class MainWindow extends Application {
             public void handle(MouseEvent event) {
                 //FIXME: shouldnt be hardcoded
                 int robot = Integer.parseInt(robotsComboBox.getValue().toString().substring(6));
-                System.out.println(robot);
 
             }
         });

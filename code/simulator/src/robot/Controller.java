@@ -1,6 +1,5 @@
 package robot;
 
-import model.Coordinate;
 import model.Instruction;
 import model.Status;
 import robot.routines.*;
@@ -40,6 +39,7 @@ public class Controller implements Runnable {
 	}
 
 	void setInstruction(Instruction instruction) {
+		System.out.println("SetInstruction!!");
         Set<Instruction> instructions = lastStatus.getInstructions();
         instructions.remove(instruction);
         instructions.add(instruction);
@@ -47,8 +47,10 @@ public class Controller implements Runnable {
 
 	@Override
 	public void run() {
+		System.out.println("before while");
 		while(true){
 			for(Routine routine : routines){
+				System.out.println("while_routine");
 				Action a = routine.calculateAction(lastStatus);
 				if(a != null){
 					a.execute(actuator);

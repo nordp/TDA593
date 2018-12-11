@@ -1,28 +1,19 @@
 package cmd;
+import control_station.ControlStationFactory;
+import control_station.OperatorInterface;
+import project.AbstractSimulatorMonitor;
+import project.Point;
+import robot.ControlStationInterface;
+import robot.Controller;
+import robot.SimulatorRobot;
+import simbad.sim.*;
+import user_interface.Display;
+
+import java.awt.*;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import control_station.Conductor;
-import model.EmergencyInstruction;
-import model.Instruction;
-import project.Point;
-import project.AbstractSimulatorMonitor;
-import robot.ControlStationInterface;
-import robot.Controller;
-import robot.SimulatorRobot;
-import simbad.sim.AbstractWall;
-import simbad.sim.Boundary;
-import simbad.sim.EnvironmentDescription;
-import simbad.sim.HorizontalBoundary;
-import simbad.sim.HorizontalWall;
-import simbad.sim.VerticalBoundary;
-import simbad.sim.VerticalWall;
-import user_interface.Display;
-import user_interface.graphical_interface.MainWindow;
-
-import java.awt.Color;
 @SuppressWarnings("unused")
 public class Main {
 
@@ -60,13 +51,14 @@ public class Main {
 		robots.add(robot2);
 
 		// Set up the monitor
+
 		AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
+		OperatorInterface operatorInterface = ControlStationFactory.instanciate(controlStationInterfaces);
 
-		Conductor conductor = new Conductor(controlStationInterfaces);
 
-		MainWindow.launch(MainWindow.class, args);
-/*		Display display = new Display(conductor.operatorInterface);
-		display.displayView();*/
+		//MainWindow.launch(MainWindow.class, args);
+		Display display = new Display(operatorInterface);
+		display.displayView();
 	}
 
 }

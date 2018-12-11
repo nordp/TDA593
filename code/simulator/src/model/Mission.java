@@ -18,6 +18,6 @@ public class Mission {
     }
 
     public int getAssignedRobot(){
-        return assignedRobot;
+        return this.assignedRobot;
     }
 }

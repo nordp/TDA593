@@ -29,8 +29,8 @@ public class RobotInterface {
      * Dispatches an instruction to a robot with the identification 'id'
      */
     void dispatch(int id, Instruction instruction){
+        System.out.println("dispatch");
         robots.get(id).notify(instruction);
-
     }
 
 

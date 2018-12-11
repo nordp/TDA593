@@ -1,12 +1,17 @@
 package robot.routines.actions;
 
+import model.Coordinate;
 import robot.Actuator;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class MoveAction implements Action {
+	private Coordinate coordinate;
+	public MoveAction (Coordinate coordinate){
+		this.coordinate = coordinate;
+	}
 	@Override
 	public void execute(Actuator actuator) {
-		throw new NotImplementedException();
+		System.out.println("GOGOGOG!!!");
+		actuator.goTo(coordinate);
 	}
 
 	@Override

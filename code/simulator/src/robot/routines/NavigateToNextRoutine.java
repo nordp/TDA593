@@ -2,12 +2,13 @@ package robot.routines;
 
 import model.Status;
 import robot.routines.actions.Action;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import robot.routines.actions.MoveAction;
 
 public class NavigateToNextRoutine implements Routine {
 	//TODO Implement
 	@Override
 	public Action calculateAction(Status status) {
-		return null;
+		System.out.println("calcAction");
+		return new MoveAction(status.getLocation());
 	}
 }

@@ -3,7 +3,6 @@ package robot;
 import model.Coordinate;
 import project.AbstractRobotSimulator;
 import project.Point;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.vecmath.Color3f;
 
@@ -31,17 +30,17 @@ public class SimulatorRobot extends AbstractRobotSimulator implements Actuator, 
 
 	@Override
 	public Boolean checkObstacles() {
-		throw new NotImplementedException();
+		throw new Error("Not Implemented");
 	}
 
 	@Override
 	public Coordinate getCoordinate() {
-		throw new NotImplementedException();
+		throw new Error("Not Implemented");
 	}
 
 	@Override
 	public Boolean checkCamera() {
-		throw new NotImplementedException();
+		throw new Error("Not Implemented");
 	}
 
 	@Override

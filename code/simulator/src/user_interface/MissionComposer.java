@@ -9,12 +9,10 @@ public class MissionComposer {
     private Mission changedMission = null; // Should ofc not be null when sending a mission.
 
     public Mission createMission(List<Coordinate> missionPoints) {
+        assembledMission = new Mission(1,missionPoints); // TODO: Change to chosen robot ID!
         return assembledMission;
     }
 
-    public void sendMission() {}
-
     public Mission changeMission(Mission oldMission, Mission mission, int strategyId) {return changedMission;}
-
 
 }

@@ -8,7 +8,21 @@ import java.util.Collection;
 /**
  * Created by svante on 2018-12-01.
  */
-public interface Procedure {
-    Procedure update(Collection<Status> robots, Collection<Area> areas);
-    int calculate(Collection<Status> robots, Collection<Area> areas);
+public abstract class Procedure {
+    abstract Procedure update(Collection<Status> robots, Collection<Area> logicalAreas, Collection<Area> physicalAreas);
+
+    abstract int calculate(Collection<Status> robots, Collection<Area> logicalAreas, Collection<Area> physicalAreas);
+
+    protected int countPointsForAreas(Collection<Status> robots, Collection<Area> areas) {
+        int points = 0;
+        for (Status status : robots) {
+            for (Area area : areas) {
+                if (area.isInArea(status.getLocation())) {
+                    points += area.getPoints();
+                    break;
+                }
+            }
+        }
+        return points;
+    }
 }

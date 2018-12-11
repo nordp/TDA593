@@ -4,10 +4,12 @@ public class Area {
 
     private final Coordinate start;
     private final Coordinate end;
+    private final int points;
 
-    public Area(Coordinate start, Coordinate end){
+    public Area(Coordinate start, Coordinate end, int points){
         this.start = start;
         this.end = end;
+        this.points = points;
     }
 
     /**
@@ -16,10 +18,11 @@ public class Area {
      * @param coordinate
      * @return
      */
-    public boolean isRobotInArea(Coordinate coordinate){
+    public boolean isInArea(Coordinate coordinate){
         return (coordinate.getX() >= start.getX() || coordinate.getX() <= end.getX()) &&
                 (coordinate.getY() >= start.getY() || coordinate.getY() <= end.getY());
     }
+
 
     public Coordinate getStart(){
         return start;
@@ -28,4 +31,6 @@ public class Area {
     public Coordinate getEnd(){
         return end;
     }
+
+    public int getPoints() { return points; }
 }

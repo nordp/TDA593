@@ -1,4 +1,5 @@
 package control_station;
+
 import control_station.storage.StorageBroker;
 import model.Area;
 import model.Status;
@@ -13,8 +14,7 @@ public class PointRewarder implements Runnable {
     private StorageBroker storageBroker;
 
 
-
-    PointRewarder(){
+    PointRewarder() {
         this.current = new ProcedureA(); //Defaulting to procedure A when initiating class, can be changed later
         this.storageBroker = new StorageBroker();
     }
@@ -24,15 +24,15 @@ public class PointRewarder implements Runnable {
      * Calculates and returns the amount of points that the current state of all robots
      * should reward depending on where in the environment they reside.
      */
-    private int calculate(Collection<Status> robots, Collection<Area> areas) {
+    private int calculate(Collection<Status> robots, Collection<Area> logicalAreas, Collection<Area> physicalAreas) {
 
 
-        return current.calculate(robots, areas);
+        return current.calculate(robots, logicalAreas, physicalAreas);
     }
 
-    private void updateStoragePoints(Collection<Status> robots, Collection<Area> areas){
+    private void updateStoragePoints(Collection<Status> robots, Collection<Area> logicalAreas, Collection<Area> physicalAreas) {
 
-        storageBroker.getRewardDAO().addReward(calculate(robots, areas));
+        storageBroker.getRewardDAO().addReward(calculate(robots, logicalAreas, physicalAreas));
     }
 
     /**
@@ -43,14 +43,10 @@ public class PointRewarder implements Runnable {
     public void run() {
         try {
             Thread.sleep(20000);
-
-            if(current instanceof ProcedureA) {
-                updateStoragePoints(storageBroker.getStatusDAO().getStatuses(), storageBroker.getMapDAO().getEnvironment().getPhysicalAreas());
-                current.update(storageBroker.getStatusDAO().getStatuses(), storageBroker.getMapDAO().getEnvironment().getLogicalAreas());
-            } else {
-                updateStoragePoints(storageBroker.getStatusDAO().getStatuses(), storageBroker.getMapDAO().getEnvironment().getLogicalAreas());
-                current.update(storageBroker.getStatusDAO().getStatuses(), storageBroker.getMapDAO().getEnvironment().getPhysicalAreas());
-            }
+            updateStoragePoints(storageBroker.getStatusDAO().getStatuses(), storageBroker.getMapDAO().getEnvironment().getLogicalAreas(),
+                    storageBroker.getMapDAO().getEnvironment().getPhysicalAreas());
+            current.update(storageBroker.getStatusDAO().getStatuses(), storageBroker.getMapDAO().getEnvironment().getLogicalAreas(),
+                    storageBroker.getMapDAO().getEnvironment().getPhysicalAreas());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

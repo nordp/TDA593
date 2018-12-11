@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<featureModel>
+    <properties/>
+    <struct>
+        <and abstract="true" mandatory="true" name="ROVU">
+            <and abstract="true" mandatory="true" name="Robot">
+                <and abstract="true" mandatory="true" name="Routines">
+                    <feature mandatory="true" name="Emergency Stop"/>
+                    <feature mandatory="true" name="Navigate to Point"/>
+                    <feature mandatory="true" name="Obstacle Avoidance"/>
+                    <feature mandatory="true" name="Handle Robot Failure"/>
+                    <alt abstract="true" name="Finish Mission">
+                        <feature name="Go Home "/>
+                        <feature name="Stay on the spot"/>
+                        <feature name="Exit Area"/>
+                    </alt>
+                </and>
+                <feature name="Provide Camera Feed"/>
+                <feature name="Change Colour"/>
+            </and>
+            <and abstract="true" mandatory="true" name="User Interface">
+                <alt abstract="true" mandatory="true" name="Interface Visualization">
+                    <and name="Graphic User Interface">
+                        <feature name="Show Camera Feed"/>
+                    </and>
+                    <and name="Text-based">
+                        <feature name="Text-to-Speech"/>
+                    </and>
+                </alt>
+                <feature mandatory="true" name="Visualize Map"/>
+                <feature mandatory="true" name="Visualize Reward Points"/>
+                <feature mandatory="true" name="Visualize Robots"/>
+                <and abstract="true" mandatory="true" name="Send Instruction">
+                    <feature mandatory="true" name="Send Immediate Instruction"/>
+                    <and abstract="true" mandatory="true" name="Strategize Mission">
+                        <feature mandatory="true" name="Select Strategy"/>
+                        <feature mandatory="true" name="Select Coordinates"/>
+                    </and>
+                </and>
+            </and>
+        </and>
+    </struct>
+    <constraints>
+        <rule>
+            <imp>
+                <var>Provide Camera Feed</var>
+                <conj>
+                    <var>Graphic User Interface</var>
+                    <var>Show Camera Feed</var>
+                </conj>
+            </imp>
+        </rule>
+    </constraints>
+    <calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
+    <comments/>
+    <featureOrder userDefined="false"/>
+</featureModel>

@@ -8,24 +8,23 @@ import java.util.Collection;
 /**
  * Created by svante on 2018-12-01.
  */
-public class ProcedureB implements Procedure {
+public class ProcedureB extends Procedure {
+
+    ProcedureB() {
+
+    }
+
     @Override
-    public Procedure update(Collection<Status> robots, Collection<Area> physicalAreas) {
-        for (Status s: robots
+    public Procedure update(Collection<Status> robots, Collection<Area> logicalAreas, Collection<Area> physicalAreas) {
+        for (Status s : robots
         ) {
-            for (Area a: physicalAreas
+            for (Area a : physicalAreas
             ) {
-                if(
-                        a.isRobotInArea(s.getLocation())) {
+                if (a.isInArea(s.getLocation())) {
 
                     return new ProcedureA();
                 }
             }
-
-
-
-
-
 
         }
 
@@ -33,25 +32,9 @@ public class ProcedureB implements Procedure {
     }
 
     @Override
-    public int calculate(Collection<Status> robots, Collection<Area> logicalAreas) {
-        int points = 0;
+    public int calculate(Collection<Status> robots, Collection<Area> logicalAreas, Collection<Area> physicalAreas) {
 
-        for (Status s: robots
-        ) {
-            for (Area a: logicalAreas
-            ) {
-                if(a.isRobotInArea(s.getLocation())) {
-                    points += 2;
-                }
-            }
-
-
-
-
-
-
-        }
-        return points;
+        return countPointsForAreas(robots, logicalAreas);
     }
 
 

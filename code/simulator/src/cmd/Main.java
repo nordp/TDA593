@@ -20,6 +20,7 @@ import simbad.sim.HorizontalWall;
 import simbad.sim.VerticalBoundary;
 import simbad.sim.VerticalWall;
 import user_interface.Display;
+import user_interface.graphical_interface.MainWindow;
 
 import java.awt.Color;
 @SuppressWarnings("unused")
@@ -63,8 +64,9 @@ public class Main {
 
 		Conductor conductor = new Conductor(controlStationInterfaces);
 
-		Display display = new Display(conductor.operatorInterface);
-		display.displayView();
+		MainWindow.launch(MainWindow.class, args);
+/*		Display display = new Display(conductor.operatorInterface);
+		display.displayView();*/
 	}
 
 }

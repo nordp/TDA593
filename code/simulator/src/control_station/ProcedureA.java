@@ -8,61 +8,43 @@ import java.util.Collection;
 /**
  * Created by svante on 2018-12-01.
  */
-public class ProcedureA implements Procedure {
+public class ProcedureA extends Procedure {
+
+
+    ProcedureA() {
+    }
 
     @Override
-    public Procedure update(Collection<Status> robots, Collection<Area> logicalAreas) {
-        for (Status s: robots
+    public Procedure update(Collection<Status> robots, Collection<Area> logicalAreas, Collection<Area> physicalAreas) {
+        for (Status s : robots
         ) {
-            for (Area a: logicalAreas
+            for (Area a : logicalAreas
             ) {
-                if(
-                       a.isRobotInArea(s.getLocation())) {
+                if (
+                        a.isInArea(s.getLocation())) {
 
                     return new ProcedureB();
                 }
             }
-
-
-
-
-
 
         }
 
         return new ProcedureA();
     }
 
-    //Bad practise to return new objects all the time?
-
 
     /**
      * Calculates if each robot resides in an area
      * together with the amount the point it gets for
      * residing in this area.
+     *
      * @param robots
      * @return int
      */
     @Override
-    public int calculate(Collection<Status> robots, Collection<Area> physicalAreas) {
-        int points = 0;
+    public int calculate(Collection<Status> robots, Collection<Area> logicalAreas, Collection<Area> physicalAreas) {
 
-        for (Status s: robots
-             ) {
-            for (Area a: physicalAreas
-                 ) {
-                if(a.isRobotInArea(s.getLocation())) {
-                    points++;
-                }
-            }
-
-
-
-
-
-
-        }
-         return points;
+        return countPointsForAreas(robots, physicalAreas);
     }
 
 

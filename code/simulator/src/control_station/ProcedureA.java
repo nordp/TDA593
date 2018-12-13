@@ -10,28 +10,17 @@ import java.util.Collection;
  */
 class ProcedureA extends Procedure {
 
-
-    ProcedureA() {
-    }
-
     @Override
     Procedure update(Collection<Status> robots, Collection<Area> logicalAreas, Collection<Area> physicalAreas) {
-        for (Status s : robots
-        ) {
-            for (Area a : logicalAreas
-            ) {
-                if (
-                        a.isInArea(s.getLocation())) {
-
+        for (Status s : robots) {
+            for (Area a : logicalAreas) {
+                if (a.isInArea(s.getLocation())) {
                     return new ProcedureB();
                 }
             }
-
         }
-
         return new ProcedureA();
     }
-
 
     /**
      * Calculates if each robot resides in an area

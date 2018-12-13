@@ -13,14 +13,14 @@ import java.util.List;
  * The "brain" of the entire system.
  * Responsible for calculating optimal routes for robots, commands them when necessary
  */
-public class Conductor {
+class Conductor {
     private RobotInterface robotInterface;
 
-    public Conductor(RobotInterface robotInterface){
+    Conductor(RobotInterface robotInterface){
         this.robotInterface = robotInterface;
     }
 
-    public void setMission(Mission mission, Strategy strategy, int robot){
+    void setMission(Mission mission, Strategy strategy, int robot){
         //Is this used to store the current mission for a robot in the storage?
         //If so, this method should already exist in the storage package
         System.out.println("SetMission");

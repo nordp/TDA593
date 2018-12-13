@@ -9,14 +9,16 @@ import java.util.Collection;
 /**
  * Created by svante on 2018-12-01.
  */
-public class PointRewarder implements Runnable {
+class PointRewarder implements Runnable {
     private Procedure current;
     private StorageBroker storageBroker;
-
 
     PointRewarder() {
         this.current = new ProcedureA(); //Defaulting to procedure A when initiating class, can be changed later
         this.storageBroker = new StorageBroker();
+        Thread t = new Thread(this);
+        t.setDaemon(true);
+        t.start();
     }
 
 
@@ -25,13 +27,10 @@ public class PointRewarder implements Runnable {
      * should reward depending on where in the environment they reside.
      */
     private int calculate(Collection<Status> robots, Collection<Area> logicalAreas, Collection<Area> physicalAreas) {
-
-
         return current.calculate(robots, logicalAreas, physicalAreas);
     }
 
     private void updateStoragePoints(Collection<Status> robots, Collection<Area> logicalAreas, Collection<Area> physicalAreas) {
-
         storageBroker.getRewardDAO().addReward(calculate(robots, logicalAreas, physicalAreas));
     }
 

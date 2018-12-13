@@ -6,7 +6,7 @@ import model.Status;
 public class ControlStationInterface {
 	private Controller robot;
 
-	public ControlStationInterface (Controller robot) {
+	ControlStationInterface(Controller robot) {
 		this.robot = robot;
 	}
 

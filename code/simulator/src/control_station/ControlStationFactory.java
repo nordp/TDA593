@@ -6,9 +6,10 @@ import java.util.Map;
 
 public class ControlStationFactory {
 
-    public static OperatorInterface instanciate(Map<Integer,ControlStationInterface> robots){
+    public static OperatorInterface build(Map<Integer,ControlStationInterface> robots){
         RobotInterface robotInterface = new RobotInterface(robots);
         Conductor conductor = new Conductor(robotInterface);
+        new PointRewarder();
         return new OperatorInterface(robotInterface, conductor);
     }
 

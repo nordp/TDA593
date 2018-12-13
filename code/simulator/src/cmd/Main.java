@@ -18,47 +18,66 @@ import java.util.Set;
 public class Main {
 
 	@SuppressWarnings("unused")
-	public static void main(String[] args) {
+	public static void main(String... args) {
+		boolean execute = true;
+		if (args.length == 0) {
+			System.out.println("Please add an argument, in order to start the graphical, or the command-line user interface.\n" +
+					"> cmd		start with command-line\n" +
+					"> gui		start with gui\n" +
+					"\n" +
+					"Terminating now..."
+			);
+			execute = false;
+		} else if (!(args[0].equals("gui") || (args[0].equals("cmd")))) {
+			System.out.println("Please add a valid argument, in order to start the graphical, or the command-line user interface.\n" +
+					"> cmd		start with command-line\n" +
+					"> gui		start with gui\n" +
+					"\n" +
+					"Terminating now..."
+			);
+		}
 
-		EnvironmentDescription e = new EnvironmentDescription();
-		
-		Color color = Color.GRAY;
+		if (execute) {
+			EnvironmentDescription e = new EnvironmentDescription();
 
-		// Set map
-		Boundary w1 = new HorizontalBoundary(-5.0f, -5.0f, 5.0f, e, color);
-		Boundary w2 = new HorizontalBoundary(5.0f, -5.0f, 5.0f, e, color);
-		Boundary w3 = new VerticalBoundary(5.0f, -5.0f, 5.0f, e, color);
-		Boundary w4 = new VerticalBoundary(-5.0f, -5.0f, 5.0f, e, color);
+			Color color = Color.GRAY;
 
-		// Build room
-		AbstractWall roomWall1 = new HorizontalWall(-1f, 4.5f, 3.5f, e, color);
-		AbstractWall roomWall2 = new HorizontalWall(-4.5f, 4.5f, 1f, e, color);
-		AbstractWall roomWall3 = new VerticalWall(4.5f, -4.5f, -1f, e, color);
-		AbstractWall roomWall4 = new VerticalWall(1f, -4.5f, -1f, e, color);
+			// Set map
+			Boundary w1 = new HorizontalBoundary(-5.0f, -5.0f, 5.0f, e, color);
+			Boundary w2 = new HorizontalBoundary(5.0f, -5.0f, 5.0f, e, color);
+			Boundary w3 = new VerticalBoundary(5.0f, -5.0f, 5.0f, e, color);
+			Boundary w4 = new VerticalBoundary(-5.0f, -5.0f, 5.0f, e, color);
 
-		// Create robots
-		Set<SimulatorRobot> robots = new HashSet<>();
-		Map<Integer,ControlStationInterface> controlStationInterfaces = new HashMap<>();
+			// Build room
+			AbstractWall roomWall1 = new HorizontalWall(-1f, 4.5f, 3.5f, e, color);
+			AbstractWall roomWall2 = new HorizontalWall(-4.5f, 4.5f, 1f, e, color);
+			AbstractWall roomWall3 = new VerticalWall(4.5f, -4.5f, -1f, e, color);
+			AbstractWall roomWall4 = new VerticalWall(1f, -4.5f, -1f, e, color);
 
-
-		SimulatorRobot robot1 = new SimulatorRobot(new Point(0, 0), "Robot 1");
-		controlStationInterfaces.put(1, new ControlStationInterface(new Controller(robot1, robot1)));
-		robots.add(robot1);
+			// Create robots
+			Set<SimulatorRobot> robots = new HashSet<>();
+			Map<Integer, ControlStationInterface> controlStationInterfaces = new HashMap<>();
 
 
-		SimulatorRobot robot2 = new SimulatorRobot(new Point(1, 3), "Robot 2");
-		controlStationInterfaces.put(2, new ControlStationInterface(new Controller(robot2, robot2)));
-		robots.add(robot2);
+			SimulatorRobot robot1 = new SimulatorRobot(new Point(0, 0), "Robot 1");
+			controlStationInterfaces.put(1, new ControlStationInterface(new Controller(robot1, robot1)));
+			robots.add(robot1);
 
-		// Set up the monitor
+			SimulatorRobot robot2 = new SimulatorRobot(new Point(1, 3), "Robot 2");
+			controlStationInterfaces.put(2, new ControlStationInterface(new Controller(robot2, robot2)));
+			robots.add(robot2);
 
-		AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
-		OperatorInterface operatorInterface = ControlStationFactory.instanciate(controlStationInterfaces);
+			// Set up the monitor
+			AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
+			OperatorInterface operatorInterface = ControlStationFactory.instanciate(controlStationInterfaces);
 
-
-		//MainWindow.launch(MainWindow.class, args);
-		Display display = new Display(operatorInterface);
-		display.displayView();
+			if(args[0].equals("gui")) {
+				MainWindow.launch(MainWindow.class, args);
+			}
+			else{
+				Display display = new Display(operatorInterface);
+				display.displayView();
+			}
+		}
 	}
-
 }

@@ -18,6 +18,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 //import model.ChangeColourInstruction;
 import model.EmergencyInstruction;
+import model.Strategy;
 import project.AbstractSimulatorMonitor;
 import project.Point;
 import robot.ControlStationInterface;
@@ -30,6 +31,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class MainWindow extends Application {
 
@@ -68,11 +71,11 @@ public class MainWindow extends Application {
         // mission selection combobox
         ObservableList<String> missions =
                 FXCollections.observableArrayList(
-                        "Given order",
-                        "Shortest route",
-                        "Backwards order",
-                        "Random"
+                        Stream.of(Strategy.values())
+                                .map(Enum::name)
+                                .collect(Collectors.toList())
                 );
+
         ComboBox missionComboBox = new ComboBox(missions);
         grid.add(missionComboBox, 1, 2);
 

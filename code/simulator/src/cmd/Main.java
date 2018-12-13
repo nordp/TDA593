@@ -80,6 +80,7 @@ public class Main {
 			// Set up the monitor
 			AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
 
+
 			Conductor conductor = new Conductor(controlStationInterfaces);
 
 			if(args[0].equals("gui")) {
@@ -91,5 +92,4 @@ public class Main {
 			}
 		}
 	}
-
 }

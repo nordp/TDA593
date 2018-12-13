@@ -9,13 +9,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-public class Controller implements Runnable {
+class Controller implements Runnable {
 	private List<Routine> routines = new LinkedList<>();
 	private Status lastStatus;
 	private Actuator actuator;
 	private Sensor sensor;
 
-	public Controller(Actuator actuator, Sensor sensor) {
+	Controller(int id, Actuator actuator, Sensor sensor) {
 		this.actuator = actuator;
 		this.sensor = sensor;
 
@@ -27,7 +27,7 @@ public class Controller implements Runnable {
 		routines.add(new MissionReachedRoutine());
 		routines.add(new NavigateToNextRoutine());
 
-		lastStatus = new Status(0, null, false, null);
+		lastStatus = new Status(id, null, false, null);
 
 		Thread t = new Thread(this);
 		t.setDaemon(true);

@@ -9,7 +9,7 @@ import java.util.Collection;
 /**
  * Created by svante on 2018-12-01.
  */
-public class PointRewarder implements Runnable {
+class PointRewarder implements Runnable {
     private Procedure current;
     private StorageBroker storageBroker;
 

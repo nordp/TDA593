@@ -79,7 +79,7 @@ public class Main {
 
 			// Set up the monitor
 			AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
-
+			
 
 			Conductor conductor = new Conductor(controlStationInterfaces);
 

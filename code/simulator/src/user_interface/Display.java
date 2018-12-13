@@ -82,7 +82,7 @@ public class Display {
 											input.nextLine();
 											choice = input.nextLine();
 										}
-										mission = missionComp.createMission(missionList);
+										mission = missionComp.createMission(missionList, robot);
 										operatorInterface.assignMission(robot, mission);
 										missionList.clear();
 										break;

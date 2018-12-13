@@ -8,12 +8,12 @@ import java.util.Collection;
 /**
  * Created by svante on 2018-12-01.
  */
-public abstract class Procedure {
+abstract class Procedure {
     abstract Procedure update(Collection<Status> robots, Collection<Area> logicalAreas, Collection<Area> physicalAreas);
 
     abstract int calculate(Collection<Status> robots, Collection<Area> logicalAreas, Collection<Area> physicalAreas);
 
-    protected int countPointsForAreas(Collection<Status> robots, Collection<Area> areas) {
+    int countPointsForAreas(Collection<Status> robots, Collection<Area> areas) {
         int points = 0;
         for (Status status : robots) {
             for (Area area : areas) {

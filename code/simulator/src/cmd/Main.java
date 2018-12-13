@@ -70,7 +70,7 @@ public class Main {
 
 			// Set up the monitor
 			AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
-			OperatorInterface operatorInterface = ControlStationFactory.instanciate(controlStationInterfaces);
+			OperatorInterface operatorInterface = ControlStationFactory.build(controlStationInterfaces);
 
 			if(args[0].equals("gui")) {
 				MainWindow.launch(MainWindow.class, args);

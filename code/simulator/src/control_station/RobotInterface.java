@@ -14,7 +14,7 @@ import java.util.Map;
  * well as storing data comm
  * Currently missing a way to get information from robots
  */
-public class RobotInterface implements Runnable {
+class RobotInterface implements Runnable {
 
     private Map<Integer,ControlStationInterface> robots;
     //private RobotInterface instance; Might need to implement as a singleton, don't want more than one RobotInterface

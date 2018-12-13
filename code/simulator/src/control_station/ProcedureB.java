@@ -8,14 +8,14 @@ import java.util.Collection;
 /**
  * Created by svante on 2018-12-01.
  */
-public class ProcedureB extends Procedure {
+class ProcedureB extends Procedure {
 
     ProcedureB() {
 
     }
 
     @Override
-    public Procedure update(Collection<Status> robots, Collection<Area> logicalAreas, Collection<Area> physicalAreas) {
+    Procedure update(Collection<Status> robots, Collection<Area> logicalAreas, Collection<Area> physicalAreas) {
         for (Status s : robots
         ) {
             for (Area a : physicalAreas

@@ -1,6 +1,5 @@
 package robot;
 
-import model.Coordinate;
 import model.Instruction;
 import model.Status;
 import robot.routines.*;
@@ -62,7 +61,6 @@ public class Controller implements Runnable {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-
 		}
 	}
 }

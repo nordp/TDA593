@@ -1,8 +1,6 @@
 package control_station;
-import model.Environment;
-import model.Status;
-import model.Mission;
-import model.Instruction;
+import model.*;
+
 //import model.Environment
 
 /**
@@ -11,10 +9,12 @@ import model.Instruction;
 public class OperatorInterface {
 
     private RobotInterface robotInterface;
+    private Conductor conductor;
+    private Strategy strategy;
 
-
-    OperatorInterface(RobotInterface robotInterface){
+    OperatorInterface(RobotInterface robotInterface, Conductor conductor){
         this.robotInterface = robotInterface;
+        this.conductor = conductor;
     }
 
     /*public static OperatorInterface getInstance(){
@@ -25,8 +25,11 @@ public class OperatorInterface {
         return null;
     }
 
-    void assignMission(int id, Mission mission){
-
+    public void assignMission(int id, Mission mission){
+        System.out.println("I am here!!");
+        System.out.println(mission.getAssignedRobot());
+        if(id == 1){ strategy = Strategy.SHORTEST_ROUTE; }
+        conductor.setMission(mission, strategy , mission.getAssignedRobot());
     }
 
     public void assignAction(int id, Instruction instruction){

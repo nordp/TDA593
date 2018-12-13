@@ -8,8 +8,8 @@ public class MissionComposer {
     private Mission assembledMission = null; // Should ofc not be null when sending a mission.
     private Mission changedMission = null; // Should ofc not be null when sending a mission.
 
-    public Mission createMission(List<Coordinate> missionPoints) {
-        assembledMission = new Mission(1,missionPoints); // TODO: Change to chosen robot ID!
+    public Mission createMission(List<Coordinate> missionPoints, int robot) {
+        assembledMission = new Mission(robot,missionPoints); // TODO: Change to chosen robot ID!
         return assembledMission;
     }
 

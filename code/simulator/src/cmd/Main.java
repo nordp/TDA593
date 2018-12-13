@@ -8,6 +8,7 @@ import robot.Controller;
 import robot.SimulatorRobot;
 import simbad.sim.*;
 import user_interface.Display;
+import user_interface.graphical_interface.MainWindow;
 
 import java.awt.*;
 import java.util.HashMap;

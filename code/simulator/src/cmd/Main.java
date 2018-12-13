@@ -4,10 +4,11 @@ import control_station.OperatorInterface;
 import project.AbstractSimulatorMonitor;
 import project.Point;
 import robot.ControlStationInterface;
-import robot.Controller;
+import robot.RobotFactory;
 import robot.SimulatorRobot;
 import simbad.sim.*;
 import user_interface.Display;
+import user_interface.graphical_interface.MainWindow;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -60,11 +61,11 @@ public class Main {
 
 
 			SimulatorRobot robot1 = new SimulatorRobot(new Point(0, 0), "Robot 1");
-			controlStationInterfaces.put(1, new ControlStationInterface(new Controller(robot1, robot1)));
+			controlStationInterfaces.put(1,RobotFactory.build(1,robot1,robot1));
 			robots.add(robot1);
 
 			SimulatorRobot robot2 = new SimulatorRobot(new Point(1, 3), "Robot 2");
-			controlStationInterfaces.put(2, new ControlStationInterface(new Controller(robot2, robot2)));
+			controlStationInterfaces.put(2, RobotFactory.build(2, robot2, robot2));
 			robots.add(robot2);
 
 			// Set up the monitor

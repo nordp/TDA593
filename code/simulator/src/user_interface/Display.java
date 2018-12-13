@@ -70,23 +70,20 @@ public class Display {
 										float inputY;
 										String choice = "";
 
-										while (!(choice.equals("no"))) { // TODO: Add choosing of robot ID!
+										while (!(choice.equals("no"))) {
 											System.out.println("Enter coordinates one after the other"); // Shorten down to use float array.
 											System.out.printf("> ");
 											inputX = input.nextFloat();
 											System.out.printf("> ");
 											inputY = input.nextFloat();
-											Coordinate poi = new Coordinate(inputX, inputY);
-											missionList.add(poi);
+											missionList.add(new Coordinate(inputX, inputY));
 											System.out.print("Continue input? (yes/no)");
 											System.out.printf("> ");
 											input.nextLine();
 											choice = input.nextLine();
 										}
 										mission = missionComp.createMission(missionList);
-										System.out.println("Choose a mission");
-										int id = input.nextInt();
-										operatorInterface.assignMission(id, mission);
+										operatorInterface.assignMission(robot, mission);
 										missionList.clear();
 										break;
 									case "exit":

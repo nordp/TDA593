@@ -10,30 +10,20 @@ import java.util.Collection;
  */
 class ProcedureB extends Procedure {
 
-    ProcedureB() {
-
-    }
-
     @Override
     Procedure update(Collection<Status> robots, Collection<Area> logicalAreas, Collection<Area> physicalAreas) {
-        for (Status s : robots
-        ) {
-            for (Area a : physicalAreas
-            ) {
+        for (Status s : robots) {
+            for (Area a : physicalAreas) {
                 if (a.isInArea(s.getLocation())) {
-
                     return new ProcedureA();
                 }
             }
-
         }
-
         return new ProcedureB();
     }
 
     @Override
     public int calculate(Collection<Status> robots, Collection<Area> logicalAreas, Collection<Area> physicalAreas) {
-
         return countPointsForAreas(robots, logicalAreas);
     }
 

@@ -64,9 +64,9 @@ public class Main {
 
 		Conductor conductor = new Conductor(controlStationInterfaces);
 
-		MainWindow.launch(MainWindow.class, args);
-/*		Display display = new Display(conductor.operatorInterface);
-		display.displayView();*/
+		//MainWindow.launch(MainWindow.class, args);
+		Display display = new Display(conductor.operatorInterface);
+		display.displayView();
 	}
 
 }

@@ -43,10 +43,12 @@ public class Controller implements Runnable {
         Set<Instruction> instructions = lastStatus.getInstructions();
         instructions.remove(instruction);
         instructions.add(instruction);
-        lastStatus = new Status(lastStatus.getId(), lastStatus.getLocation(), lastStatus.isInMotion(), instructions);	}
+        lastStatus = new Status(lastStatus.getId(), lastStatus.getLocation(), lastStatus.isInMotion(), instructions);
+	    System.out.println("SetInstruction");}
 
 	@Override
 	public void run() {
+	    System.out.println("run");
 		while(true){
 			for(Routine routine : routines){
 				Action a = routine.calculateAction(lastStatus);

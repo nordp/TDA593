@@ -2,13 +2,14 @@ package user_interface;
 import control_station.OperatorInterface;
 import model.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Display {
     private int points;
     private Scanner input = new Scanner(System.in);
-    private List<Coordinate> missionList;
+    private List<Coordinate> missionList = new ArrayList<>();
     private MissionComposer missionComp = new MissionComposer();
     private Mission mission;
     private OperatorInterface operatorInterface;
@@ -63,7 +64,30 @@ public class Display {
 										operatorInterface.assignAction(robot, new ChangeColourInstruction());
 										break;
 									case "mission":
-										//TODO: parse mission
+										System.out.println("Add a coordinate within the allowed range.");
+										System.out.println("Write 'done' when all desired mission points are input.");
+										float inputX;
+										float inputY;
+										String choice = "";
+
+										while (!(choice.equals("no"))) { // TODO: Add choosing of robot ID!
+											System.out.println("Enter coordinates one after the other"); // Shorten down to use float array.
+											System.out.printf("> ");
+											inputX = input.nextFloat();
+											System.out.printf("> ");
+											inputY = input.nextFloat();
+											Coordinate poi = new Coordinate(inputX, inputY);
+											missionList.add(poi);
+											System.out.print("Continue input? (yes/no)");
+											System.out.printf("> ");
+											input.nextLine();
+											choice = input.nextLine();
+										}
+										mission = missionComp.createMission(missionList);
+										System.out.println("Choose a mission");
+										int id = input.nextInt();
+										operatorInterface.assignMission(id, mission);
+										missionList.clear();
 										break;
 									case "exit":
 										System.exit(0);
@@ -133,9 +157,7 @@ public class Display {
 						System.out.printf("Input wasn't recognized see \"help\" for available commands %n");
 				}
 			}
-
 	    }
-
     }
 
     public void updateView(){}

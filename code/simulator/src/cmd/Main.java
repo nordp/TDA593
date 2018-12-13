@@ -1,28 +1,20 @@
 package cmd;
+import control_station.ControlStationFactory;
+import control_station.OperatorInterface;
+import project.AbstractSimulatorMonitor;
+import project.Point;
+import robot.ControlStationInterface;
+import robot.Controller;
+import robot.SimulatorRobot;
+import simbad.sim.*;
+import user_interface.Display;
+import user_interface.graphical_interface.MainWindow;
+
+import java.awt.*;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import control_station.Conductor;
-import model.EmergencyInstruction;
-import model.Instruction;
-import project.Point;
-import project.AbstractSimulatorMonitor;
-import robot.ControlStationInterface;
-import robot.Controller;
-import robot.SimulatorRobot;
-import simbad.sim.AbstractWall;
-import simbad.sim.Boundary;
-import simbad.sim.EnvironmentDescription;
-import simbad.sim.HorizontalBoundary;
-import simbad.sim.HorizontalWall;
-import simbad.sim.VerticalBoundary;
-import simbad.sim.VerticalWall;
-import user_interface.Display;
-import user_interface.graphical_interface.MainWindow;
-
-import java.awt.Color;
 @SuppressWarnings("unused")
 public class Main {
 
@@ -72,24 +64,21 @@ public class Main {
 			controlStationInterfaces.put(1, new ControlStationInterface(new Controller(robot1, robot1)));
 			robots.add(robot1);
 
-
 			SimulatorRobot robot2 = new SimulatorRobot(new Point(1, 3), "Robot 2");
 			controlStationInterfaces.put(2, new ControlStationInterface(new Controller(robot2, robot2)));
 			robots.add(robot2);
 
 			// Set up the monitor
 			AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
-
-			Conductor conductor = new Conductor(controlStationInterfaces);
+			OperatorInterface operatorInterface = ControlStationFactory.instanciate(controlStationInterfaces);
 
 			if(args[0].equals("gui")) {
 				MainWindow.launch(MainWindow.class, args);
 			}
 			else{
-				Display display = new Display(conductor.operatorInterface);
+				Display display = new Display(operatorInterface);
 				display.displayView();
 			}
 		}
 	}
-
 }

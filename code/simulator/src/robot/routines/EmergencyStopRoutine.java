@@ -4,7 +4,6 @@ import model.EmergencyInstruction;
 import model.Status;
 import robot.routines.actions.Action;
 import robot.routines.actions.StopAction;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class EmergencyStopRoutine implements Routine {
 	@Override

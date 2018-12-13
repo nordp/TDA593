@@ -1,6 +1,5 @@
 package robot;
 
-import control_station.RobotInterface;
 import model.Instruction;
 import model.Status;
 
@@ -16,6 +15,7 @@ public class ControlStationInterface {
 	}
 
 	public void notify(Instruction instruction){
+		System.out.println("StationInterface");
 		this.robot.setInstruction(instruction);
 	}
 }

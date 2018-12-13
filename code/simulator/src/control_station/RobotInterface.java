@@ -1,5 +1,7 @@
 package control_station;
 //import model;
+import control_station.storage.StatusDAO;
+import control_station.storage.StorageBroker;
 import model.Instruction;
 import robot.ControlStationInterface;
 
@@ -12,14 +14,16 @@ import java.util.Map;
  * well as storing data comm
  * Currently missing a way to get information from robots
  */
-public class RobotInterface {
+public class RobotInterface implements Runnable {
 
     private Map<Integer,ControlStationInterface> robots;
     //private RobotInterface instance; Might need to implement as a singleton, don't want more than one RobotInterface
 
     RobotInterface(Map<Integer, ControlStationInterface> robots){
         this.robots = robots;
-
+        Thread t = new Thread(this);
+        t.setDaemon(true);
+        t.start();
     }
 
     /**
@@ -29,9 +33,24 @@ public class RobotInterface {
      * Dispatches an instruction to a robot with the identification 'id'
      */
     void dispatch(int id, Instruction instruction){
+        System.out.println("dispatch");
         robots.get(id).notify(instruction);
-
     }
 
 
+    @Override
+    public void run() {
+        StatusDAO statusDAO = new StorageBroker().getStatusDAO();
+        while(true){
+            for(ControlStationInterface robot : robots.values()){
+                statusDAO.store(robot.getStatus());
+            }
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
 }

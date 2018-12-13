@@ -10,7 +10,6 @@ public class MoveAction implements Action {
 	}
 	@Override
 	public void execute(Actuator actuator) {
-		System.out.println("GOGOGOG!!!");
 		actuator.goTo(coordinate);
 	}
 

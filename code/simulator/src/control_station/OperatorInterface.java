@@ -28,7 +28,7 @@ public class OperatorInterface {
     public void assignMission(int id, Mission mission){
         System.out.println("I am here!!");
         System.out.println(mission.getAssignedRobot());
-        //if(id == 1){ strategy = Strategy.SHORTEST_ROUTE; }
+        if(id == 1){ strategy = Strategy.SHORTEST_ROUTE; }
         conductor.setMission(mission, strategy , mission.getAssignedRobot());
     }
 

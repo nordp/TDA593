@@ -72,8 +72,6 @@ public class Display {
                     } else if (parts.length > 0 && ("color".equals(parts[0]) || "colour".equals(parts[0]))) {
                         System.out.printf("Changing colo(u)r of robot %s%n", robot);
                         operatorInterface.assignAction(robot, new ChangeColourInstruction());
-                    } else if (parts.length > 0 && "mission".equals(parts[0])) {
-                        // TODO parse mission
                     } else if (parts.length > 0 && "exit".equals(parts[0])) {
                         System.exit(0);
                     } else if (parts.length > 0 && "help".equals(parts[0])) {
@@ -88,6 +86,30 @@ public class Display {
                                 "colour || color                        - makes the robot change colo(u)r",
                         };
                         System.out.printf(String.join("%n", commands) + "%n");
+                    } else if (parts.length > 0 && "mission".equals(parts[0])) {
+                        System.out.println("Add a coordinate within the allowed range.");
+                        System.out.println("Write 'done' when all desired mission points are input.");
+                        float inputX;
+                        float inputY;
+                        String choice = "";
+                        while (!(choice.equals("no"))) { // TODO: Add choosing of robot ID!
+                            System.out.println("Enter coordinates one after the other"); // Shorten down to use float array.
+                            System.out.printf("> ");
+                            inputX = input.nextFloat();
+                            System.out.printf("> ");
+                            inputY = input.nextFloat();
+                            Coordinate poi = new Coordinate(inputX, inputY);
+                            missionList.add(poi);
+                            System.out.print("Continue input? (yes/no)");
+                            System.out.printf("> ");
+                            input.nextLine();
+                            choice = input.nextLine();
+                        }
+                        mission = missionComp.createMission(missionList);
+                        System.out.println("Choose a mission");
+                        int id = input.nextInt();
+                        operatorInterface.assignMission(id, mission);
+                        missionList.clear();
                     } else if (parts.length > 0 && "map".equals(parts[0])) {
                         // TODO print map
                     } else {
@@ -112,30 +134,6 @@ public class Display {
                 // TODO print map
             } else if (parts.length > 0 && "robots".equals(parts[0])) {
                 // TODO print robots info
-            }else if (parts.length > 0 && "mission".equals(parts[0])) {
-                System.out.println("Add a coordinate within the allowed range.");
-                System.out.println("Write 'done' when all desired mission points are input.");
-                float inputX;
-                float inputY;
-                String choice = "";
-                while(!(choice.equals("no"))) { // TODO: Add choosing of robot ID!
-                    System.out.println("Enter coordinates one after the other"); // Shorten down to use float array.
-                    System.out.printf("> ");
-                    inputX = input.nextFloat();
-                    System.out.printf("> ");
-                    inputY = input.nextFloat();
-                    Coordinate poi = new Coordinate(inputX, inputY);
-                    missionList.add(poi);
-                    System.out.print("Continue input? (yes/no)");
-                    System.out.printf("> ");
-                    input.nextLine();
-                    choice = input.nextLine();
-                }
-                   mission = missionComp.createMission(missionList);
-                   System.out.println("Choose a mission");
-                   int id = input.nextInt();
-                   operatorInterface.assignMission(id, mission);
-                   missionList.clear();
             }else {
 			    System.out.printf("Input wasn't recognized see \"help\" for available commands %n");
 		    }

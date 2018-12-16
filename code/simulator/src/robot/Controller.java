@@ -47,12 +47,17 @@ class Controller implements Runnable {
 	@Override
 	public void run() {
 		while(true){
+			boolean blocked = false;
 			for(Routine routine : routines){
 				Action a = routine.calculateAction(lastStatus);
 				if(a != null){
-					a.execute(actuator);
 					if (a.blocking()) {
-						break;
+						if (!blocked) {
+							blocked = true;
+							a.execute(actuator);
+						}
+					} else {
+						a.execute(actuator);
 					}
 				}
 			}

@@ -1,7 +1,6 @@
 package robot.routines;
 
 import model.ChangeColourInstruction;
-import model.Instruction;
 import model.Status;
 import robot.routines.actions.Action;
 import robot.routines.actions.ChangeColourAction;
@@ -14,15 +13,11 @@ public class ColourRoutine implements Routine {
 	@Override
 	public Action calculateAction(Status status) {
 		Action a = null;
-		for (Instruction i : status.getInstructions()) {
-			if (i.equals(new ChangeColourInstruction())) {
-				ChangeColourInstruction cci = (ChangeColourInstruction) i;
-				if (cci.sent.after(lastRun)) {
-					lastRun = cci.sent;
-					a = new ChangeColourAction();
-				}
-			}
+		ChangeColourInstruction i = (ChangeColourInstruction) status.getInstruction(ChangeColourInstruction.class);
+		if (i != null && i.sent.after(lastRun)) {
+			lastRun = i.sent;
+			return new ChangeColourAction();
 		}
-		return a;
+		return null;
 	}
 }

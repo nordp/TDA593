@@ -7,7 +7,7 @@ import robot.routines.actions.Action;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 class Controller implements Runnable {
 	private List<Routine> routines = new LinkedList<>();
@@ -39,9 +39,8 @@ class Controller implements Runnable {
 	}
 
 	void setInstruction(Instruction instruction) {
-        Set<Instruction> instructions = lastStatus.getInstructions();
-        instructions.remove(instruction);
-        instructions.add(instruction);
+        Map<Class, Instruction> instructions = lastStatus.getInstructions();
+        instructions.put(instruction.getClass(), instruction);
         lastStatus = new Status(lastStatus.getId(), lastStatus.getLocation(), lastStatus.isInMotion(), instructions);	}
 
 	@Override

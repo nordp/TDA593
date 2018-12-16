@@ -22,19 +22,19 @@ public class Main {
 	public static void main(String... args) {
 		boolean execute = true;
 		if (args.length == 0) {
-			System.out.println("Please add an argument, in order to start the graphical, or the command-line user interface.\n" +
-					"> cmd		start with command-line\n" +
-					"> gui		start with gui\n" +
-					"\n" +
-					"Terminating now..."
+			System.out.printf("Please add an argument, in order to start the graphical, or the command-line user interface.%n" +
+					"> cmd		start with command-line%n" +
+					"> gui		start with gui%n" +
+					"%n" +
+					"Terminating now...%n"
 			);
 			execute = false;
 		} else if (!(args[0].equals("gui") || (args[0].equals("cmd")))) {
-			System.out.println("Please add a valid argument, in order to start the graphical, or the command-line user interface.\n" +
-					"> cmd		start with command-line\n" +
-					"> gui		start with gui\n" +
-					"\n" +
-					"Terminating now..."
+			System.out.printf("Please add a valid argument, in order to start the graphical, or the command-line user interface.%n" +
+					"> cmd		start with command-line%n" +
+					"> gui		start with gui%n" +
+					"%n" +
+					"Terminating now...%n"
 			);
 		}
 

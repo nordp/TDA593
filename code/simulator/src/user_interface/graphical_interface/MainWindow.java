@@ -1,7 +1,5 @@
 package user_interface.graphical_interface;
 
-import control_station.Conductor;
-import control_station.OperatorInterface;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,21 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-//import model.ChangeColourInstruction;
-import model.EmergencyInstruction;
 import model.Strategy;
-import project.AbstractSimulatorMonitor;
-import project.Point;
-import robot.ControlStationInterface;
-import robot.Controller;
-import robot.SimulatorRobot;
-import simbad.sim.*;
-
-import java.awt.*;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 

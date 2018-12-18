@@ -45,11 +45,14 @@ class Conductor implements Runnable {
 
         StorageBroker.getMissionDAO().store(mission);
 
+        moveCoor = new MovementInstruction(true, missionList.get(0));
+
+        robotInterface.dispatch(robot, moveCoor);
+
         /*int i = 0;
         while(i < missionList.size()){
             Status stat = store.getStatus(robot);
             if (stat.getLocation().equals(missionList.get(i)) || i == 0) {
-                moveCoor = new MovementInstruction(true, missionList.get(i));
                 robotInterface.dispatch(robot, moveCoor);
                 i++;
             }
@@ -76,7 +79,7 @@ class Conductor implements Runnable {
                   if (StorageBroker.getStatusDAO().getStatus(id.get(i)).getLocation()
                           .equals(StorageBroker.getMissionDAO().getMission(id.get(i)).getPoints().get(0))) {
                       // Remove the "to be sent" coordinate and store the rest of the mission back into the storage.
-                     Instruction move = new MovementInstruction(true, StorageBroker.getMissionDAO().getMission(id.get(i)).getPoints().get(0));
+                     MovementInstruction move = new MovementInstruction(true, StorageBroker.getMissionDAO().getMission(id.get(i)).getPoints().get(0));
                      List<Coordinate> cor = StorageBroker.getMissionDAO().getMission(id.get(i)).getPoints();
                      cor.remove(0);
                      Mission m = new Mission(id.get(i), cor);

@@ -1,6 +1,11 @@
 package cmd;
 import control_station.ControlStationFactory;
 import control_station.OperatorInterface;
+import control_station.storage.StorageBroker;
+import model.Area;
+import model.Coordinate;
+import model.Environment;
+import model.Wall;
 import project.AbstractSimulatorMonitor;
 import project.Point;
 import robot.ControlStationInterface;
@@ -11,10 +16,8 @@ import user_interface.Display;
 import user_interface.graphical_interface.MainWindow;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+
 @SuppressWarnings("unused")
 public class Main {
 
@@ -41,32 +44,67 @@ public class Main {
 		if (execute) {
 			EnvironmentDescription e = new EnvironmentDescription();
 
-			Color color = Color.GRAY;
-
 			// Set map
-			Boundary w1 = new HorizontalBoundary(-5.0f, -5.0f, 5.0f, e, color);
-			Boundary w2 = new HorizontalBoundary(5.0f, -5.0f, 5.0f, e, color);
-			Boundary w3 = new VerticalBoundary(5.0f, -5.0f, 5.0f, e, color);
-			Boundary w4 = new VerticalBoundary(-5.0f, -5.0f, 5.0f, e, color);
+			Boundary w1 = new HorizontalBoundary(-8.0f, -8.0f, 8.0f, e, Color.MAGENTA);
+			Boundary w2 = new HorizontalBoundary(8.0f, -8.0f, 8.0f, e, Color.MAGENTA);
+			Boundary w3 = new VerticalBoundary(8.0f, -8.0f, 8.0f, e, Color.MAGENTA);
+			Boundary w4 = new VerticalBoundary(-8.0f, -8.0f, 8.0f, e, Color.MAGENTA);
 
-			// Build room
-			AbstractWall roomWall1 = new HorizontalWall(-1f, 4.5f, 3.5f, e, color);
-			AbstractWall roomWall2 = new HorizontalWall(-4.5f, 4.5f, 1f, e, color);
-			AbstractWall roomWall3 = new VerticalWall(4.5f, -4.5f, -1f, e, color);
-			AbstractWall roomWall4 = new VerticalWall(1f, -4.5f, -1f, e, color);
+
+			Collection<Wall> walls = new ArrayList<>();
+
+			// Consulting room
+			AbstractWall roomWall11 = new HorizontalWall(-4f, -4f, -8f, e, Color.RED);
+			walls.add(new Wall(new Coordinate(12, 4), new Coordinate(16, 4)));
+			AbstractWall roomWall12 = new VerticalWall(-4f, -8f, -7f, e, Color.RED);
+			walls.add(new Wall(new Coordinate(12, 1), new Coordinate(12, 0)));
+
+			// Surgery rooms
+			AbstractWall roomWall21 = new HorizontalWall(-4f, 4f, 8f, e, Color.BLUE);
+			walls.add(new Wall(new Coordinate(0, 4), new Coordinate(1, 4)));
+			AbstractWall roomWall22 = new HorizontalWall(0f, 4f, 8f, e, Color.BLUE);
+			walls.add(new Wall(new Coordinate(0, 8), new Coordinate(1, 8)));
+			AbstractWall roomWall23 = new HorizontalWall(4f, 4f, 8f, e, Color.BLUE);
+			walls.add(new Wall(new Coordinate(0, 12), new Coordinate(1, 12)));
+			AbstractWall roomWall24 = new VerticalWall(4f, -8f, -7f, e, Color.BLUE);
+			walls.add(new Wall(new Coordinate(4, 3), new Coordinate(4, 5)));
+			AbstractWall roomWall25 = new VerticalWall(4f, 8f, 7f, e, Color.BLUE);
+			walls.add(new Wall(new Coordinate(4, 7), new Coordinate(4, 9)));
+			AbstractWall roomWall26 = new VerticalWall(4f, -1f, 1f, e, Color.BLUE);
+			walls.add(new Wall(new Coordinate(4, 11), new Coordinate(4, 13)));
+
+			Collection<Area> physical = new ArrayList<>();
+			physical.add(new Area(new Coordinate(0, 0), new Coordinate(4, 4), 0)); // surgery 001
+			physical.add(new Area(new Coordinate(4, 0), new Coordinate(8, 4), 0)); // surgery 002
+			physical.add(new Area(new Coordinate(8, 0), new Coordinate(12, 4), 0)); // surgery 003
+			physical.add(new Area(new Coordinate(12, 0), new Coordinate(16, 4), 0)); // surgery 004
+			physical.add(new Area(new Coordinate(12, 4), new Coordinate(16, 16), 0)); // Consulting
+			Collection<Area> logical = new ArrayList<>();
+			logical.add(new Area(new Coordinate(13, 13), new Coordinate(16, 16), 0)); // Eating area
+			logical.add(new Area(new Coordinate(12, 12), new Coordinate(16, 0), 0)); // WIFI
+
+			StorageBroker.getMapDAO().store(new Environment(16, 16, walls, logical, physical));
 
 			// Create robots
 			Set<SimulatorRobot> robots = new HashSet<>();
 			Map<Integer, ControlStationInterface> controlStationInterfaces = new HashMap<>();
 
 
-			SimulatorRobot robot1 = new SimulatorRobot(new Point(0, 0), "Robot 1");
+			SimulatorRobot robot1 = new SimulatorRobot(new Point(7, -7), "Robot 1");
 			controlStationInterfaces.put(1,RobotFactory.build(1,robot1,robot1));
 			robots.add(robot1);
 
-			SimulatorRobot robot2 = new SimulatorRobot(new Point(1, 3), "Robot 2");
+			SimulatorRobot robot2 = new SimulatorRobot(new Point(7, -5), "Robot 2");
 			controlStationInterfaces.put(2, RobotFactory.build(2, robot2, robot2));
 			robots.add(robot2);
+
+			SimulatorRobot robot3 = new SimulatorRobot(new Point(7, -3), "Robot 3");
+			controlStationInterfaces.put(3, RobotFactory.build(3, robot3, robot3));
+			robots.add(robot3);
+
+			SimulatorRobot robot4 = new SimulatorRobot(new Point(7, -1), "Robot 4");
+			controlStationInterfaces.put(4, RobotFactory.build(4, robot4, robot4));
+			robots.add(robot4);
 
 			// Set up the monitor
 			AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);

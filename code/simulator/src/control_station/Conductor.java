@@ -42,13 +42,14 @@ class Conductor implements Runnable {
         //If so, this method should already exist in the storage package
         Mission strategized = strategize(mission, strategy);
         MovementInstruction moveCoor;
-        List<Coordinate> missionList = mission.getPoints();
+        //List<Coordinate> missionList = mission.getPoints();
+        List<Coordinate> missionList = strategized.getPoints();
 
         StorageBroker.getMissionDAO().store(mission);
 
         moveCoor = new MovementInstruction(true, missionList.get(0));
 
-        robotInterface.dispatch(robot, moveCoor);
+        robotInterface.dispatch(strategized.getAssignedRobot(), moveCoor);
 
         /*int i = 0;
         while(i < missionList.size()){
@@ -62,7 +63,6 @@ class Conductor implements Runnable {
                     moveCoor = new MovementInstruction(true, missionList.get(i));
                     robotInterface.dispatch(robot, moveCoor);
             }*/
-        List<Coordinate> missionList = strategized.getPoints();
 
     }
 
@@ -77,7 +77,10 @@ class Conductor implements Runnable {
         robotIds.forEach (e -> id.add(e) ); // Extract the robot ids and make them accessible.
         while(true){ // Main thread loop.
             for(int i=0; i < id.size(); ){
-              if(StorageBroker.getStatusDAO().getStatus(id.get(i)).getLocation() != null) {
+                try{
+                    wait(1000);
+                }catch(Exception e){}
+              if(StorageBroker.getMissionDAO().getMission(id.get(i)).getPoints().get(0) != null) {
                   if (StorageBroker.getStatusDAO().getStatus(id.get(i)).getLocation()
                           .equals(StorageBroker.getMissionDAO().getMission(id.get(i)).getPoints().get(0))) {
                       // Remove the "to be sent" coordinate and store the rest of the mission back into the storage.

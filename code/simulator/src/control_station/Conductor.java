@@ -29,16 +29,16 @@ class Conductor {
         this.strategies.put(Strategy.RANDOM, new StochasticStrategizer());
     }
 
-    void setMission(Mission mission, Strategy strategy, int robot){
+    void setMission(Mission mission, Strategy strategy){
         //Is this used to store the current mission for a robot in the storage?
         //If so, this method should already exist in the storage package
-        System.out.println("SetMission");
+        Mission strategized = strategize(mission, strategy);
         MovementInstruction moveCoor;
-            List<Coordinate> missionList = mission.getPoints();
-            for(int i = 0; i < missionList.size(); i++){
-                moveCoor = new MovementInstruction(true , missionList.get(i));
-                robotInterface.dispatch(robot, moveCoor);
-            }
+        List<Coordinate> missionList = strategized.getPoints();
+        for(int i = 0; i < missionList.size(); i++){
+            moveCoor = new MovementInstruction(true , missionList.get(i));
+            robotInterface.dispatch(mission.getAssignedRobot(), moveCoor);
+        }
 
     }
 

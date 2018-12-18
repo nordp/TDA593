@@ -11,11 +11,9 @@ import java.util.Collection;
  */
 class PointRewarder implements Runnable {
     private Procedure current;
-    private StorageBroker storageBroker;
 
     PointRewarder() {
         this.current = new ProcedureA(); //Defaulting to procedure A when initiating class, can be changed later
-        this.storageBroker = new StorageBroker();
         Thread t = new Thread(this);
         t.setDaemon(true);
         t.start();
@@ -31,7 +29,7 @@ class PointRewarder implements Runnable {
     }
 
     private void updateStoragePoints(Collection<Status> robots, Collection<Area> logicalAreas, Collection<Area> physicalAreas) {
-        storageBroker.getRewardDAO().addReward(calculate(robots, logicalAreas, physicalAreas));
+        StorageBroker.getRewardDAO().addReward(calculate(robots, logicalAreas, physicalAreas));
     }
 
     /**
@@ -42,10 +40,10 @@ class PointRewarder implements Runnable {
     public void run() {
         try {
             Thread.sleep(20000);
-            updateStoragePoints(storageBroker.getStatusDAO().getStatuses(), storageBroker.getMapDAO().getEnvironment().getLogicalAreas(),
-                    storageBroker.getMapDAO().getEnvironment().getPhysicalAreas());
-            current.update(storageBroker.getStatusDAO().getStatuses(), storageBroker.getMapDAO().getEnvironment().getLogicalAreas(),
-                    storageBroker.getMapDAO().getEnvironment().getPhysicalAreas());
+            updateStoragePoints(StorageBroker.getStatusDAO().getStatuses(), StorageBroker.getMapDAO().getEnvironment().getLogicalAreas(),
+		            StorageBroker.getMapDAO().getEnvironment().getPhysicalAreas());
+            current.update(StorageBroker.getStatusDAO().getStatuses(), StorageBroker.getMapDAO().getEnvironment().getLogicalAreas(),
+		            StorageBroker.getMapDAO().getEnvironment().getPhysicalAreas());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

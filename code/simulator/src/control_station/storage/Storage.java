@@ -14,7 +14,7 @@ public class Storage implements StatusDAO, MissionDAO, EnvironmentDAO, RewardDAO
     private final Map<Integer, Status> robots = new HashMap<>();
     private final Map<Integer, Mission> missions = new HashMap<>();
     private int reward;
-    private Environment map;
+    private Environment map = new Environment(0, 0, null, null, null);
 
     @Override
     public void store(Mission mission) {

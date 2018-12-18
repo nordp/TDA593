@@ -4,19 +4,19 @@ public class StorageBroker {
 
     private static final Storage store = new Storage();
 
-    public StatusDAO getStatusDAO() {
+    public static StatusDAO getStatusDAO() {
         return store;
     }
 
-    public MissionDAO getMissionDAO() {
+    public static MissionDAO getMissionDAO() {
         return store;
     }
 
-    public EnvironmentDAO getMapDAO() {
+    public static EnvironmentDAO getMapDAO() {
         return store;
     }
 
-    public RewardDAO getRewardDAO() {
+    public static RewardDAO getRewardDAO() {
         return store;
     }
 }

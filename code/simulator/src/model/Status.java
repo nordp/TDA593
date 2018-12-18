@@ -1,19 +1,21 @@
 package model;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class Status {
     private final int id;
     private final Coordinate location;
     private final boolean inMotion;
-    private final Set<Instruction> instructions;
+    private final Map<Class, Instruction> instructions;
 
-    public Status(int id, Coordinate location, boolean inMotion, Set<Instruction> instructions){
+    public Status(int id, Coordinate location, boolean inMotion, Map<Class, Instruction> instructions){
         this.id = id;
         this.location = location;
         this.inMotion = inMotion;
-        this.instructions = instructions == null ? new HashSet<>() : new HashSet<>(instructions);
+        this.instructions = instructions == null ? new HashMap<>() : new HashMap<>(instructions);
     }
 
     public Coordinate getLocation() {
@@ -24,9 +26,13 @@ public class Status {
         return inMotion;
     }
 
-    public Set<Instruction> getInstructions() {
-        return new HashSet<>(instructions);
+    public Instruction getInstruction(Class c) {
+        return instructions.get(c);
     }
+
+	public Map<Class, Instruction> getInstructions() {
+    	return new HashMap<>(this.instructions);
+	}
 
     public int getId() {
         return id;

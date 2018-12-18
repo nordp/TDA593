@@ -39,7 +39,7 @@ class RobotInterface implements Runnable {
 
     @Override
     public void run() {
-        StatusDAO statusDAO = new StorageBroker().getStatusDAO();
+        StatusDAO statusDAO = StorageBroker.getStatusDAO();
         while(true){
             for(ControlStationInterface robot : robots.values()){
                 statusDAO.store(robot.getStatus());

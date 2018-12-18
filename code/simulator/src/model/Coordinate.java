@@ -1,19 +1,19 @@
 package model;
 
 public class Coordinate {
-    private final float x;
-    private final float y;
+    private final double x;
+    private final double y;
 
-    public Coordinate(float x, float y){
+    public Coordinate(double x, double y) {
         this.x = x;
         this.y = y;
     }
 
-    public float getX() {
+    public double getX() {
         return x;
     }
 
-    public float getY() {
+    public double getY() {
         return y;
     }
 }

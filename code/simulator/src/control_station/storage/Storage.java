@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Storage implements StatusDAO, MissionDAO, EnvironmentDAO, RewardDAO {
+class Storage implements StatusDAO, MissionDAO, EnvironmentDAO, RewardDAO {
 
     private final Map<Integer, Status> robots = new HashMap<>();
     private final Map<Integer, Mission> missions = new HashMap<>();

@@ -64,9 +64,28 @@ public class Display {
 									case "mission":
 										System.out.println("Add a coordinate within the allowed range.");
 										System.out.println("Write 'done' when all desired mission points are input.");
+
+										Strategy choice = Strategy.GIVEN_ORDER;
+										if (parts.length > 1){
+											switch (parts[1]){
+												case "shortest":
+													choice = Strategy.SHORTEST_ROUTE;
+													break;
+												case "given":
+													choice = Strategy.GIVEN_ORDER;
+													break;
+												case "backwards":
+													choice = Strategy.BACKWARDS;
+													break;
+												case "random":
+													choice = Strategy.RANDOM;
+													break;
+											}
+										}
+
 										float inputX;
 										float inputY;
-										String choice = "";
+										String input = "";
 
 										while (!(choice.equals("no"))) {
 											System.out.println("Enter coordinates one after the other (X then Y)"); // Shorten down to use float array.
@@ -77,11 +96,11 @@ public class Display {
 											missionList.add(new Coordinate(inputX, inputY));
 											System.out.print("Continue input? (yes/no)");
 											System.out.printf("> ");
-											input.nextLine();
-											choice = input.nextLine();
+											this.input.nextLine();
+											input = this.input.nextLine();
 										}
 										mission = missionComp.createMission(missionList, robot);
-										operatorInterface.assignMission(robot, mission);
+										operatorInterface.assignMission(mission,choice);
 										missionList.clear();
 										break;
 									case "exit":
@@ -92,7 +111,7 @@ public class Display {
 												"exit                                   - Quits application",
 												"stop                                   - Stops the robot",
 												"start                                  - Starts the robot",
-												"mission {strategy} {1,5 4,8 points...} - Sets a mission for the robot",
+												"mission {shortest|backwards|random}    - Sets a mission for the robot",
 												"map                                    - show the current map",
 												"q                                      - deselect the robot",
 												"help                                   - show this help text",
@@ -159,7 +178,7 @@ public class Display {
 	    }
     }
 
-    public void printPoints(){
+    private void printPoints(){
     	int reward = operatorInterface.getRewardPoints();
 		System.out.println("The current total amount of points rewarded: " + reward);
 	}

@@ -11,27 +11,18 @@ public class OperatorInterface {
 
     private RobotInterface robotInterface;
     private Conductor conductor;
-    private Strategy strategy;
-    StorageBroker storageBroker = new StorageBroker();
 
     OperatorInterface(RobotInterface robotInterface, Conductor conductor){
         this.robotInterface = robotInterface;
         this.conductor = conductor;
     }
 
-    /*public static OperatorInterface getInstance(){
-        return instance;
-    }*/
-
     Status getStatuses(){
         return null;
     }
 
-    public void assignMission(int id, Mission mission){
-        System.out.println("I am here!!");
-        System.out.println(mission.getAssignedRobot());
-        if(id == 1){ strategy = Strategy.SHORTEST_ROUTE; }
-        conductor.setMission(mission, strategy , mission.getAssignedRobot());
+    public void assignMission(Mission mission, Strategy strategy){
+        conductor.setMission(mission, strategy);
     }
 
     public void assignAction(int id, Instruction instruction){
@@ -40,11 +31,11 @@ public class OperatorInterface {
 
 
     public int getRewardPoints() {
-        return storageBroker.getRewardDAO().getReward();
+        return StorageBroker.getRewardDAO().getReward();
     }
 
     public Environment getEnv() {
 
-        return storageBroker.getMapDAO().getEnvironment();
+        return StorageBroker.getMapDAO().getEnvironment();
     }
 }

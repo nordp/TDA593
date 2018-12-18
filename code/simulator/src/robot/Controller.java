@@ -1,5 +1,6 @@
 package robot;
 
+import model.Coordinate;
 import model.Instruction;
 import model.Status;
 import robot.routines.*;
@@ -46,6 +47,14 @@ class Controller implements Runnable {
 	@Override
 	public void run() {
 		while(true){
+			// update status
+			this.lastStatus = new Status(
+					this.lastStatus.getId(),
+					this.sensor.getCoordinate(),
+					lastStatus.isInMotion(),
+					this.lastStatus.getInstructions()
+			);
+
 			boolean blocked = false;
 			for(Routine routine : routines){
 				Action a = routine.calculateAction(lastStatus);
@@ -60,6 +69,7 @@ class Controller implements Runnable {
 					}
 				}
 			}
+			
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {

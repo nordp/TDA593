@@ -1,9 +1,7 @@
 package control_station;
 
-import model.Coordinate;
-import model.Mission;
-import model.MovementInstruction;
-import model.Strategy;
+import control_station.storage.Storage;
+import model.*;
 
 import java.util.List;
 
@@ -23,13 +21,26 @@ class Conductor {
     void setMission(Mission mission, Strategy strategy, int robot){
         //Is this used to store the current mission for a robot in the storage?
         //If so, this method should already exist in the storage package
-        System.out.println("SetMission");
         MovementInstruction moveCoor;
-            List<Coordinate> missionList = mission.getPoints();
-            for(int i = 0; i < missionList.size(); i++){
-                moveCoor = new MovementInstruction(true , missionList.get(i));
+        Storage store = new Storage();
+        List<Coordinate> missionList = mission.getPoints();
+        int i = 0;
+        while(i < missionList.size()){
+            Status stat = store.getStatus(robot);
+            if (stat.getLocation().equals(missionList.get(i)) || i == 0) {
+                moveCoor = new MovementInstruction(true, missionList.get(i));
                 robotInterface.dispatch(robot, moveCoor);
+                i++;
             }
+        }
+            /*for(int i = 0; i < missionList.size(); i++) {
+                Status stat = store.getStatus(robot);
+                if (stat.getLocation() == missionList.get(i)) {
+                    moveCoor = new MovementInstruction(true, missionList.get(i));
+                    robotInterface.dispatch(robot, moveCoor);
+                }
+
+            }*/
 
     }
 

@@ -71,10 +71,10 @@ public class Display {
 										String choice = "";
 
 										while (!(choice.equals("no"))) {
-											System.out.println("Enter coordinates one after the other"); // Shorten down to use float array.
-											System.out.printf("> ");
+											System.out.println("Enter coordinates one after the other (X then Y)"); // Shorten down to use float array.
+											System.out.printf("X > ");
 											inputX = input.nextFloat();
-											System.out.printf("> ");
+											System.out.printf("Y > ");
 											inputY = input.nextFloat();
 											missionList.add(new Coordinate(inputX, inputY));
 											System.out.print("Continue input? (yes/no)");

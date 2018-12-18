@@ -2,9 +2,7 @@ package user_interface;
 import control_station.OperatorInterface;
 import model.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Display {
     private int points;
@@ -130,6 +128,9 @@ public class Display {
 					case "map":
 						//TODO: print map?
 						break;
+					case "points":
+						printPoints();
+						break;
 					case "exit":
 						System.exit(0);
 						break;
@@ -143,6 +144,7 @@ public class Display {
 								"robot {robotId}      - selects the robot",
 								"robots               - get info about available robots",
 								"map                  - show the current map",
+								"points               - show the total amount of points rewarded",
 								"help                 - show this help text",
 						};
 						System.out.printf(String.join("%n", commands) + "%n");
@@ -156,6 +158,21 @@ public class Display {
 			}
 	    }
     }
+
+    public void printPoints(){
+    	int reward = operatorInterface.getRewardPoints();
+		System.out.println("The current total amount of points rewarded: " + reward);
+	}
+
+
+	public void printMap(){
+    	Environment map = operatorInterface.getEnv();
+    	int x = (int) map.getWidth();
+    	int y = (int) map.getHeight();
+		String [][] pmap = new String [x][y];
+		
+
+	}
 
     public void updateView(){}
 

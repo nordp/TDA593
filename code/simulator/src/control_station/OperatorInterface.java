@@ -1,4 +1,5 @@
 package control_station;
+import control_station.storage.StorageBroker;
 import model.*;
 
 //import model.Environment
@@ -11,6 +12,7 @@ public class OperatorInterface {
     private RobotInterface robotInterface;
     private Conductor conductor;
     private Strategy strategy;
+    StorageBroker storageBroker = new StorageBroker();
 
     OperatorInterface(RobotInterface robotInterface, Conductor conductor){
         this.robotInterface = robotInterface;
@@ -36,11 +38,13 @@ public class OperatorInterface {
         robotInterface.dispatch(id,instruction);
     }
 
-    Environment getMap(){
-        return null;
+
+    public int getRewardPoints() {
+        return storageBroker.getRewardDAO().getReward();
     }
 
-    int getPoints(){
-        return 1;
+    public Environment getEnv() {
+
+        return storageBroker.getMapDAO().getEnvironment();
     }
 }

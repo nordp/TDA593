@@ -3,6 +3,10 @@ import model.*;
 
 import java.util.Collection;
 
+import static control_station.storage.StorageBroker.getMapDAO;
+import static control_station.storage.StorageBroker.getRewardDAO;
+import static control_station.storage.StorageBroker.getStatusDAO;
+
 //import model.Environment
 
 /**
@@ -19,11 +23,11 @@ public class OperatorInterface {
     }
 
     Status getStatus(int id){
-        return StorageBroker.getStatusDAO().getStatus(id);
+        return getStatusDAO().getStatus(id);
     }
 
-    Collection<Status> getStatuses(){
-        return StorageBroker.getStatusDAO().getStatuses();
+    public Collection<Status> getStatuses(){
+        return getStatusDAO().getStatuses();
     }
 
     public void assignMission(Mission mission, Strategy strategy){

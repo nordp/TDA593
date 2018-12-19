@@ -1,5 +1,4 @@
 package control_station;
-import control_station.storage.StorageBroker;
 import model.*;
 
 import java.util.Collection;
@@ -37,11 +36,11 @@ public class OperatorInterface {
 
 
     public int getRewardPoints() {
-        return StorageBroker.getRewardDAO().getReward();
+        return getRewardDAO().getReward();
     }
 
     public Environment getEnv() {
 
-        return StorageBroker.getMapDAO().getEnvironment();
+        return getMapDAO().getEnvironment();
     }
 }

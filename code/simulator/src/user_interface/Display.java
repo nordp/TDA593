@@ -145,7 +145,7 @@ public class Display {
 						// TODO stop all robots
 						break;
 					case "map":
-						//TODO: print map?
+						printMap();
 						break;
 					case "points":
 						printPoints();
@@ -188,7 +188,53 @@ public class Display {
     	Environment map = operatorInterface.getEnv();
     	int x = (int) map.getWidth();
     	int y = (int) map.getHeight();
-		String [][] pmap = new String [x][y];
+    	Collection<Wall> walls = map.getWalls();
+    	Collection<Status> robots = operatorInterface.getStatuses();
+		char[][] pmap = new char[x+1][y+1];
+
+		for(int i = 0; i < pmap.length;i++){
+			pmap[i][0] = '#';
+			pmap[i][pmap[0].length-1] = '#';
+		}
+
+		for(int j = 0; j < pmap[0].length; j++){
+			pmap[0][j] = '#';
+			pmap[(pmap.length-1)][j] = '#';
+		}
+
+		for(Wall w : walls){
+			Coordinate start = w.getStart();
+			Coordinate end = w.getEnd();
+			int startx = (int)(start.getX() < end.getX() ? start.getX() : end.getX());
+			int starty = (int)(start.getY() < end.getY() ? start.getY() : end.getY());
+			int endx = (int)(start.getX() >= end.getX() ? start.getX() : end.getX());
+			int endy = (int)(start.getY() >= end.getY() ? start.getY() : end.getY());
+			for(int i = startx;i <= endx;i++){
+				for(int j = starty;j <= endy;j++){
+						pmap[i][j] = '#';
+				}
+			}
+		}
+
+
+		for(Status s : robots){
+			Coordinate location = s.getLocation();
+			pmap[(int)location.getX()+8][(int)location.getY()+8] = 'o';
+		}
+
+		for(int i = 0; i < pmap[0].length;i++){
+			for(int j = 0; j < pmap.length;j++){
+				if(pmap[j][i] == 0){
+					System.out.print(' ');
+				}
+				else{
+					System.out.print(pmap[j][i]);
+				}
+			}
+			System.out.println();
+		}
+
+
 		
 
 	}

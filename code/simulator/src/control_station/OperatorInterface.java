@@ -2,6 +2,8 @@ package control_station;
 import control_station.storage.StorageBroker;
 import model.*;
 
+import java.util.Collection;
+
 //import model.Environment
 
 /**
@@ -17,8 +19,12 @@ public class OperatorInterface {
         this.conductor = conductor;
     }
 
-    Status getStatuses(){
-        return null;
+    Status getStatus(int id){
+        return StorageBroker.getStatusDAO().getStatus(id);
+    }
+
+    Collection<Status> getStatuses(){
+        return StorageBroker.getStatusDAO().getStatuses();
     }
 
     public void assignMission(Mission mission, Strategy strategy){

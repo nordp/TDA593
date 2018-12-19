@@ -138,11 +138,15 @@ public class Display {
 				switch (parts[0]){
 					case "start":
 						System.out.printf("Starting all robots%n");
-						// TODO start all robots
+						operatorInterface.getStatuses().forEach((Status status) -> {
+							operatorInterface.assignAction(status.getId(), new EmergencyInstruction(false));
+						});
 						break;
 					case "stop":
 						System.out.printf("Stopping all robots %n");
-						// TODO stop all robots
+						operatorInterface.getStatuses().forEach((Status status) -> {
+							operatorInterface.assignAction(status.getId(), new EmergencyInstruction(true));
+						});
 						break;
 					case "map":
 						printMap();
@@ -169,7 +173,9 @@ public class Display {
 						System.out.printf(String.join("%n", commands) + "%n");
 						break;
 					case "robots":
-						//TODO: print robots info
+						operatorInterface.getStatuses().forEach((Status status) -> {
+							System.out.printf("%d: (%d, %d)%n", status.getId(), (int) status.getLocation().getX(), (int) status.getLocation().getY());
+						});
 						break;
 					default:
 						System.out.printf("Input wasn't recognized see \"help\" for available commands %n");
@@ -250,7 +256,4 @@ public class Display {
 		
 
 	}
-
-    public void updateView(){}
-
 }

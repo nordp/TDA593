@@ -183,35 +183,38 @@ public class Display {
 		System.out.println("The current total amount of points rewarded: " + reward);
 	}
 
+	private static final int RESOLUTION = 4;
+
 
 	public void printMap(){
     	Environment map = operatorInterface.getEnv();
-    	int x = (int) map.getWidth();
-    	int y = (int) map.getHeight();
-    	Collection<Wall> walls = map.getWalls();
+    	int mapWidth = (int) map.getWidth();
+    	int mapHeight = (int) map.getHeight();
     	Collection<Status> robots = operatorInterface.getStatuses();
-		char[][] pmap = new char[x+1][y+1];
-
-		for(int i = 0; i < pmap.length;i++){
-			pmap[i][0] = '#';
-			pmap[i][pmap[0].length-1] = '#';
-		}
-
-		for(int j = 0; j < pmap[0].length; j++){
-			pmap[0][j] = '#';
-			pmap[(pmap.length-1)][j] = '#';
-		}
+    	Collection<Wall> walls = map.getWalls();
+		char[][] plot = new char[mapWidth*RESOLUTION][mapHeight*RESOLUTION];
 
 		for(Wall w : walls){
 			Coordinate start = w.getStart();
 			Coordinate end = w.getEnd();
-			int startx = (int)(start.getX() < end.getX() ? start.getX() : end.getX());
-			int starty = (int)(start.getY() < end.getY() ? start.getY() : end.getY());
-			int endx = (int)(start.getX() >= end.getX() ? start.getX() : end.getX());
-			int endy = (int)(start.getY() >= end.getY() ? start.getY() : end.getY());
-			for(int i = startx;i <= endx;i++){
-				for(int j = starty;j <= endy;j++){
-						pmap[i][j] = '#';
+			int startX = (int)(start.getX() < end.getX() ? start.getX() : end.getX());
+			int startY = (int)(start.getY() < end.getY() ? start.getY() : end.getY());
+			int endX = (int)(start.getX() >= end.getX() ? start.getX() : end.getX());
+			int endY = (int)(start.getY() >= end.getY() ? start.getY() : end.getY());
+
+			if (startX == endX) {
+				for(int j = startY * RESOLUTION; j < endY * RESOLUTION; j++){
+					plot[startX * RESOLUTION][j] = '#';
+				}
+			} else if (startY == endY) {
+				for(int i = startX * RESOLUTION; i < endX * RESOLUTION; i++){
+					plot[i][startY * RESOLUTION] = '#';
+				}
+			} else {
+				for(int i = startX * RESOLUTION; i < endX * RESOLUTION; i++){
+					for(int j = startY * RESOLUTION; j < endY * RESOLUTION; j++){
+						plot[i][j] = '#';
+					}
 				}
 			}
 		}
@@ -219,20 +222,29 @@ public class Display {
 
 		for(Status s : robots){
 			Coordinate location = s.getLocation();
-			pmap[(int)location.getX()+8][(int)location.getY()+8] = 'o';
+			int x, y;
+			x = (int) s.getLocation().getX();
+			y = (int) s.getLocation().getY();
+			plot[x * RESOLUTION][y * RESOLUTION] = Integer.toString(s.getId() % 10).charAt(0);
 		}
 
-		for(int i = 0; i < pmap[0].length;i++){
-			for(int j = 0; j < pmap.length;j++){
-				if(pmap[j][i] == 0){
+		for (int i = -2; i < mapWidth * RESOLUTION;i++) System.out.print("#");
+		System.out.println();
+
+		for(int i = 0; i < plot[0].length;i++){
+			System.out.print("#");
+			for(int j = 0; j < plot.length;j++){
+				if(plot[j][i] == 0){
 					System.out.print(' ');
 				}
 				else{
-					System.out.print(pmap[j][i]);
+					System.out.print(plot[j][i]);
 				}
 			}
-			System.out.println();
+			System.out.println("#");
 		}
+		for (int i = -2; i < mapWidth * RESOLUTION;i++) System.out.print("#");
+		System.out.println();
 
 
 		

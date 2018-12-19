@@ -35,7 +35,7 @@ public class SimulatorRobot extends AbstractRobotSimulator implements Actuator, 
 
 	@Override
 	public Coordinate getCoordinate() {
-		return new Coordinate(getPosition().getX(),getPosition().getZ());
+		return new Coordinate(8 - getPosition().getZ(),getPosition().getX() + 8);
 	}
 
 	@Override

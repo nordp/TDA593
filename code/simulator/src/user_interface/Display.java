@@ -36,11 +36,11 @@ public class Display {
 					switch (parts[0]) {
 						case "start":
 							System.out.printf("Starting robot %s%n", robot);
-							operatorInterface.assignAction(robot, new EmergencyInstruction(false));
+							operatorInterface.assignAction(robot, new StopInstruction(false));
 							break;
 						case "stop":
 							System.out.printf("Stopping robot %s%n", robot);
-							operatorInterface.assignAction(robot, new EmergencyInstruction(true));
+							operatorInterface.assignAction(robot, new StopInstruction(true));
 							break;
 						case "robot":
 							System.out.printf("Robot %s selected, \"q\" to deselect%n", robot);
@@ -52,11 +52,11 @@ public class Display {
 									switch (parts[0]) {
 										case "start":
 											System.out.printf("Starting robot %s%n", robot);
-											operatorInterface.assignAction(robot, new EmergencyInstruction(false));
+											operatorInterface.assignAction(robot, new StopInstruction(false));
 											break;
 										case "stop":
 											System.out.printf("Stopping robot %s%n", robot);
-											operatorInterface.assignAction(robot, new EmergencyInstruction(true));
+											operatorInterface.assignAction(robot, new StopInstruction(true));
 											break;
 										case "color":
 										case "colour":
@@ -142,13 +142,13 @@ public class Display {
 					case "start":
 						System.out.printf("Starting all robots%n");
 						operatorInterface.getStatuses().forEach((Status status) -> {
-							operatorInterface.assignAction(status.getId(), new EmergencyInstruction(false));
+							operatorInterface.assignAction(status.getId(), new StopInstruction(false));
 						});
 						break;
 					case "stop":
 						System.out.printf("Stopping all robots %n");
 						operatorInterface.getStatuses().forEach((Status status) -> {
-							operatorInterface.assignAction(status.getId(), new EmergencyInstruction(true));
+							operatorInterface.assignAction(status.getId(), new StopInstruction(true));
 						});
 						break;
 					case "map":

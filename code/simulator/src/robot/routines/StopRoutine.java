@@ -1,15 +1,14 @@
 package robot.routines;
 
-import model.EmergencyInstruction;
-import model.Instruction;
+import model.StopInstruction;
 import model.Status;
 import robot.routines.actions.Action;
 import robot.routines.actions.StopAction;
 
-public class EmergencyStopRoutine implements Routine {
+public class StopRoutine implements Routine {
 	@Override
 	public Action calculateAction(Status status) {
-		EmergencyInstruction i = (EmergencyInstruction) status.getInstruction(EmergencyInstruction.class);
+		StopInstruction i = (StopInstruction) status.getInstruction(StopInstruction.class);
 		if(i != null && i.getActive()){
 			return new StopAction();
 		}

@@ -4,6 +4,7 @@ import model.Coordinate;
 
 public interface Sensor {
 	Coordinate getCoordinate();
-	Boolean checkCamera();
-	Boolean checkObstacles();
+	boolean checkCamera();
+	boolean checkObstacles();
+    boolean isInMotion();
 }

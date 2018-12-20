@@ -19,8 +19,8 @@ public class Area {
      * @return
      */
     public boolean isInArea(Coordinate coordinate){
-        return (coordinate.getX() >= start.getX() || coordinate.getX() <= end.getX()) &&
-                (coordinate.getY() >= start.getY() || coordinate.getY() <= end.getY());
+        return (coordinate.getX() >= start.getX() && coordinate.getX() <= end.getX()) &&
+                (coordinate.getY() >= start.getY() && coordinate.getY() <= end.getY());
     }
 
 

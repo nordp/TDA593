@@ -1,6 +1,5 @@
 package robot;
 
-import model.Coordinate;
 import model.Instruction;
 import model.Status;
 import robot.routines.*;
@@ -21,7 +20,7 @@ class Controller implements Runnable {
 		this.sensor = sensor;
 
 		// Setup routines
-		routines.add(new EmergencyStopRoutine());
+		routines.add(new StopRoutine());
 		routines.add(new RobotFailureRoutine());
 		routines.add(new CollisionPreventionRoutine());
 		routines.add(new ColourRoutine());
@@ -51,7 +50,7 @@ class Controller implements Runnable {
 			this.lastStatus = new Status(
 					this.lastStatus.getId(),
 					this.sensor.getCoordinate(),
-					lastStatus.isInMotion(),
+					this.sensor.isInMotion(),
 					this.lastStatus.getInstructions()
 			);
 

@@ -28,7 +28,7 @@ class Controller implements Runnable {
 		routines.add(new MissionReachedRoutine());
 		routines.add(new NavigateToNextRoutine());
 
-		lastStatus = new Status(id, null, false, null);
+		lastStatus = new Status(id, null, false, null, false, false);
 
 		Thread t = new Thread(this);
 		t.setDaemon(true);
@@ -42,7 +42,7 @@ class Controller implements Runnable {
 	void setInstruction(Instruction instruction) {
         Map<Class, Instruction> instructions = lastStatus.getInstructions();
         instructions.put(instruction.getClass(), instruction);
-        lastStatus = new Status(lastStatus.getId(), lastStatus.getLocation(), lastStatus.isInMotion(), instructions);	}
+        lastStatus = new Status(lastStatus.getId(), lastStatus.getLocation(), lastStatus.isInMotion(), instructions, lastStatus.getSensor(), lastStatus.getCamera());	}
 
 	@Override
 	public void run() {
@@ -52,7 +52,9 @@ class Controller implements Runnable {
 					this.lastStatus.getId(),
 					this.sensor.getCoordinate(),
 					lastStatus.isInMotion(),
-					this.lastStatus.getInstructions()
+					this.lastStatus.getInstructions(),
+					this.sensor.checkObstacles(),
+					this.sensor.checkCamera()
 			);
 
 			boolean blocked = false;

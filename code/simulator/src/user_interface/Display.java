@@ -28,110 +28,112 @@ public class Display {
 
 		    if(parts.length > 1){
 		    	int robot = Integer.parseInt(parts[1]);
-		    	switch (parts[0]){
-					case "start":
-						// Todo handle invalid id
-						System.out.printf("Starting robot %s%n", robot);
-						operatorInterface.assignAction(robot, new EmergencyInstruction(false));
-						break;
-					case "stop":
-						// Todo handle invalid id
-						System.out.printf("Stopping robot %s%n", robot);
-						operatorInterface.assignAction(robot, new EmergencyInstruction(true));
-						break;
-					case "robot":
-						// Todo handle invalid id
-						System.out.printf("Robot %s selected, \"q\" to deselect%n", robot);
-						while (true) {
-							System.out.printf("Robot %s > ", robot);
-							parts = input.nextLine().split(" ");
+		    	if(!(checkIfValid(robot))){
+					System.out.printf("Robot with id %s does not exists! Try again!%n",robot);
+				}
+				else {
+					switch (parts[0]) {
+						case "start":
+							System.out.printf("Starting robot %s%n", robot);
+							operatorInterface.assignAction(robot, new EmergencyInstruction(false));
+							break;
+						case "stop":
+							System.out.printf("Stopping robot %s%n", robot);
+							operatorInterface.assignAction(robot, new EmergencyInstruction(true));
+							break;
+						case "robot":
+							System.out.printf("Robot %s selected, \"q\" to deselect%n", robot);
+							while (true) {
+								System.out.printf("Robot %s > ", robot);
+								parts = input.nextLine().split(" ");
 
-							if (parts.length > 0) {
-								switch (parts[0]) {
-									case "start":
-										System.out.printf("Starting robot %s%n", robot);
-										operatorInterface.assignAction(robot, new EmergencyInstruction(false));
-										break;
-									case "stop":
-										System.out.printf("Stopping robot %s%n", robot);
-										operatorInterface.assignAction(robot, new EmergencyInstruction(true));
-										break;
-									case "color":
-									case "colour":
-										System.out.printf("Changing colo(u)r of robot %s%n", robot);
-										operatorInterface.assignAction(robot, new ChangeColourInstruction());
-										break;
-									case "mission":
-										System.out.println("Add a coordinate within the allowed range.");
-										System.out.println("Write 'done' when all desired mission points are input.");
+								if (parts.length > 0) {
+									switch (parts[0]) {
+										case "start":
+											System.out.printf("Starting robot %s%n", robot);
+											operatorInterface.assignAction(robot, new EmergencyInstruction(false));
+											break;
+										case "stop":
+											System.out.printf("Stopping robot %s%n", robot);
+											operatorInterface.assignAction(robot, new EmergencyInstruction(true));
+											break;
+										case "color":
+										case "colour":
+											System.out.printf("Changing colo(u)r of robot %s%n", robot);
+											operatorInterface.assignAction(robot, new ChangeColourInstruction());
+											break;
+										case "mission":
+											System.out.println("Add a coordinate within the allowed range.");
+											System.out.println("Write 'done' when all desired mission points are input.");
 
-										Strategy choice = Strategy.GIVEN_ORDER;
-										if (parts.length > 1){
-											switch (parts[1]){
-												case "shortest":
-													choice = Strategy.SHORTEST_ROUTE;
-													break;
-												case "given":
-													choice = Strategy.GIVEN_ORDER;
-													break;
-												case "backwards":
-													choice = Strategy.BACKWARDS;
-													break;
-												case "random":
-													choice = Strategy.RANDOM;
-													break;
+											Strategy choice = Strategy.GIVEN_ORDER;
+											if (parts.length > 1) {
+												switch (parts[1]) {
+													case "shortest":
+														choice = Strategy.SHORTEST_ROUTE;
+														break;
+													case "given":
+														choice = Strategy.GIVEN_ORDER;
+														break;
+													case "backwards":
+														choice = Strategy.BACKWARDS;
+														break;
+													case "random":
+														choice = Strategy.RANDOM;
+														break;
+												}
 											}
-										}
 
-										float inputX;
-										float inputY;
-										String input = "";
+											float inputX;
+											float inputY;
+											String input = "";
 
-										while (!(input.equals("no"))) {
-											System.out.println("Enter coordinates one after the other"); // Shorten down to use float array.
-											System.out.printf("> ");
-											inputX = this.input.nextFloat();
-											System.out.printf("> ");
-											inputY = this.input.nextFloat();
-											missionList.add(new Coordinate(inputX, inputY));
-											System.out.print("Continue input? (yes/no)");
-											System.out.printf("> ");
-											this.input.nextLine();
-											input = this.input.nextLine();
-										}
-										mission = missionComp.createMission(missionList, robot);
-										operatorInterface.assignMission(mission,choice);
-										missionList.clear();
+											while (!(input.equals("no"))) {
+												System.out.println("Enter coordinates one after the other"); // Shorten down to use float array.
+												System.out.printf("> ");
+												inputX = this.input.nextFloat();
+												System.out.printf("> ");
+												inputY = this.input.nextFloat();
+												missionList.add(new Coordinate(inputX, inputY));
+												System.out.print("Continue input? (yes/no)");
+												System.out.printf("> ");
+												this.input.nextLine();
+												input = this.input.nextLine();
+											}
+											mission = missionComp.createMission(missionList, robot);
+											operatorInterface.assignMission(mission, choice);
+											missionList.clear();
+											break;
+										case "exit":
+											System.exit(0);
+											break;
+										case "help":
+											String[] commands = {
+													"exit                                   - Quits application",
+													"stop                                   - Stops the robot",
+													"start                                  - Starts the robot",
+													"mission {shortest|backwards|random}    - Sets a mission for the robot",
+													"map                                    - show the current map",
+													"q                                      - deselect the robot",
+													"help                                   - show this help text",
+													"colour || color                        - makes the robot change colo(u)r",
+											};
+											System.out.printf(String.join("%n", commands) + "%n");
+											break;
+										case "q":
+											break;
+										default:
+											System.out.printf("Input wasn't recognized see \"help\" for available commands %n");
+									}
+
+									if (parts[0].equals("q"))
 										break;
-									case "exit":
-										System.exit(0);
-										break;
-									case "help":
-										String[] commands = {
-												"exit                                   - Quits application",
-												"stop                                   - Stops the robot",
-												"start                                  - Starts the robot",
-												"mission {shortest|backwards|random}    - Sets a mission for the robot",
-												"map                                    - show the current map",
-												"q                                      - deselect the robot",
-												"help                                   - show this help text",
-												"colour || color                        - makes the robot change colo(u)r",
-										};
-										System.out.printf(String.join("%n", commands) + "%n");
-										break;
-									case "q":
-										break;
-									default:
-										System.out.printf("Input wasn't recognized see \"help\" for available commands %n");
+
+								} else {
+									System.out.printf("Input wasn't recognized see \"help\" for available commands %n");
 								}
-
-								if (parts[0].equals("q"))
-									break;
-								
-							} else {
-								System.out.printf("Input wasn't recognized see \"help\" for available commands %n");
 							}
-						}
+					}
 				}
 			}
 		    else if(parts.length > 0){
@@ -255,5 +257,16 @@ public class Display {
 
 		
 
+	}
+
+	private boolean checkIfValid(int robot){
+		Collection<Status> robots= operatorInterface.getStatuses();
+		for(Status s : robots){
+			if(s.getId() == robot){
+				return true;
+			}
+
+		}
+		return false;
 	}
 }

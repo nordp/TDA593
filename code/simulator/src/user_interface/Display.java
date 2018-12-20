@@ -85,21 +85,21 @@ public class Display {
 												}
 											}
 
-											float inputX;
-											float inputY;
-											String input = "";
+											double inputX;
+											double inputY;
+											String cont = "";
 
-											while (!(input.equals("no"))) {
+											while (!(cont.equals("no"))) {
 												System.out.println("Enter coordinates one after the other"); // Shorten down to use float array.
 												System.out.printf("> ");
-												inputX = this.input.nextFloat();
+												inputX = input.nextDouble();
 												System.out.printf("> ");
-												inputY = this.input.nextFloat();
+												inputY = input.nextDouble();
 												missionList.add(new Coordinate(inputX, inputY));
 												System.out.print("Continue input? (yes/no)");
 												System.out.printf("> ");
-												this.input.nextLine();
-												input = this.input.nextLine();
+												input.nextLine();
+												cont = input.nextLine();
 											}
 											mission = missionComp.createMission(missionList, robot);
 											operatorInterface.assignMission(mission, choice);

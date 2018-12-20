@@ -30,8 +30,6 @@ public class Coordinate {
         return diffX <= MARGIN_OF_ERROR &&
                 diffY <= MARGIN_OF_ERROR;
     }
-}
-
 
     public String toString() {
         return "X = " + this.x + ", Y = " + this.y;

@@ -75,14 +75,14 @@ public class Main {
 			walls.add(new Wall(new Coordinate(4, 15), new Coordinate(4, 16)));
 
 			Collection<Area> physical = new ArrayList<>();
-			physical.add(new Area(new Coordinate(0, 0), new Coordinate(4, 4), 0)); // surgery 001
-			physical.add(new Area(new Coordinate(4, 0), new Coordinate(8, 4), 0)); // surgery 002
-			physical.add(new Area(new Coordinate(8, 0), new Coordinate(12, 4), 0)); // surgery 003
-			physical.add(new Area(new Coordinate(12, 0), new Coordinate(16, 4), 0)); // surgery 004
-			physical.add(new Area(new Coordinate(12, 4), new Coordinate(16, 16), 0)); // Consulting
+			physical.add(new Area(new Coordinate(0, 0), new Coordinate(4, 4), 20)); // surgery 001
+			physical.add(new Area(new Coordinate(4, 0), new Coordinate(8, 4), 20)); // surgery 002
+			physical.add(new Area(new Coordinate(8, 0), new Coordinate(12, 4), 20)); // surgery 003
+			physical.add(new Area(new Coordinate(12, 0), new Coordinate(16, 4), 20)); // surgery 004
+			physical.add(new Area(new Coordinate(12, 4), new Coordinate(16, 16), 10)); // Consulting
 			Collection<Area> logical = new ArrayList<>();
-			logical.add(new Area(new Coordinate(13, 13), new Coordinate(16, 16), 0)); // Eating area
-			logical.add(new Area(new Coordinate(12, 12), new Coordinate(16, 0), 0)); // WIFI
+			logical.add(new Area(new Coordinate(13, 13), new Coordinate(16, 16), 20)); // Eating area
+			logical.add(new Area(new Coordinate(12, 12), new Coordinate(16, 0), 10)); // WIFI
 
 			StorageBroker.getMapDAO().store(new Environment(16, 16, walls, logical, physical));
 

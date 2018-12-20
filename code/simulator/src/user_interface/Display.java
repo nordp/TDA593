@@ -152,6 +152,10 @@ public class Display {
 						});
 						break;
 					case "map":
+						System.out.println("# - Wall");
+						System.out.println("^ - Physical area ");
+						System.out.println("* - Logical area");
+						System.out.println("¨ - Both Physical and Logical area");
 						plotter = new MapPlotter(operatorInterface);
 						break;
 					case "points":

@@ -30,9 +30,10 @@ public class Coordinate {
         return diffX <= MARGIN_OF_ERROR &&
                 diffY <= MARGIN_OF_ERROR;
     }
+}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(x, y);
+
+    public String toString() {
+        return "X = " + this.x + ", Y = " + this.y;
     }
 }

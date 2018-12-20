@@ -8,15 +8,6 @@ import static org.junit.Assert.*;
 
 public class SimulatorRobotTest {
 
-    private Point point0 = new Point(0,0);
-    private Point point1 = new Point(1,3);
-    private Point point2 = new Point(4,2);
-    private Point point3 = new Point(7,7);
-    private Point point4 = new Point(2,3);
-    private Point point5 = new Point(8,12);
-    private Point point6 = new Point(2,14);
-    private Point point7 = new Point(1,9);
-
     private Coordinate c0 = new Coordinate(0,0);
     private Coordinate c1 = new Coordinate(-3,-2);
     private Coordinate c2 = new Coordinate(4,1);

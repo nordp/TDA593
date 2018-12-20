@@ -76,13 +76,13 @@ public class Main {
 
 			Collection<Area> physical = new ArrayList<>();
 			physical.add(new Area(new Coordinate(0, 0), new Coordinate(4, 4), 20)); // surgery 001
-			physical.add(new Area(new Coordinate(4, 0), new Coordinate(8, 4), 20)); // surgery 002
-			physical.add(new Area(new Coordinate(8, 0), new Coordinate(12, 4), 20)); // surgery 003
-			physical.add(new Area(new Coordinate(12, 0), new Coordinate(16, 4), 20)); // surgery 004
-			physical.add(new Area(new Coordinate(12, 4), new Coordinate(16, 16), 10)); // Consulting
+			physical.add(new Area(new Coordinate(0, 4), new Coordinate(4, 8), 20)); // surgery 002
+			physical.add(new Area(new Coordinate(0, 4), new Coordinate(4, 12), 20)); // surgery 003
+			physical.add(new Area(new Coordinate(0, 4), new Coordinate(4, 16), 20)); // surgery 004
+			physical.add(new Area(new Coordinate(12, 0), new Coordinate(16, 4), 10)); // Consulting
 			Collection<Area> logical = new ArrayList<>();
 			logical.add(new Area(new Coordinate(13, 13), new Coordinate(16, 16), 20)); // Eating area
-			logical.add(new Area(new Coordinate(12, 12), new Coordinate(16, 0), 10)); // WIFI
+			logical.add(new Area(new Coordinate(10, 0), new Coordinate(16, 10), 10)); // WIFI
 
 			StorageBroker.getMapDAO().store(new Environment(16, 16, walls, logical, physical));
 

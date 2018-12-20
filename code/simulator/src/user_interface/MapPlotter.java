@@ -1,17 +1,17 @@
 package user_interface;
 
 import control_station.OperatorInterface;
-import model.Coordinate;
-import model.Environment;
-import model.Status;
-import model.Wall;
+import model.*;
 
 import java.util.Collection;
+import java.util.function.Function;
 
 public class MapPlotter {
     private OperatorInterface operatorInterface;
     private char[][] plot;
     private Collection<Wall> walls;
+    private Collection<Area> logicalAreas;
+    private Collection<Area> physicalAreas;
     private int width;
     private int height;
     private Collection<Status> robots;
@@ -25,41 +25,73 @@ public class MapPlotter {
         plot = new char[width*RESOLUTION][height*RESOLUTION];
         walls = map.getWalls();
         robots = operatorInterface.getStatuses();
+        logicalAreas = map.getLogicalAreas();
+        physicalAreas = map.getPhysicalAreas();
+        addAreaPhysical();
+        addAreaLogical();
         addWalls();
         addRobots();
         printMap();
     }
 
-    private void addWalls(){
-        for(Wall w : walls){
-            Coordinate start = w.getStart();
-            Coordinate end = w.getEnd();
-            int startX = (int)(start.getX() < end.getX() ? start.getX() : end.getX());
-            int startY = (int)(start.getY() < end.getY() ? start.getY() : end.getY());
-            int endX = (int)(start.getX() >= end.getX() ? start.getX() : end.getX());
-            int endY = (int)(start.getY() >= end.getY() ? start.getY() : end.getY());
+    private void addAreaLogical(){
+        for(Area a : logicalAreas){
+            Coordinate start = a.getStart();
+            Coordinate end = a.getEnd();
+            addArea(start,end,(character -> {
+                if(character.equals('^')){
+                    return '¨';
+                }
+                else {
+                    return '*';
+                }
+            }));
+        }
+    }
 
-            if (startX == endX) {
+    private void addAreaPhysical(){
+        for(Area a : physicalAreas){
+            Coordinate start = a.getStart();
+            Coordinate end = a.getEnd();
+            addArea(start,end,(character -> '^'));
+        }
+    }
+
+    private void addArea(Coordinate start,Coordinate end, Function<Character, Character> symbolChooser){
+        int startX = (int)(start.getX() < end.getX() ? start.getX() : end.getX());
+        int startY = (int)(start.getY() < end.getY() ? start.getY() : end.getY());
+        int endX = (int)(start.getX() >= end.getX() ? start.getX() : end.getX());
+        int endY = (int)(start.getY() >= end.getY() ? start.getY() : end.getY());
+
+        if (startX == endX) {
+            for(int j = startY * RESOLUTION; j < endY * RESOLUTION; j++){
+                plot[startX * RESOLUTION][j] = symbolChooser.apply(plot[startX * RESOLUTION][j]);
+            }
+        } else if (startY == endY) {
+            for(int i = startX * RESOLUTION; i < endX * RESOLUTION; i++){
+                plot[i][startY * RESOLUTION] = symbolChooser.apply(plot[i][startY * RESOLUTION]);
+            }
+        } else {
+            for(int i = startX * RESOLUTION; i < endX * RESOLUTION; i++){
                 for(int j = startY * RESOLUTION; j < endY * RESOLUTION; j++){
-                    plot[startX * RESOLUTION][j] = '#';
-                }
-            } else if (startY == endY) {
-                for(int i = startX * RESOLUTION; i < endX * RESOLUTION; i++){
-                    plot[i][startY * RESOLUTION] = '#';
-                }
-            } else {
-                for(int i = startX * RESOLUTION; i < endX * RESOLUTION; i++){
-                    for(int j = startY * RESOLUTION; j < endY * RESOLUTION; j++){
-                        plot[i][j] = '#';
-                    }
+                    plot[i][j] = symbolChooser.apply(plot[i][j]);
                 }
             }
         }
     }
 
+
+
+    private void addWalls(){
+        for(Wall w : walls){
+            Coordinate start = w.getStart();
+            Coordinate end = w.getEnd();
+            addArea(start,end,(character -> '#'));
+        }
+    }
+
     private void addRobots(){
         for(Status s : robots){
-            Coordinate location = s.getLocation();
             int x, y;
             x = (int) s.getLocation().getX();
             y = (int) s.getLocation().getY();

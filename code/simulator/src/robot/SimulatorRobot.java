@@ -32,9 +32,7 @@ public class SimulatorRobot extends AbstractRobotSimulator implements Actuator, 
 	}
 
 	@Override
-	public Boolean checkObstacles() {
-		return super.checkObstacle();
-	}
+	public Boolean checkObstacles() { return super.checkObstacle(); }
 
 	@Override
 	public Coordinate getCoordinate() {

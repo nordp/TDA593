@@ -30,7 +30,7 @@ public class SimulatorRobot extends AbstractRobotSimulator implements Actuator, 
 
 	@Override
 	public Boolean checkObstacles() {
-		throw new Error("Not Implemented");
+		return super.checkObstacle();
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class SimulatorRobot extends AbstractRobotSimulator implements Actuator, 
 
 	@Override
 	public Boolean checkCamera() {
-		throw new Error("Not Implemented");
+		return super.checkCameraDetection();
 	}
 
 	@Override

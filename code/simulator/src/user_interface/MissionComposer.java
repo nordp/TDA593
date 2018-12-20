@@ -13,6 +13,7 @@ public class MissionComposer {
         return assembledMission;
     }
 
+    // Should this maybe be done in the conductor instead? Since we have no notion of past missions here.
     public Mission changeMission(Mission oldMission, Mission mission, int strategyId) {return changedMission;}
 
 }

@@ -1,10 +1,9 @@
 package control_station;
 
-import model.Coordinate;
-import model.Mission;
-import model.MovementInstruction;
-import model.Strategy;
+import control_station.storage.StorageBroker;
+import model.*;
 
+import java.util.Collection;
 import java.util.List;
 
 
@@ -13,31 +12,59 @@ import java.util.List;
  * The "brain" of the entire system.
  * Responsible for calculating optimal routes for robots, commands them when necessary
  */
-class Conductor {
+class Conductor implements Runnable {
     private RobotInterface robotInterface;
 
     Conductor(RobotInterface robotInterface){
         this.robotInterface = robotInterface;
+
+        Thread thread = new Thread(this);
+        thread.setDaemon(true);
+        thread.start();
     }
 
     void setMission(Mission mission, Strategy strategy){
         //Is this used to store the current mission for a robot in the storage?
         //If so, this method should already exist in the storage package
-        Mission strategized = strategize(mission, strategy);
-        MovementInstruction moveCoor;
+        Mission strategized = Strategizer.strategize(strategy, mission);
+
+        MovementInstruction move;
         List<Coordinate> missionList = strategized.getPoints();
-        for(int i = 0; i < missionList.size(); i++){
-            moveCoor = new MovementInstruction(true , missionList.get(i));
-            robotInterface.dispatch(mission.getAssignedRobot(), moveCoor);
+        StorageBroker.getMissionDAO().store(mission);
+        move = new MovementInstruction(true, missionList.get(0));
+
+        robotInterface.dispatch(strategized.getAssignedRobot(), move);
+    }
+
+    @Override
+    public void run(){
+        Collection<Integer> robotIds = StorageBroker.getStatusDAO().getRobotIds(); // Extract the ids from the storage.
+
+        while(true){ // Main thread loop.
+            for(Integer id : robotIds){
+                try{
+                    wait(10000);
+                }catch(Exception e){}
+
+                Mission mission = StorageBroker.getMissionDAO().getMission(id);
+                Status status = StorageBroker.getStatusDAO().getStatus(id);
+
+                if(mission != null && status != null && status.getLocation() != null) { // if robot has mission and we know the location of the robot
+                    if (status.getLocation().equals(mission.getPoints().get(0))) {
+                        List<Coordinate> cor = StorageBroker.getMissionDAO().getMission(id).getPoints();
+
+                        if (cor.size() > 1){
+                            // Remove the "to be sent" coordinate and store the rest of the mission back into the storage.
+                            MovementInstruction move = new MovementInstruction(true, cor.get(1));
+                            cor.remove(0);
+                            Mission m = new Mission(id, cor);
+                            StorageBroker.getMissionDAO().store(m);
+                            robotInterface.dispatch(id, move);
+                        }
+
+                    }
+                }
+            }
         }
-
-    }
-
-    private Mission strategize(Mission mission, Strategy strategy){
-        return Strategizer.strategize(strategy, mission);
-    }
-
-    private void runMission(Mission mission, int id){
-
     }
 }

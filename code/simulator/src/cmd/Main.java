@@ -13,7 +13,6 @@ import robot.RobotFactory;
 import robot.SimulatorRobot;
 import simbad.sim.*;
 import user_interface.Display;
-import user_interface.graphical_interface.MainWindow;
 
 import java.awt.*;
 import java.util.*;
@@ -112,7 +111,7 @@ public class Main {
 			OperatorInterface operatorInterface = ControlStationFactory.build(controlStationInterfaces);
 
 			if(args[0].equals("gui")) {
-				MainWindow.launch(MainWindow.class, args);
+				//MainWindow.launch(MainWindow.class, args);
 			}
 			else{
 				Display display = new Display(operatorInterface);

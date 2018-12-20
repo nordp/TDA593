@@ -23,7 +23,7 @@ public class SimulatorRobot extends AbstractRobotSimulator implements Actuator, 
 
 	@Override
 	public void goTo(Coordinate coordinate) {
-		this.setDestination(coordinateToPoint(getCoordinate()));
+		this.setDestination(coordinateToPoint(coordinate));
 	}
 
 	@Override

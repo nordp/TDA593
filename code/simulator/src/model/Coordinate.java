@@ -16,4 +16,18 @@ public class Coordinate {
     public double getY() {
         return y;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Coordinate) {
+            Coordinate c = (Coordinate) o;
+            return (this.x == c.getX() && (this.y == c.getY()));
+        }
+        return false;
+    }
+
+
+    public String toString() {
+        return "X = " + this.x + ", Y = " + this.y;
+    }
 }

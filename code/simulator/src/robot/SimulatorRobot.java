@@ -8,9 +8,12 @@ import javax.vecmath.Color3f;
 
 public class SimulatorRobot extends AbstractRobotSimulator implements Actuator, Sensor {
 	// Constructor takes cmd point because its implementation specific
+
+	private double zConversion = 8;
+	private double xConversion = 8;
+
 	public SimulatorRobot(Point position, String name) {
 		super(position, name);
-
 	}
 
 	@Override
@@ -20,7 +23,7 @@ public class SimulatorRobot extends AbstractRobotSimulator implements Actuator, 
 
 	@Override
 	public void goTo(Coordinate coordinate) {
-		this.setDestination(new Point(coordinate.getX(),coordinate.getY()));
+		this.setDestination(coordinateToPoint(getCoordinate()));
 	}
 
 	@Override
@@ -35,7 +38,7 @@ public class SimulatorRobot extends AbstractRobotSimulator implements Actuator, 
 
 	@Override
 	public Coordinate getCoordinate() {
-		return new Coordinate(8 - getPosition().getZ(),getPosition().getX() + 8);
+		return pointToCoordinate(getPosition());
 	}
 
 	@Override
@@ -46,5 +49,13 @@ public class SimulatorRobot extends AbstractRobotSimulator implements Actuator, 
 	@Override
 	public void changeColour() {
 		this.changeColor(new Color3f((float)Math.random(), (float)Math.random(), (float)Math.random()));
+	}
+
+	Coordinate pointToCoordinate(Point point){
+		return new Coordinate(zConversion + point.getZ(), point.getX() + xConversion);
+	}
+
+	Point coordinateToPoint(Coordinate coordinate){
+		return new Point(coordinate.getY() - xConversion, coordinate.getX() - zConversion);
 	}
 }

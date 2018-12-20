@@ -31,8 +31,4 @@ public class Coordinate {
                 diffY <= MARGIN_OF_ERROR;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(x, y);
-    }
 }

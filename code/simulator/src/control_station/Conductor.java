@@ -51,14 +51,17 @@ class Conductor implements Runnable {
 
                 if(mission != null && status != null && status.getLocation() != null) { // if robot has mission and we know the location of the robot
                     if (status.getLocation().equals(mission.getPoints().get(0))) {
-                        // Remove the "to be sent" coordinate and store the rest of the mission back into the storage.
-                       MovementInstruction move = new MovementInstruction(true, StorageBroker.getMissionDAO().getMission(id).getPoints().get(0));
-                       List<Coordinate> cor = StorageBroker.getMissionDAO().getMission(id).getPoints();
-                       cor.remove(0);
-                       Mission m = new Mission(id, cor);
-                       StorageBroker.getMissionDAO().store(m);
+                        List<Coordinate> cor = StorageBroker.getMissionDAO().getMission(id).getPoints();
 
-                       robotInterface.dispatch(id, move);
+                        if (cor.size() > 1){
+                            // Remove the "to be sent" coordinate and store the rest of the mission back into the storage.
+                            MovementInstruction move = new MovementInstruction(true, cor.get(1));
+                            cor.remove(0);
+                            Mission m = new Mission(id, cor);
+                            StorageBroker.getMissionDAO().store(m);
+                            robotInterface.dispatch(id, move);
+                        }
+
                     }
                 }
             }

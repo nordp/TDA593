@@ -33,7 +33,6 @@ class RobotInterface implements Runnable {
      * Dispatches an instruction to a robot with the identification 'id'
      */
     void dispatch(int id, Instruction instruction){
-        System.out.println("DISPATCH");
         robots.get(id).notify(instruction);
     }
 

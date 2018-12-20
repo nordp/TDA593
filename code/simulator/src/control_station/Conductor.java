@@ -28,12 +28,12 @@ class Conductor implements Runnable {
         //If so, this method should already exist in the storage package
         Mission strategized = Strategizer.strategize(strategy, mission);
 
-        MovementInstruction moveCoor;
+        MovementInstruction move;
         List<Coordinate> missionList = strategized.getPoints();
         StorageBroker.getMissionDAO().store(mission);
-        moveCoor = new MovementInstruction(true, missionList.get(0));
+        move = new MovementInstruction(true, missionList.get(0));
 
-        robotInterface.dispatch(strategized.getAssignedRobot(), moveCoor);
+        robotInterface.dispatch(strategized.getAssignedRobot(), move);
     }
 
     @Override
@@ -51,16 +51,17 @@ class Conductor implements Runnable {
 
                 if(mission != null && status != null && status.getLocation() != null) { // if robot has mission and we know the location of the robot
                     if (status.getLocation().equals(mission.getPoints().get(0))) {
-                        // Remove the "to be sent" coordinate and store the rest of the mission back into the storage.
                         List<Coordinate> cor = StorageBroker.getMissionDAO().getMission(id).getPoints();
-                        if (cor.size() > 1) {
-                            MovementInstruction move = new MovementInstruction(true, StorageBroker.getMissionDAO().getMission(id).getPoints().get(1));
+
+                        if (cor.size() > 1){
+                            // Remove the "to be sent" coordinate and store the rest of the mission back into the storage.
+                            MovementInstruction move = new MovementInstruction(true, cor.get(1));
                             cor.remove(0);
                             Mission m = new Mission(id, cor);
                             StorageBroker.getMissionDAO().store(m);
-
                             robotInterface.dispatch(id, move);
                         }
+
                     }
                 }
             }

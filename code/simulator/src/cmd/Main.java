@@ -60,27 +60,28 @@ public class Main {
 
 			// Surgery rooms
 			AbstractWall roomWall21 = new HorizontalWall(-4f, 4f, 8f, e, Color.BLUE);
-			walls.add(new Wall(new Coordinate(0, 4), new Coordinate(1, 4)));
+			walls.add(new Wall(new Coordinate(0, 4), new Coordinate(4, 4)));
 			AbstractWall roomWall22 = new HorizontalWall(0f, 4f, 8f, e, Color.BLUE);
-			walls.add(new Wall(new Coordinate(0, 8), new Coordinate(1, 8)));
+			walls.add(new Wall(new Coordinate(0, 8), new Coordinate(4, 8)));
 			AbstractWall roomWall23 = new HorizontalWall(4f, 4f, 8f, e, Color.BLUE);
-			walls.add(new Wall(new Coordinate(0, 12), new Coordinate(1, 12)));
+			walls.add(new Wall(new Coordinate(0, 12), new Coordinate(4, 12)));
+
 			AbstractWall roomWall24 = new VerticalWall(4f, -8f, -7f, e, Color.BLUE);
-			walls.add(new Wall(new Coordinate(4, 3), new Coordinate(4, 5)));
+			walls.add(new Wall(new Coordinate(4, 0), new Coordinate(4, 1)));
 			AbstractWall roomWall25 = new VerticalWall(4f, 8f, 7f, e, Color.BLUE);
 			walls.add(new Wall(new Coordinate(4, 7), new Coordinate(4, 9)));
 			AbstractWall roomWall26 = new VerticalWall(4f, -1f, 1f, e, Color.BLUE);
-			walls.add(new Wall(new Coordinate(4, 11), new Coordinate(4, 13)));
+			walls.add(new Wall(new Coordinate(4, 15), new Coordinate(4, 16)));
 
 			Collection<Area> physical = new ArrayList<>();
-			physical.add(new Area(new Coordinate(0, 0), new Coordinate(4, 4), 0)); // surgery 001
-			physical.add(new Area(new Coordinate(4, 0), new Coordinate(8, 4), 0)); // surgery 002
-			physical.add(new Area(new Coordinate(8, 0), new Coordinate(12, 4), 0)); // surgery 003
-			physical.add(new Area(new Coordinate(12, 0), new Coordinate(16, 4), 0)); // surgery 004
-			physical.add(new Area(new Coordinate(12, 4), new Coordinate(16, 16), 0)); // Consulting
+			physical.add(new Area(new Coordinate(0, 0), new Coordinate(4, 4), 20)); // surgery 001
+			physical.add(new Area(new Coordinate(4, 0), new Coordinate(8, 4), 20)); // surgery 002
+			physical.add(new Area(new Coordinate(8, 0), new Coordinate(12, 4), 20)); // surgery 003
+			physical.add(new Area(new Coordinate(12, 0), new Coordinate(16, 4), 20)); // surgery 004
+			physical.add(new Area(new Coordinate(12, 4), new Coordinate(16, 16), 10)); // Consulting
 			Collection<Area> logical = new ArrayList<>();
-			logical.add(new Area(new Coordinate(13, 13), new Coordinate(16, 16), 0)); // Eating area
-			logical.add(new Area(new Coordinate(12, 12), new Coordinate(16, 0), 0)); // WIFI
+			logical.add(new Area(new Coordinate(13, 13), new Coordinate(16, 16), 20)); // Eating area
+			logical.add(new Area(new Coordinate(12, 12), new Coordinate(16, 0), 10)); // WIFI
 
 			StorageBroker.getMapDAO().store(new Environment(16, 16, walls, logical, physical));
 

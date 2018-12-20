@@ -1,6 +1,11 @@
 package control_station;
-import control_station.storage.StorageBroker;
 import model.*;
+
+import java.util.Collection;
+
+import static control_station.storage.StorageBroker.getMapDAO;
+import static control_station.storage.StorageBroker.getRewardDAO;
+import static control_station.storage.StorageBroker.getStatusDAO;
 
 //import model.Environment
 
@@ -17,8 +22,12 @@ public class OperatorInterface {
         this.conductor = conductor;
     }
 
-    Status getStatuses(){
-        return null;
+    Status getStatus(int id){
+        return getStatusDAO().getStatus(id);
+    }
+
+    public Collection<Status> getStatuses(){
+        return getStatusDAO().getStatuses();
     }
 
     public void assignMission(Mission mission, Strategy strategy){
@@ -31,11 +40,11 @@ public class OperatorInterface {
 
 
     public int getRewardPoints() {
-        return StorageBroker.getRewardDAO().getReward();
+        return getRewardDAO().getReward();
     }
 
     public Environment getEnv() {
 
-        return StorageBroker.getMapDAO().getEnvironment();
+        return getMapDAO().getEnvironment();
     }
 }

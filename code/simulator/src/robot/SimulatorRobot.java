@@ -30,17 +30,17 @@ public class SimulatorRobot extends AbstractRobotSimulator implements Actuator, 
 
 	@Override
 	public Boolean checkObstacles() {
-		throw new Error("Not Implemented");
+		return super.checkObstacle();
 	}
 
 	@Override
 	public Coordinate getCoordinate() {
-		return new Coordinate(getPosition().getX(),getPosition().getZ());
+		return new Coordinate(8 - getPosition().getZ(),getPosition().getX() + 8);
 	}
 
 	@Override
 	public Boolean checkCamera() {
-		throw new Error("Not Implemented");
+		return super.checkCameraDetection();
 	}
 
 	@Override

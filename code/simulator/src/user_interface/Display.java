@@ -11,6 +11,7 @@ public class Display {
     private MissionComposer missionComp = new MissionComposer();
     private Mission mission;
     private OperatorInterface operatorInterface;
+    private MapPlotter plotter;
 
     public Display(OperatorInterface operatorInterface){
         this.operatorInterface = operatorInterface;
@@ -151,7 +152,7 @@ public class Display {
 						});
 						break;
 					case "map":
-						printMap();
+						plotter = new MapPlotter(operatorInterface);
 						break;
 					case "points":
 						printPoints();
@@ -191,73 +192,6 @@ public class Display {
 		System.out.println("The current total amount of points rewarded: " + reward);
 	}
 
-	private static final int RESOLUTION = 4;
-
-
-	public void printMap(){
-    	Environment map = operatorInterface.getEnv();
-    	int mapWidth = (int) map.getWidth();
-    	int mapHeight = (int) map.getHeight();
-    	Collection<Status> robots = operatorInterface.getStatuses();
-    	Collection<Wall> walls = map.getWalls();
-		char[][] plot = new char[mapWidth*RESOLUTION][mapHeight*RESOLUTION];
-
-		for(Wall w : walls){
-			Coordinate start = w.getStart();
-			Coordinate end = w.getEnd();
-			int startX = (int)(start.getX() < end.getX() ? start.getX() : end.getX());
-			int startY = (int)(start.getY() < end.getY() ? start.getY() : end.getY());
-			int endX = (int)(start.getX() >= end.getX() ? start.getX() : end.getX());
-			int endY = (int)(start.getY() >= end.getY() ? start.getY() : end.getY());
-
-			if (startX == endX) {
-				for(int j = startY * RESOLUTION; j < endY * RESOLUTION; j++){
-					plot[startX * RESOLUTION][j] = '#';
-				}
-			} else if (startY == endY) {
-				for(int i = startX * RESOLUTION; i < endX * RESOLUTION; i++){
-					plot[i][startY * RESOLUTION] = '#';
-				}
-			} else {
-				for(int i = startX * RESOLUTION; i < endX * RESOLUTION; i++){
-					for(int j = startY * RESOLUTION; j < endY * RESOLUTION; j++){
-						plot[i][j] = '#';
-					}
-				}
-			}
-		}
-
-
-		for(Status s : robots){
-			Coordinate location = s.getLocation();
-			int x, y;
-			x = (int) s.getLocation().getX();
-			y = (int) s.getLocation().getY();
-			plot[x * RESOLUTION][y * RESOLUTION] = Integer.toString(s.getId() % 10).charAt(0);
-		}
-
-		for (int i = -2; i < mapWidth * RESOLUTION;i++) System.out.print("#");
-		System.out.println();
-
-		for(int i = 0; i < plot[0].length;i++){
-			System.out.print("#");
-			for(int j = 0; j < plot.length;j++){
-				if(plot[j][i] == 0){
-					System.out.print(' ');
-				}
-				else{
-					System.out.print(plot[j][i]);
-				}
-			}
-			System.out.println("#");
-		}
-		for (int i = -2; i < mapWidth * RESOLUTION;i++) System.out.print("#");
-		System.out.println();
-
-
-		
-
-	}
 
 	private boolean checkIfValid(int robot){
 		Collection<Status> robots= operatorInterface.getStatuses();

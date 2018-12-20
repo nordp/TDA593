@@ -31,7 +31,6 @@ public class SimulatorRobotTest {
 
     @Test
     public void testCtoP(){
-        System.out.println(simulatorRobot.coordinateToPoint(c0));
         assertEquals(c0, simulatorRobot.pointToCoordinate(simulatorRobot.coordinateToPoint(c0)));
         assertEquals(c1, simulatorRobot.pointToCoordinate(simulatorRobot.coordinateToPoint(c1)));
         assertEquals(c2, simulatorRobot.pointToCoordinate(simulatorRobot.coordinateToPoint(c2)));

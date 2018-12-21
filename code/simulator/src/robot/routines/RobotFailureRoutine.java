@@ -8,7 +8,7 @@ public class RobotFailureRoutine implements Routine {
 
 	@Override
 	public Action calculateAction(Status status) {
-		boolean failure = false; // Real failure condition?
+		boolean failure = status.getSensor(); // How is this?
 		if (failure) {
 			return new StopAction();
 		}

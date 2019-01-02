@@ -36,8 +36,8 @@ public class MapPlotter {
 
     private void addAreaLogical(){
         for(Area a : logicalAreas){
-            Coordinate start = a.getStart();
-            Coordinate end = a.getEnd();
+            Coordinate start = a.getA();
+            Coordinate end = a.getB();
             addArea(start,end,(character -> {
                 if(character.equals('^')){
                     return '¨';
@@ -51,8 +51,8 @@ public class MapPlotter {
 
     private void addAreaPhysical(){
         for(Area a : physicalAreas){
-            Coordinate start = a.getStart();
-            Coordinate end = a.getEnd();
+            Coordinate start = a.getA();
+            Coordinate end = a.getB();
             addArea(start,end,(character -> '^'));
         }
     }

@@ -2,13 +2,13 @@ package chalmers.tda593.y2018.g11.rovu.model;
 
 public class Area {
 
-    private final Coordinate start;
-    private final Coordinate end;
+    private final Coordinate a;
+    private final Coordinate b;
     private final int points;
 
-    public Area(Coordinate start, Coordinate end, int points){
-        this.start = start;
-        this.end = end;
+    public Area(Coordinate a, Coordinate b, int points){
+        this.a = a;
+        this.b = b;
         this.points = points;
     }
 
@@ -19,17 +19,23 @@ public class Area {
      * @return
      */
     public boolean isInArea(Coordinate coordinate){
-        return (coordinate.getX() >= start.getX() && coordinate.getX() <= end.getX()) &&
-                (coordinate.getY() >= start.getY() && coordinate.getY() <= end.getY());
+    	double smallestX = a.getX() > b.getX() ? b.getX() : a.getX();
+	    double smallestY = a.getY() > b.getY() ? b.getY() : a.getY();
+
+	    double biggestX = a.getX() <= b.getX() ? b.getX() : a.getX();
+	    double biggestY = a.getY() <= b.getY() ? b.getY() : a.getY();
+
+        return coordinate.getX() >= smallestX && coordinate.getX() <= biggestX &&
+		        coordinate.getY() >= smallestY && coordinate.getY() <= biggestY;
     }
 
 
-    public Coordinate getStart(){
-        return start;
+    public Coordinate getA(){
+        return a;
     }
 
-    public Coordinate getEnd(){
-        return end;
+    public Coordinate getB(){
+        return b;
     }
 
     public int getPoints() { return points; }

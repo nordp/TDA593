@@ -50,10 +50,16 @@ public class SimulatorRobot extends AbstractRobotSimulator implements Actuator, 
 	}
 
 	Coordinate pointToCoordinate(Point point){
+		return pointToCoordinate(point, xConversion, zConversion);
+	}
+	static Coordinate pointToCoordinate(Point point, double xConversion, double zConversion){
 		return new Coordinate(zConversion - point.getZ(), point.getX() + xConversion);
 	}
 
 	Point coordinateToPoint(Coordinate coordinate){
+		return coordinateToPoint(coordinate, xConversion, zConversion);
+	}
+	static Point coordinateToPoint(Coordinate coordinate, double xConversion, double zConversion){
 		return new Point(coordinate.getY() - xConversion, -coordinate.getX() + zConversion);
 	}
 }

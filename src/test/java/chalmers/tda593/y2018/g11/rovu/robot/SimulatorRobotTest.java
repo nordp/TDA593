@@ -17,19 +17,19 @@ public class SimulatorRobotTest {
     private Coordinate c6 = new Coordinate(4,-3);
     private Coordinate c7 = new Coordinate(1,-5);
 
-    SimulatorRobot simulatorRobot = new SimulatorRobot(new Point(2,2), "TestRobot");
+    private double offset = 8;
 
 
     @Test
     public void testCtoP(){
-        assertEquals(c0, simulatorRobot.pointToCoordinate(simulatorRobot.coordinateToPoint(c0)));
-        assertEquals(c1, simulatorRobot.pointToCoordinate(simulatorRobot.coordinateToPoint(c1)));
-        assertEquals(c2, simulatorRobot.pointToCoordinate(simulatorRobot.coordinateToPoint(c2)));
-        assertEquals(c3, simulatorRobot.pointToCoordinate(simulatorRobot.coordinateToPoint(c3)));
-        assertEquals(c4, simulatorRobot.pointToCoordinate(simulatorRobot.coordinateToPoint(c4)));
-        assertEquals(c5, simulatorRobot.pointToCoordinate(simulatorRobot.coordinateToPoint(c5)));
-        assertEquals(c6, simulatorRobot.pointToCoordinate(simulatorRobot.coordinateToPoint(c6)));
-        assertEquals(c7, simulatorRobot.pointToCoordinate(simulatorRobot.coordinateToPoint(c7)));
+        assertEquals(c0, SimulatorRobot.pointToCoordinate(SimulatorRobot.coordinateToPoint(c0, offset, offset), offset, offset));
+        assertEquals(c1, SimulatorRobot.pointToCoordinate(SimulatorRobot.coordinateToPoint(c1, offset, offset), offset, offset));
+        assertEquals(c2, SimulatorRobot.pointToCoordinate(SimulatorRobot.coordinateToPoint(c2, offset, offset), offset, offset));
+        assertEquals(c3, SimulatorRobot.pointToCoordinate(SimulatorRobot.coordinateToPoint(c3, offset, offset), offset, offset));
+        assertEquals(c4, SimulatorRobot.pointToCoordinate(SimulatorRobot.coordinateToPoint(c4, offset, offset), offset, offset));
+        assertEquals(c5, SimulatorRobot.pointToCoordinate(SimulatorRobot.coordinateToPoint(c5, offset, offset), offset, offset));
+        assertEquals(c6, SimulatorRobot.pointToCoordinate(SimulatorRobot.coordinateToPoint(c6, offset, offset), offset, offset));
+        assertEquals(c7, SimulatorRobot.pointToCoordinate(SimulatorRobot.coordinateToPoint(c7, offset, offset), offset, offset));
 
     }
 

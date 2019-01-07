@@ -106,6 +106,7 @@ public class Display {
 												cont = input.nextLine();
 											}
 											mission = missionComp.createMission(missionList, robot);
+											operatorInterface.assignAction(robot, new StopInstruction(true));
 											operatorInterface.assignMission(mission, choice);
 											missionList.clear();
 											break;

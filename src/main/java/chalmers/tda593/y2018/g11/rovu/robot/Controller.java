@@ -51,7 +51,7 @@ class Controller implements Runnable {
 			this.lastStatus = new Status(
 					this.lastStatus.getId(),
 					this.sensor.getCoordinate(),
-					lastStatus.isInMotion(),
+					this.sensor.isInMotion(),
 					this.lastStatus.getInstructions(),
 					this.sensor.checkObstacles(),
 					this.sensor.checkCamera()

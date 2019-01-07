@@ -79,8 +79,8 @@ class Conductor implements Runnable {
                         if (target != null){
                             occupied.replace(target,true);
                         }
-                        Status stopped = new Status(assignee.getId(),assignee.getLocation(),true,assignee.getInstructions(), assignee.getSensor(), assignee.getCamera());
-                        StorageBroker.getStatusDAO().store(stopped);
+                        Status started = new Status(assignee.getId(),assignee.getLocation(),true,assignee.getInstructions(), assignee.getSensor(), assignee.getCamera());
+                        StorageBroker.getStatusDAO().store(started);
                         robotInterface.dispatch(assignee.getId(), new StopInstruction(false));
                         robotInterface.dispatch(assignee.getId(), new MovementInstruction(true,nextStep));
                     }

@@ -77,8 +77,8 @@ public class Simulator {
 			Collection<Area> physical = new ArrayList<>();
 			physical.add(new Area(new Coordinate(0, 0), new Coordinate(4, 4), 20)); // surgery 001
 			physical.add(new Area(new Coordinate(0, 4), new Coordinate(4, 8), 20)); // surgery 002
-			physical.add(new Area(new Coordinate(0, 4), new Coordinate(4, 12), 20)); // surgery 003
-			physical.add(new Area(new Coordinate(0, 4), new Coordinate(4, 16), 20)); // surgery 004
+			physical.add(new Area(new Coordinate(0, 8), new Coordinate(4, 12), 20)); // surgery 003
+			physical.add(new Area(new Coordinate(0, 12), new Coordinate(4, 16), 20)); // surgery 004
 			physical.add(new Area(new Coordinate(12, 0), new Coordinate(16, 4), 10)); // Consulting
 			Collection<Area> logical = new ArrayList<>();
 			logical.add(new Area(new Coordinate(13, 13), new Coordinate(16, 16), 20)); // Eating area

@@ -80,7 +80,7 @@ class Conductor implements Runnable {
 
                             // Wait 2 seconds before making room available
                             new Thread(() -> {
-                                try  { Thread.sleep( 2000 ); }
+                                try  { Thread.sleep( 3000 ); }
                                 catch (InterruptedException ie)  {}
                                 occupied.put(physical,0);
                             }).start();

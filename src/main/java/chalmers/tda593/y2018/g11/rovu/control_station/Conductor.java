@@ -16,7 +16,7 @@ import java.util.Map;
  */
 class Conductor implements Runnable {
     private RobotInterface robotInterface;
-    private Map<Area,Boolean> occupied;
+    private Map<Area,Integer> occupied;
 
     Conductor(RobotInterface robotInterface){
         this.robotInterface = robotInterface;
@@ -24,7 +24,7 @@ class Conductor implements Runnable {
         this.occupied = new HashMap<>();
 
         for(Area area : StorageBroker.getMapDAO().getEnvironment().getPhysicalAreas()){
-            occupied.put(area,false);
+            occupied.put(area,0);
         }
 
         Thread thread = new Thread(this);
@@ -72,12 +72,24 @@ class Conductor implements Runnable {
                     for (Area physical : StorageBroker.getMapDAO().getEnvironment().getPhysicalAreas()) {
                         if (physical.isInArea(nextStep) ){
                             target = physical;
+                        } else if (occupied.get(physical).equals(assignee.getId())){
+
+                            // Leaving room -> wait 2 seconds
+                            try  { Thread.sleep( 2000 ); }
+                            catch (InterruptedException ie)  {}
+
+                            // Wait 2 seconds before making room available
+                            new Thread(() -> {
+                                try  { Thread.sleep( 2000 ); }
+                                catch (InterruptedException ie)  {}
+                                occupied.put(physical,0);
+                            }).start();
                         }
                     }
 
-                    if (target == null || !occupied.get(target)){
+                    if (target == null || occupied.get(target).equals(0) || occupied.get(target).equals(assignee.getId())){
                         if (target != null){
-                            occupied.replace(target,true);
+                            occupied.replace(target,assignee.getId());
                         }
                         Status started = new Status(assignee.getId(),assignee.getLocation(),true,assignee.getInstructions(), assignee.getSensor(), assignee.getCamera());
                         StorageBroker.getStatusDAO().store(started);

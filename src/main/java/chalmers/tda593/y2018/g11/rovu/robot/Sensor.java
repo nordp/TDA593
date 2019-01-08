@@ -4,6 +4,7 @@ import chalmers.tda593.y2018.g11.rovu.model.Coordinate;
 
 public interface Sensor {
 	Coordinate getCoordinate();
-	Boolean checkCamera();
-	Boolean checkObstacles();
+	boolean checkCamera();
+	boolean checkObstacles();
+    boolean isInMotion();
 }

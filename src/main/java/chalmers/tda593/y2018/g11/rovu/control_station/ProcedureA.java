@@ -39,5 +39,5 @@ class ProcedureA extends Procedure {
 
 }
 
-//Break calculate down in to a function that returns true if the chalmers.tda593.y2018.g11.rovu.robot resides in a room?
+//Break calculate down in to a function that returns true if the robot resides in a room?
 

@@ -1,5 +1,6 @@
 package chalmers.tda593.y2018.g11.rovu.robot;
 
+
 import chalmers.tda593.y2018.g11.rovu.model.Instruction;
 import chalmers.tda593.y2018.g11.rovu.model.Status;
 import chalmers.tda593.y2018.g11.rovu.robot.routines.*;
@@ -20,7 +21,7 @@ class Controller implements Runnable {
 		this.sensor = sensor;
 
 		// Setup routines
-		routines.add(new EmergencyStopRoutine());
+		routines.add(new StopRoutine());
 		routines.add(new RobotFailureRoutine());
 		routines.add(new CollisionPreventionRoutine());
 		routines.add(new ColourRoutine());
@@ -50,7 +51,7 @@ class Controller implements Runnable {
 			this.lastStatus = new Status(
 					this.lastStatus.getId(),
 					this.sensor.getCoordinate(),
-					lastStatus.isInMotion(),
+					this.sensor.isInMotion(),
 					this.lastStatus.getInstructions(),
 					this.sensor.checkObstacles(),
 					this.sensor.checkCamera()

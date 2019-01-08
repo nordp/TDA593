@@ -11,6 +11,7 @@ public class SimulatorRobot extends AbstractRobotSimulator implements Actuator, 
 
 	private double zConversion = 8;
 	private double xConversion = 8;
+	private boolean isInMotion = false;
 
 	public SimulatorRobot(Point position, String name) {
 		super(position, name);
@@ -23,16 +24,25 @@ public class SimulatorRobot extends AbstractRobotSimulator implements Actuator, 
 
 	@Override
 	public void goTo(Coordinate coordinate) {
+		this.isInMotion = true;
 		this.setDestination(coordinateToPoint(coordinate));
 	}
 
 	@Override
 	public void stop() {
+		this.isInMotion = false;
 		this.setDestination(this.getPosition());
 	}
 
 	@Override
-	public Boolean checkObstacles() { return super.checkObstacle(); }
+	public boolean checkObstacles() {
+		return super.checkObstacle();
+	}
+
+	@Override
+	public boolean isInMotion() {
+		return isInMotion;
+	}
 
 	@Override
 	public Coordinate getCoordinate() {
@@ -40,7 +50,7 @@ public class SimulatorRobot extends AbstractRobotSimulator implements Actuator, 
 	}
 
 	@Override
-	public Boolean checkCamera() {
+	public boolean checkCamera() {
 		return super.checkCameraDetection();
 	}
 

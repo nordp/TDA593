@@ -39,12 +39,12 @@ public class Display {
 				else {
 					switch (parts[0]) {
 						case "start":
-							System.out.printf("Starting chalmers.tda593.y2018.g11.rovu.robot %s%n", robot);
-							operatorInterface.assignAction(robot, new EmergencyInstruction(false));
+							System.out.printf("Starting robot %s%n", robot);
+							operatorInterface.assignAction(robot, new StopInstruction(false));
 							break;
 						case "stop":
-							System.out.printf("Stopping chalmers.tda593.y2018.g11.rovu.robot %s%n", robot);
-							operatorInterface.assignAction(robot, new EmergencyInstruction(true));
+							System.out.printf("Stopping robot %s%n", robot);
+							operatorInterface.assignAction(robot, new StopInstruction(true));
 							break;
 						case "robot":
 							System.out.printf("Robot %s selected, \"q\" to deselect%n", robot);
@@ -55,16 +55,16 @@ public class Display {
 								if (parts.length > 0) {
 									switch (parts[0]) {
 										case "start":
-											System.out.printf("Starting chalmers.tda593.y2018.g11.rovu.robot %s%n", robot);
-											operatorInterface.assignAction(robot, new EmergencyInstruction(false));
+											System.out.printf("Starting robot %s%n", robot);
+											operatorInterface.assignAction(robot, new StopInstruction(false));
 											break;
 										case "stop":
-											System.out.printf("Stopping chalmers.tda593.y2018.g11.rovu.robot %s%n", robot);
-											operatorInterface.assignAction(robot, new EmergencyInstruction(true));
+											System.out.printf("Stopping robot %s%n", robot);
+											operatorInterface.assignAction(robot, new StopInstruction(true));
 											break;
 										case "color":
 										case "colour":
-											System.out.printf("Changing colo(u)r of chalmers.tda593.y2018.g11.rovu.robot %s%n", robot);
+											System.out.printf("Changing colo(u)r of robot %s%n", robot);
 											operatorInterface.assignAction(robot, new ChangeColourInstruction());
 											break;
 										case "mission":
@@ -106,6 +106,7 @@ public class Display {
 												cont = input.nextLine();
 											}
 											mission = missionComp.createMission(missionList, robot);
+											operatorInterface.assignAction(robot, new StopInstruction(true));
 											operatorInterface.assignMission(mission, choice);
 											missionList.clear();
 											break;
@@ -115,13 +116,13 @@ public class Display {
 										case "help":
 											String[] commands = {
 													"exit                                   - Quits application",
-													"stop                                   - Stops the chalmers.tda593.y2018.g11.rovu.robot",
-													"start                                  - Starts the chalmers.tda593.y2018.g11.rovu.robot",
-													"mission {shortest|backwards|random}    - Sets a mission for the chalmers.tda593.y2018.g11.rovu.robot",
+													"stop                                   - Stops the robot",
+													"start                                  - Starts the robot",
+													"mission {shortest|backwards|random}    - Sets a mission for the robot",
 													"map                                    - show the current map",
-													"q                                      - deselect the chalmers.tda593.y2018.g11.rovu.robot",
+													"q                                      - deselect the robot",
 													"help                                   - show this help text",
-													"colour || color                        - makes the chalmers.tda593.y2018.g11.rovu.robot change colo(u)r",
+													"colour || color                        - makes the robot change colo(u)r",
 											};
 											System.out.printf(String.join("%n", commands) + "%n");
 											break;
@@ -146,13 +147,13 @@ public class Display {
 					case "start":
 						System.out.printf("Starting all robots%n");
 						operatorInterface.getStatuses().forEach((Status status) -> {
-							operatorInterface.assignAction(status.getId(), new EmergencyInstruction(false));
+							operatorInterface.assignAction(status.getId(), new StopInstruction(false));
 						});
 						break;
 					case "stop":
 						System.out.printf("Stopping all robots %n");
 						operatorInterface.getStatuses().forEach((Status status) -> {
-							operatorInterface.assignAction(status.getId(), new EmergencyInstruction(true));
+							operatorInterface.assignAction(status.getId(), new StopInstruction(true));
 						});
 						break;
 					case "map":
@@ -172,10 +173,10 @@ public class Display {
 						String[] commands = {
 								"exit                 - Quits application",
 								"stop                 - Stops all robots",
-								"stop  {robotId}      - Stops the chalmers.tda593.y2018.g11.rovu.robot",
+								"stop  {robotId}      - Stops the robot",
 								"start                - Starts all robots",
-								"start {robotId}      - Starts the chalmers.tda593.y2018.g11.rovu.robot",
-								"chalmers.tda593.y2018.g11.rovu.robot {robotId}      - selects the chalmers.tda593.y2018.g11.rovu.robot",
+								"start {robotId}      - Starts the robot",
+								"robot {robotId}      - selects the robot",
 								"robots               - get info about available robots",
 								"map                  - show the current map",
 								"points               - show the total amount of points rewarded",

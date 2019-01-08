@@ -32,7 +32,7 @@ public class MainWindow extends Application {
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Label label0 = new Label("Current chalmers.tda593.y2018.g11.rovu.robot:");
+        Label label0 = new Label("Current robot:");
         GridPane.setHalignment(label0, HPos.RIGHT);
         grid.add(label0, 1, 0);
 

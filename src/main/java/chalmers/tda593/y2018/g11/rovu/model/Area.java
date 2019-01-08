@@ -13,7 +13,7 @@ public class Area {
     }
 
     /**
-     * With the coordinate of a chalmers.tda593.y2018.g11.rovu.robot, check if said chalmers.tda593.y2018.g11.rovu.robot
+     * With the coordinate of a robot, check if said robot
      * resides within the area.
      * @param coordinate
      * @return

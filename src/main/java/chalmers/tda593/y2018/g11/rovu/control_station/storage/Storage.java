@@ -17,12 +17,12 @@ class Storage implements StatusDAO, MissionDAO, EnvironmentDAO, RewardDAO {
     private Environment map = new Environment(0, 0, null, null, null);
 
     @Override
-    public void store(Mission mission) {
+    public synchronized void store(Mission mission) {
         missions.put(mission.getAssignedRobot(), mission);
     }
 
     @Override
-    public Collection<Mission> getMissions() {
+    public synchronized Collection<Mission> getMissions() {
         return new ArrayList<>(missions.values());
     }
 

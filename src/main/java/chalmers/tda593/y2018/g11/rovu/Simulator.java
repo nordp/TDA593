@@ -91,19 +91,19 @@ public class Simulator {
 			Map<Integer, ControlStationInterface> controlStationInterfaces = new HashMap<>();
 
 
-			SimulatorRobot robot1 = new SimulatorRobot(new Point(7, -7), "Robot 1");
+			SimulatorRobot robot1 = new SimulatorRobot(new Coordinate(2,2), "Robot 1");
 			controlStationInterfaces.put(1,RobotFactory.build(1,robot1,robot1));
 			robots.add(robot1);
 
-			SimulatorRobot robot2 = new SimulatorRobot(new Point(7, -5), "Robot 2");
+			SimulatorRobot robot2 = new SimulatorRobot(new Coordinate(2, 6), "Robot 2");
 			controlStationInterfaces.put(2, RobotFactory.build(2, robot2, robot2));
 			robots.add(robot2);
 
-			SimulatorRobot robot3 = new SimulatorRobot(new Point(7, -3), "Robot 3");
+			SimulatorRobot robot3 = new SimulatorRobot(new Coordinate(2, 10), "Robot 3");
 			controlStationInterfaces.put(3, RobotFactory.build(3, robot3, robot3));
 			robots.add(robot3);
 
-			SimulatorRobot robot4 = new SimulatorRobot(new Point(7, -1), "Robot 4");
+			SimulatorRobot robot4 = new SimulatorRobot(new Coordinate(2, 14), "Robot 4");
 			controlStationInterfaces.put(4, RobotFactory.build(4, robot4, robot4));
 			robots.add(robot4);
 

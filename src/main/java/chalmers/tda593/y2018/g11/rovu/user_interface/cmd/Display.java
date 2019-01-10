@@ -144,6 +144,8 @@ public class Display {
 			}
 		    else if(parts.length > 0){
 				switch (parts[0]){
+					case "demo":
+						runDemo();
 					case "start":
 						System.out.printf("Starting all robots%n");
 						operatorInterface.getStatuses().forEach((Status status) -> {
@@ -171,6 +173,8 @@ public class Display {
 						break;
 					case "help":
 						String[] commands = {
+
+								"demo				  - Run demo commands",
 								"exit                 - Quits application",
 								"stop                 - Stops all robots",
 								"stop  {robotId}      - Stops the robot",
@@ -196,7 +200,47 @@ public class Display {
 	    }
     }
 
-    private void printPoints(){
+	private void runDemo() {
+		operatorInterface.assignAction(1, new ChangeColourInstruction());
+		operatorInterface.assignAction(2, new ChangeColourInstruction());
+		operatorInterface.assignAction(3, new ChangeColourInstruction());
+		operatorInterface.assignAction(4, new ChangeColourInstruction());
+		List<Coordinate> missionPoints = new ArrayList<>();
+
+
+		missionPoints.add(new Coordinate(10,1));
+		missionPoints.add(new Coordinate(14,2));
+		missionPoints.add(new Coordinate(10,1));
+		missionPoints.add(new Coordinate(2,2));
+
+		operatorInterface.assignMission(new Mission(1,missionPoints), Strategy.GIVEN_ORDER);
+		missionPoints.clear();
+
+        missionPoints.add(new Coordinate(10,2));
+        missionPoints.add(new Coordinate(14,2));
+        missionPoints.add(new Coordinate(10,2));
+        missionPoints.add(new Coordinate(2,6));
+		operatorInterface.assignMission(new Mission(2,missionPoints), Strategy.GIVEN_ORDER);
+		missionPoints.clear();
+		missionPoints.add(new Coordinate(5,10));
+        missionPoints.add(new Coordinate(10,3));
+        missionPoints.add(new Coordinate(14,2));
+        missionPoints.add(new Coordinate(10,3));
+        missionPoints.add(new Coordinate(5,10));
+        missionPoints.add(new Coordinate(2,10));
+		operatorInterface.assignMission(new Mission(3,missionPoints), Strategy.GIVEN_ORDER);
+		missionPoints.clear();
+        missionPoints.add(new Coordinate(5,14));
+        missionPoints.add(new Coordinate(10,4));
+        missionPoints.add(new Coordinate(14,2));
+        missionPoints.add(new Coordinate(10,4));
+        missionPoints.add(new Coordinate(5,14));
+        missionPoints.add(new Coordinate(2,14));
+		operatorInterface.assignMission(new Mission(4,missionPoints), Strategy.GIVEN_ORDER);
+		missionPoints.clear();
+	}
+
+	private void printPoints(){
     	int reward = operatorInterface.getRewardPoints();
 		System.out.println("The current total amount of points rewarded: " + reward);
 	}

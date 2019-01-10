@@ -32,48 +32,6 @@ The interface subsystem provides the relevant information about the environment 
 \subsection*{Interface Descriptions}
 Descriptions and methods of interface connections found between the different components.
 
-// Diagram Version 1 - Version 2 desc below.
-\subsubsection{IConnection}
-Provides a connection between the controlstation and the robot. Allows the control station to send and retrieve data from the robots inside the simulation.
-Methods:
-\begin{itemize}
-    \item public Status getStatus()
-	\item public void notify(Instruction instruction)
-\end{itemize}
-
-\subsubsection{Sensor}
-Used as a general access point to retrieve sensor data.
-	\begin{itemize}
-	    \item Coordinate getCoordinate();
-	    \item boolean checkCamera();
-	    \item boolean checkObstacles();
-        \item boolean isInMotion();
-	\end{itemize}
-    
-\subsubsection{Actuator}
-Used to access actuators such as the motors for moving and color change
-Methods:
-\begin{itemize}
-    \item void goTo(Coordinate coordinate);
-	\item void stop();
-	\item void changeColour();
-\end{itemize}
-
-\subsubsection{Send instructions}
-Used by the User Interface to retrieve new data about the environment and send Instruction as well as mission data to be handled and relayed to the robot.
-Methods:
-\begin{itemize}
-    \item Status getStatus(int id)
-    \item public Collection<Status> getStatuses()
-    \item public void assignMission(Mission mission, Strategy strategy)
-    \item public void assignAction(int id, Instruction instruction)
-    \item public int getRewardPoints() 
-    \item public Environment getEnv()
-\end{itemize}
-
-
----- VERSION 2 ----
-
 // Diagram Version 2 desc
 \subsubsection{Storage}
 Realization of the split storage interfaces to retieve and store data about the simulation, such as the contents of the environment and the status of robots within it.

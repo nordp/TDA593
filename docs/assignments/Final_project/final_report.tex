@@ -1,6 +1,76 @@
+
+\section*{The ROVU System}
+The assignment was to produce a ROVU system. 
+\subsection*{Our interpretation of the ROVU System}
+We interpreted the project description and all additional information to come up with a system where operators through a control station can control a set of robots. 
+We have taken care to keep the operator interface, control station and robot software very separate so that it might run on different computers/servers/units in the future.
+Furthermore we have a very loose connection to the provided simulator so that we easily could use the system for real robots.
+\subsection*{This Document}
+This documents presents all models that were used in the creation of the ROVU-software. First are all descriptions and justifications followed by the actual models in the appendix. Most models have also been included in .svg format in the zip containing this report for easier reading.
+\newpage
+\tableofcontents
+\newpage
 \input{docs/assignments/Final_project/use_case_diagram.tex}
+\newpage
 \input{docs/assignments/Final_project/domain_model.tex}
+\newpage
 \input{docs/assignments/Final_project/component_diagram.tex}
+\newpage
 \input{docs/assignments/Final_project/class_diagram.tex}
+\newpage
 \input{docs/assignments/Final_project/feature_model.tex}
+\newpage
 \input{docs/assignments/Final_project/sequence_diagram.tex}
+
+\newpage
+\section{Appendix}
+\subsection{Use Case Diagram}
+\begin{figure}[H]
+\includegraphics[width=16cm]{docs/assignments/Final_project/use_case_diagram.png}
+\end{figure}
+\newpage
+
+\subsection{Domain Model Diagram}
+\begin{figure}[H]
+\includegraphics[width=22cm,angle=-90]{docs/assignments/Final_project/domain_model.png}
+\end{figure}
+\newpage
+
+\subsection{Component Diagram}
+\begin{figure}[H]
+    \includegraphics[width=22cm,angle=-90]{docs/assignments/Final_project/component_diagram.png}
+\end{figure}
+\newpage
+
+\subsection{Class Diagram}
+\begin{figure}[H]
+    \includegraphics[width=22cm,angle=-90]{docs/assignments/Final_project/class_diagram.png}
+\end{figure}
+\newpage
+
+\subsection{Feature Model Diagram}
+\begin{figure}[H]
+    \includegraphics[width=22cm,angle=-90]{docs/assignments/Final_project/feature_model.png}
+\end{figure}
+\newpage
+
+
+\subsection{Sequence Diagrams}
+\subsubsection{Change of Strategy}
+\begin{figure}[H]
+\includegraphics[width=15cm]{docs/assignments/Final_project/seq_diagram1.png}
+\end{figure}
+\newpage
+
+\subsubsection{Completing a Mission}
+\begin{figure}[H]
+\includegraphics[width=15cm]{docs/assignments/Final_project/seq_diagram2.png}
+\end{figure}
+\newpage
+
+\subsubsection{Calculate Reward}
+\begin{figure}[H]
+\includegraphics[width=15cm]{docs/assignments/Final_project/seq_diagram3.png}
+\end{figure}
+\newpage
+

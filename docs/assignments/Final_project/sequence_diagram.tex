@@ -1,28 +1,27 @@
-\section{Explanation of Sequence diagrams}
+\section{Sequence diagrams}
+\subsection{Completing a mission}
+  This diagram models the sequence of actions that occur between assigning a mission and having it completed by a robot. The selected abstraction level for timelines are package-bases, as our system is designed in a way that each package could be a detached program on a separate machine.
+ \begin{itemize}
+    \item Starts when the operator inputs the mission to the interface.
+    \item The control station (Conductor) calculates a strategy for completing the given mission i.e sort the collection of mission points according to the given strategy.
+    \item The control station sends one movement instruction at a time to the robot in order to have full control of the robot. It goes on to check if the robot has reached the next location, if that is the case the control station will send a the next location in order to progress in the mission. This procedure will be done in a loop until all the instructions are completed.
+    \item Also in parallel, as the operator may want information about the robot, the control station will keep an updated storage which the user interface can query.
+\end{itemize}
+\subsection{Change of strategy}
+In our system, changing the strategy of a mission is considered equivalent to assigning a new mission with a different strategy. This results in the sequence diagram being very similar to the previous one.
 \begin{itemize}
-    \item Change of strategy 
-       \begin{itemize}
-           \item Starting by that the operator changes the strategy to a certain mission
-           \item As in the "Completing a mission" diagram the calculations/strategizing of the mission again, since it is technically now a new mission since it is not the same strategy. And since we are going with an abstraction level that is rather high these two sequences will look the same. The purpose of the sequence diagrams should be to visualise the flow of the program when a certain scenario comes up. To show the main idea, therefore it is not needed with all details and therefore we have chosen to have a high abstraction level in these diagrams. 
-           \item The robot stands still for 2 seconds.
-           \item When that part is done , send one instruction at a time and checks if the instruction is completed. Do this in a loop until all the instructions is completed and therefore completed the mission.
-           \item It also stated in this diagram that the operator might want information about the program or robot. So the robot will send its' status to control station and control station stores that in its' current state and sends that state to the user interface in order for the operator to see the acquired information.
-       \end{itemize}
-    \item Completing a mission
-       \begin{itemize}
-           \item Similar to the change of strategy diagram since changing a strategy is basically changing a mission so the mission have to be ran again
-           \item Starting by that the operator gives the mission to the interface.
-           \item The control station (Conductor) calculates a strategy for completing the given mission i.e sort the collection instructions so the robot wont break any rules and reaches its' goal.
-           \item The control station send one instruction each to the robot in order to have full control of the robot if emergency stop or anything is needed. Checks if the instruction is done, if that is the case the control station will send a new instruction in order to progress in the mission. This procedure will be done in a loop until all the instructions are completed.
-           \item Also in parallel, if the operator wants information of the robot/program it will be sent all the way from the robot and control station to the user interface. So the robot will send its' status which control station will store in the control station state and send the current state of the control station to the user interface in order for the operator to see the information that was acquired.   
-       \end{itemize}
-    \item Calculate reward
-       \begin{itemize}
-           \item The point rewarder contains a process loop which waits 20 seconds between each loop.
-           \item In order to calculate the reward points, the point rewarder asks the storage package to get the locations of all robots and the areas in the environment.
-           \item Asks the current procedure how many points it wants to reward given the locations and areas.
-           \item The global stored points are increased in the storage module with the increment that was rewarded.
-           \item Lastly, the procedure calculates whether the current one will stay or if it should change to another procedure.
-           \item In this diagram the abstraction level is rather lower than the previous ones. The reason to this is that the sequence for this scenario is only in the control station package so in order to show what is really going the abstraction level needed to be lower for this case.
-       \end{itemize}
+    \item Starts when the operator inputs the mission to the interface.
+    \item The control station (Conductor) calculates a strategy for completing the given mission i.e sort the collection of mission points according to the given strategy.
+    \item The control station sends one movement instruction at a time to the robot in order to have full control of the robot. It goes on to check if the robot has reached the next location, if that is the case the control station will send a the next location in order to progress in the mission. This procedure will be done in a loop until all the instructions are completed.
+    \item Also in parallel, as the operator may want information about the robot, the control station will keep an updated storage which the user interface can query.
+\end{itemize}
+\subsection{Calculate reward}
+This final sequence diagram illustrates the process held within the \textit{Point Rewarder} in the control station.
+\begin{itemize}
+    \item The point rewarder process is initiated when the control station is started.
+    \item In order to calculate the reward points, the point rewarder asks the storage package to get the locations of all robots and the areas in the environment.
+    \item It asks the current procedure how many points it will reward given the locations and areas.
+    \item The global stored points are increased in the storage module with the increment that was rewarded.
+    \item Lastly, the procedure calculates whether the current one will stay or if it should change to another procedure.
+    \item In this diagram the abstraction level is lower than the previous ones. The reason for this is that the sequence for this scenario is only in a single package. In order to show what is really going the abstraction level needed to be lower for this case.
 \end{itemize}

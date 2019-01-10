@@ -1,6 +1,6 @@
-\section{Domain Description}
-The domain describes important concepts in our domain. 
-It does not describe the concepts of our system but rather how the domain our system operates on works. 
+\section{Domain Model}
+The domain model describes important concepts in our domain. 
+It does not describe the concepts of our system but rather how the domain our system is built for works. 
 Therefore internal concepts as Instructions (see class diagram) are not mentioned in the domain diagram as it's something that only exists inside of our system.
 \\ \\
 An environment is built up by areas, obstacles and boundaries.
@@ -9,7 +9,7 @@ Boundaries are described as constraints to an area. Areas can be either physical
 The obstacles, can be static or dynamic where robots are the only dynamic obstacles. 
 \\ \\
 The domain also contains a control station that the operator interface connects to.
-The control station has the reward procedure and by them the reward points.
+The control station has the reward procedure and through it the reward points.
 It also communicates with all the robots through the networking device. It's also worth mentioning that each robot and the control station has their own networking devices that are connected to each other.
 \\ \\
 As previously mentioned there are also the concept of robots which exists within the environment.
@@ -22,7 +22,7 @@ Missions are a set of points that a robot should visit. A strategy (a criteria t
 This section aims at explaining relations, or missing relations that someone looking at our model might think odd. It also aims at justifying our modelling decisions.
 \\ \\
 Missions are related to robots in the domain model while they are hold by the control station in the system. 
-This is because the mission still belongs to a specific robots and therefore the concepts are closely related. 
+This is because the mission still belongs to a specific robot and therefore the concepts are closely related. 
 \\ \\
 The networking device does not exist in our system but has been replaced by a more general interface that like the network-device is used for communication between the robots and control station. We chose to leave the network device in the domain model because it accurately describes the intended domain with physical robots.
 \\ \\

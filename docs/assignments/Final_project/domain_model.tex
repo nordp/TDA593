@@ -1,0 +1,33 @@
+\section{Domain Description}
+The domain describes important concepts in our domain. 
+It does not describe the concepts of our system but rather how the domain our system operates on works. 
+Therefore internal concepts as Instructions (see class diagram) are not mentioned in the domain diagram as it's something that only exists inside of our system.
+\\ \\
+An environment is built up by areas, obstacles and boundaries.
+Boundaries are described as constraints to an area. Areas can be either physical or logical.
+%A physical area is encapsulated by physical boundaries, while the boundaries in a logical area doesn't constrain anything. 
+The obstacles, can be static or dynamic where robots are the only dynamic obstacles. 
+\\ \\
+The domain also contains a control station that the operator interface connects to.
+The control station has the reward procedure and by them the reward points.
+It also communicates with all the robots through the networking device. It's also worth mentioning that each robot and the control station has their own networking devices that are connected to each other.
+\\ \\
+As previously mentioned there are also the concept of robots which exists within the environment.
+Each robot can have a mission which it performs and communicates with the control station through the networking device. 
+The robots also have a set of sensors, used to detect the environment around them, and actuators, used to act. The robot can also be seen as an obstacle by other robots.
+\\ \\
+Missions are a set of points that a robot should visit. A strategy (a criteria to be fulfilled that may change the order of which the robot wants to visit points) will always be applied to a mission.
+\subsection{Worth noting}
+%intro
+This section aims at explaining relations, or missing relations that someone looking at our model might think odd. It also aims at justifying our modelling decisions.
+\\ \\
+Missions are related to robots in the domain model while they are hold by the control station in the system. 
+This is because the mission still belongs to a specific robots and therefore the concepts are closely related. 
+\\ \\
+The networking device does not exist in our system but has been replaced by a more general interface that like the network-device is used for communication between the robots and control station. We chose to leave the network device in the domain model because it accurately describes the intended domain with physical robots.
+\\ \\
+% actuators and sensors
+In our system actors and sensors have been grouped together into two interfaces, though they do remain separated concepts and are therefore displayed as such in the domain model.
+\\ \\
+% robots in environment
+In the domain model robots are a clear part of the environment, that's where they exist. In our system however the robots are not associated to the environment but multiple components use the robots and the environment in conjunction with each other.

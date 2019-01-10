@@ -1,0 +1,133 @@
+\section{Component Diagram}
+After identifying the main subsystems being the Robot, Control station and the Interface, the components responsible for services and functionality were created for each subsystem. They are described for each subsystem below.
+\subsection*{Subsystem 1: Robot}
+The Robot subsystem runs on the rover and consists of sensors, actuators, a communications device and a controller.
+\subsubsection*{Sensors}
+This component encompasses all the different kinds of sensors which are present 
+
+\subsubsection*{Controller}
+The main system/program of the robot. The controller component requires sensor interfaces for input, communication interfaces for talking thith the controll station and actuator interfaces for doing stuff.
+
+\subsubsection{Actuators}
+Representing the different parts of the robots such as the motor,wheels and colour change.
+\newline
+-- VERSION 1 EXCLUSIVE --
+\subsubsection{ControlStationInterface}
+This component exists as the gateway to the robot subsystem. 
+
+\subsection*{Subsystem 2: Control station}
+The control station orchestrates the communication between the operators and robots by offering interfaces to the other subsystems.
+\subsubsection*{RobotInterface}
+Works as a gateway between the control station and the robot, sending instructions for the robots such as next mission point, stop etc.
+\subsubsection*{Conductor}
+The conductors is responsible for calculating a specific instruction for the robot, given a mission, reward procedure and strategy. This component realises the assigned mission interface to get new missions and make use of the dispatch interface to send instructions.
+\subsubsection*{Point Rewarder}
+Calculates points given the information from the robot status interface. Provides the number of points and the current reward procedure through realisation of interfaces.
+\subsubsection*{Storage}
+Keeps track of all robots and areas and provide data about the these through the Store interface. Realises the store interface to retrieve and store the data.
+
+\subsection*{Subsystem 3: User Interface}
+The interface subsystem provides the relevant information about the environment to operators and allows them to design missions and send commands. Since the design of the interface may vary, this subsystem contains adapter components which may be used for implementing a specific interface.
+
+\subsection*{Interface Descriptions}
+Descriptions and methods of interface connections found between the different components.
+
+// Diagram Version 1 - Version 2 desc below.
+\subsubsection{IConnection}
+Provides a connection between the controlstation and the robot. Allows the control station to send and retrieve data from the robots inside the simulation.
+Methods:
+\begin{itemize}
+    \item public Status getStatus()
+	\item public void notify(Instruction instruction)
+\end{itemize}
+
+\subsubsection{Sensor}
+Used as a general access point to retrieve sensor data.
+	\begin{itemize}
+	    \item Coordinate getCoordinate();
+	    \item boolean checkCamera();
+	    \item boolean checkObstacles();
+        \item boolean isInMotion();
+	\end{itemize}
+    
+\subsubsection{Actuator}
+Used to access actuators such as the motors for moving and color change
+Methods:
+\begin{itemize}
+    \item void goTo(Coordinate coordinate);
+	\item void stop();
+	\item void changeColour();
+\end{itemize}
+
+\subsubsection{Send instructions}
+Used by the User Interface to retrieve new data about the environment and send Instruction as well as mission data to be handled and relayed to the robot.
+Methods:
+\begin{itemize}
+    \item Status getStatus(int id)
+    \item public Collection<Status> getStatuses()
+    \item public void assignMission(Mission mission, Strategy strategy)
+    \item public void assignAction(int id, Instruction instruction)
+    \item public int getRewardPoints() 
+    \item public Environment getEnv()
+\end{itemize}
+
+
+---- VERSION 2 ----
+
+// Diagram Version 2 desc
+\subsubsection{Storage}
+Realization of the split storage interfaces to retieve and store data about the simulation, such as the contents of the environment and the status of robots within it.
+Methods:
+\begin{itemize}
+    \item  public void store(Mission mission)
+    \item  public Collection<Mission> getMissions()
+    \item public Mission getMission(int assignedRobot)
+    \item public int getReward()
+    \item public void addReward(int points)
+    \item public void resetReward()
+    \item public void store(Status robot)
+    \item public Status getStatus(int id)
+    \item public Collection<Status> getStatuses()
+    \item public Collection<Integer> getRobotIds()
+    \item public void store(Environment current)
+    \item public Environment getEnvironment()
+\end{itemize}
+
+\subsubsection{OperatorInterface}
+Used by the User Interface to retrieve new data about the environment and send Instruction as well as mission data to be handled and relayed to the robot.
+Methods:
+\begin{itemize}
+    \item Status getStatus(int id)
+    \item public Collection<Status> getStatuses()
+    \item public void assignMission(Mission mission, Strategy strategy)
+    \item public void assignAction(int id, Instruction instruction)
+    \item public int getRewardPoints() 
+    \item public Environment getEnv()
+\end{itemize}
+
+\subsubsection{ControlStationInterface}
+Provides a connection between the controlstation and the robot. Allows the control station to send and retrieve data from the robots inside the simulation.
+Methods:
+\begin{itemize}
+    \item public Status getStatus()
+	\item public void notify(Instruction instruction)
+\end{itemize}
+
+\subsubsection{Sensor}
+Used as a general access point to retrieve sensor data.
+Methods:
+\begin{itemize}
+    \item Coordinate getCoordinate();
+	\item boolean checkCamera();
+	\item boolean checkObstacles();
+    \item boolean isInMotion();
+\end{itemize}
+
+\subsubsection{Actuator}
+Used to access actuators such as the motors for moving and color change
+Methods:
+\begin{itemize}
+    \item void goTo(Coordinate coordinate);
+	\item void stop();
+	\item void changeColour();
+\end{itemize}

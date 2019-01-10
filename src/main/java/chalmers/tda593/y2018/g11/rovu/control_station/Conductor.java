@@ -7,6 +7,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 
 /**
@@ -17,6 +19,7 @@ import java.util.Map;
 class Conductor implements Runnable {
     private RobotInterface robotInterface;
     private Map<Area,Integer> occupied;
+    private Lock occupiedLock = new ReentrantLock();
 
     Conductor(RobotInterface robotInterface){
         this.robotInterface = robotInterface;
@@ -68,6 +71,7 @@ class Conductor implements Runnable {
                         robotInterface.dispatch(assignee.getId(), new StopInstruction(true));
                     }
                 } else {
+                    occupiedLock.lock();
                     Area target = null;
                     for (Area physical : StorageBroker.getMapDAO().getEnvironment().getPhysicalAreas()) {
                         if (physical.isInArea(nextStep) ){
@@ -77,12 +81,16 @@ class Conductor implements Runnable {
                             // Leaving room -> wait 2 seconds
                             try  { Thread.sleep( 2000 ); }
                             catch (InterruptedException ie)  {}
-
+                            Area leaving = physical;
                             // Wait 2 seconds before making room available
                             new Thread(() -> {
                                 try  { Thread.sleep( 3000 ); }
                                 catch (InterruptedException ie)  {}
-                                occupied.put(physical,0);
+                                this.occupiedLock.lock();
+                                if (occupied.get(leaving).equals(assignee.getId())){
+                                    occupied.put(leaving,0);
+                                }
+                                this.occupiedLock.unlock();
                             }).start();
                         }
                     }
@@ -96,6 +104,7 @@ class Conductor implements Runnable {
                         robotInterface.dispatch(assignee.getId(), new StopInstruction(false));
                         robotInterface.dispatch(assignee.getId(), new MovementInstruction(true,nextStep));
                     }
+                    occupiedLock.unlock();
                 }
             }
         }

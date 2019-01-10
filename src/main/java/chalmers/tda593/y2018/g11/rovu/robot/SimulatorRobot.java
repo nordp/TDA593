@@ -9,15 +9,19 @@ import javax.vecmath.Color3f;
 public class SimulatorRobot extends AbstractRobotSimulator implements Actuator, Sensor {
 	// Constructor takes cmd point because its implementation specific
 
-	private double zConversion = 8;
-	private double xConversion = 8;
+	private static double zConversion = 8;
+	private static double xConversion = 8;
 	private boolean isInMotion = false;
 
 	public SimulatorRobot(Point position, String name) {
 		super(position, name);
 	}
 
-	@Override
+    public SimulatorRobot(Coordinate position, String name) {
+		super(coordinateToPoint(position,xConversion,zConversion), name);
+	}
+
+    @Override
 	public String toString() {
 		return "Robot " + this.getName();
 	}

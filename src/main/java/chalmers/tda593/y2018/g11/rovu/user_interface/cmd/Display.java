@@ -208,30 +208,36 @@ public class Display {
 		List<Coordinate> missionPoints = new ArrayList<>();
 
 
-		missionPoints.add(new Coordinate(7,14));
-		missionPoints.add(new Coordinate(1,14));
-		missionPoints.add(new Coordinate(5,14));
-		missionPoints.add(new Coordinate(8,2));
-		missionPoints.add(new Coordinate(14,3));
-		missionPoints.add(new Coordinate(1,1));
-		missionPoints.add(new Coordinate(6,2));
+		missionPoints.add(new Coordinate(10,1));
+		missionPoints.add(new Coordinate(14,2));
+		missionPoints.add(new Coordinate(10,1));
+		missionPoints.add(new Coordinate(2,2));
 
 		operatorInterface.assignMission(new Mission(1,missionPoints), Strategy.GIVEN_ORDER);
-		missionPoints.remove(new Coordinate(6,2));
-		missionPoints.add(new Coordinate(6,4));
-		operatorInterface.assignMission(new Mission(3,missionPoints), Strategy.GIVEN_ORDER);
+		missionPoints.clear();
+
+        missionPoints.add(new Coordinate(10,2));
+        missionPoints.add(new Coordinate(14,2));
+        missionPoints.add(new Coordinate(10,2));
+        missionPoints.add(new Coordinate(2,6));
+		operatorInterface.assignMission(new Mission(2,missionPoints), Strategy.GIVEN_ORDER);
 		missionPoints.clear();
 		missionPoints.add(new Coordinate(5,10));
-		missionPoints.add(new Coordinate(1,10));
-		missionPoints.add(new Coordinate(10,12));
-		missionPoints.add(new Coordinate(5,5));
-		missionPoints.add(new Coordinate(1,5));
-		missionPoints.add(new Coordinate(8,8));
-
-		operatorInterface.assignMission(new Mission(2,missionPoints), Strategy.GIVEN_ORDER);
-		missionPoints.remove(new Coordinate(8,8));
-		missionPoints.add(new Coordinate(8,6));
+        missionPoints.add(new Coordinate(10,3));
+        missionPoints.add(new Coordinate(14,2));
+        missionPoints.add(new Coordinate(10,3));
+        missionPoints.add(new Coordinate(5,10));
+        missionPoints.add(new Coordinate(2,10));
+		operatorInterface.assignMission(new Mission(3,missionPoints), Strategy.GIVEN_ORDER);
+		missionPoints.clear();
+        missionPoints.add(new Coordinate(5,14));
+        missionPoints.add(new Coordinate(10,4));
+        missionPoints.add(new Coordinate(14,2));
+        missionPoints.add(new Coordinate(10,4));
+        missionPoints.add(new Coordinate(5,14));
+        missionPoints.add(new Coordinate(2,14));
 		operatorInterface.assignMission(new Mission(4,missionPoints), Strategy.GIVEN_ORDER);
+		missionPoints.clear();
 	}
 
 	private void printPoints(){

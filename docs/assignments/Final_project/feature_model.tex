@@ -1,0 +1,14 @@
+\section{Feature Model}
+It was our understanding that a feature model’s role is to walk a user through the product’s features and their relationships to each other, as well as possible variants the product could manifest in. In this feature model, we represented our idea of our final work, in a user-accessible way.
+\subsection{Introduction and initial division of features}
+While in our actual project we have three equal in importance modules – Robots, User Interface and the Control Station, from a user perspective there will only be the Robots and the means for the users to control them (the Control Station), with the User Interface being a feature of Control Station instead. This distinction can further be proven, by the dependency between the User Interface and the Control Station – if there were no means to interact with the robots, there would be no point in User Interface as a feature.
+\\ \\
+Thus we arrive at our first division: the Robot feature, and the Control Station feature.
+\subsection{Robot feature}
+Robots follow the initial requirements of the assignment, with a few additional, optional features. They can navigate to certain points, set by the users, but can also handle failures, avoid obstacles and initiate an emergency stop routine. There are also several routines they can engage in once they are done fulfilling a mission: they can “go home”, i.e. return to their starting point, they can stay on the spot, or they could promptly exit the area. 
+\subsection{Control Station feature}
+The Control Station side of the system represents all means of interaction with the robots, the user has access to. The user’s main interaction is with the User Interface, where the robots are visualised on a map, and the sum of total reward points is displayed. This all can be done in two ways – a graphical user interface variant, or a text-based option. The GUI has the additional optional feature of displaying a camera feed for a certain robot, while if the text-based option is implemented, there is room for a text-to-speech feature.
+\\ \\
+The other role the Control Station plays is that of communicating with the robot by sending instructions its way. These instructions can also be divided in two categories, although both kinds are mandatory for all system variants – the station must be able to send “immediate” instructions (for example, an emergency stop or a pause of action – instructions with higher priority than any other). The station must also be able to strategize a mission – receive a set of points from the user, and a strategy (I.e logic to be applied to the point order), then apply the strategy to the points in order to output a list of instructions for the robot. 
+\\ \\
+Details of the communication between robots and the Control Station have been omitted in the feature model altogether, as they were considered irrelevant to potential customers or prospective buyers of the system.

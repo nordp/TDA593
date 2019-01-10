@@ -1,0 +1,53 @@
+\section{Use Cases}
+In this section we will look at the use cases we started this project with, as well as reason some of the decisions we have had to make as a group.
+\subsection{Use Case Prioritization}
+At the very beginning of the project, when we were defining our use cases, we were faced with the vital decision of which of these use cases we were going to pick up and assign to our team members. It was clear we couldn't cover all important cases, since our team was fairly small, so we decided we would try to spread the use cases we pick as far throughout the entire system as possible. 
+\\ \\
+What this meant was that some features wouldn't be represented by an official use case in our diagram and in our documentation, but they would essentially either fall under the umbrella of other use cases, or be represented by other use cases which strongly resemble their functionality.
+\\ \\
+As a result, in our use case diagram you can follow a rough sketch of the essential system functionality. Read more about the use cases represented, in the list below:
+
+\subsection{Use Cases}
+\begin{itemize}
+    \item Assign Mission
+\begin{itemize}
+    \item Actor: Operators, Control Station
+    \item Goal: The control station receives the mission assigned by the operator
+    \item Description: The operator designs a mission - a set of points for the robot to visit - then sends it off to the control station through the interface. This use-case triggers the Calculate Strategy use case in the control station.
+\end{itemize}
+\item Calculate Strategy
+\begin{itemize}
+    \item Actor: Control Station
+    \item Goal: Get a route which completes the mission using the given strategy.
+    \item Description: Upon receiving a set of points and a strategy, the control station uses its knowledge of the environment - any well known physical or logical areas, and their respective physical obstacles, then calculates the route for the mission execution.
+\end{itemize}
+\item Navigate to Point
+\begin{itemize}
+    \item Actor: Robot
+    \item Goal: Reach a specific geographical point.
+    \item Description: Once the mission has been broken down into steps, the robot executes them in sequence. Each step navigation is triggered by the step being reached in the list. After this, the robot calculates the angle of its next movement, the distance it needs to go, and performs the navigation. On the way, it avoids obstacles with help of different kinds of sensors and its knowledge about the surroundings.
+\end{itemize}
+\item Handle Failure
+\begin{itemize}
+    \item Actor: Robot
+    \item Goal: Handle any failure that occurs to the Robot.
+    \item Description: In order the not shut down, the Robot must handle when something is wrong for example, a wheel is broken and there is no guarantee that the connecting between the Control Station and the Robot is down so the Robot has handle the problem itself.
+\end{itemize}
+\item Update Procedure
+\begin{itemize}
+    \item Actor: Control Station
+    \item Goal: Switch the current point calculation procedure according to their definition.
+    \item Description: In order to fairly reward points based on the robots' location within physical and logical areas, two separate procedures are used. When the control station realises the conditions for switching the reward procedure are met.
+\end{itemize}
+\item Reward Points and Update Interface
+\begin{itemize}
+    \item Actor: Control Station
+    \item Goal: Rewarding the points that have been acquired and show the operator that this indeed is the case. 
+    \item Description: The points are calculated so now the Control Station just needs to reward them to the Operator and doing so by changing the interface so that it is shown that points have been rewarded.
+\end{itemize}
+\end{itemize}
+
+\subsection{Final thoughts}
+We were once asked about the Emergency Stop and its notable absence from our use case diagram. While we do think that this feature is vital to the functionality of our ROVU system, we deemed it was quite similar to Navigate to Point functionality-wise: in its actuality it's just an instruction to "go" to the robot's current stop, with some extra priority. 
+\\ \\
+We aimed to distinguish between important use cases and \textit{descriptive, unique} use cases, and we modelled our use case diagram only with the latter.

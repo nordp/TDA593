@@ -11,18 +11,18 @@ All packages except for model are loosely coupled to allow for different system 
 The whole system can in its current configuration be initiated by calling the build method on the various Factory classes.
 
 \subsection{Robot Package}
-The robot package have a controller class which takes care of periodically collecting sensor information and performing actions. This is done with the Sensor and Actuator interfaces which SimulatorRobot implements by inheriting the AbstractRobot class from the simulator package. Another configuration may then use another implementation of Sensor and Actuator to control a real robot.
+The robot package has a controller class which takes care of periodically collecting sensor information and performing actions. This is done with the Sensor and Actuator interfaces which SimulatorRobot implements by inheriting the AbstractRobot class from the simulator package. Another configuration may then use another implementation of Sensor and Actuator to control a real robot.
 \\ \\
 Routines are used to describe the logic, given a status for the robot they return an action which indicates what the robot should do. An action can then if given an actuator be executed. If the action is blocking then no other blocking action can be run. For example both move and emergency stop are blocking actions so only one of them can run but the colour action can run simultaneously.
 \\ \\
-ControlStationInterface is a interface for the control station which the control\_station package uses to communicate with the robot. This is done trough the getStatus and notify methods.
+ControlStationInterface is an interface for the control station which the control\_station package uses to communicate with the robot. This is done trough the getStatus and notify methods.
 
 \subsection{Control Station Package}
-The control\_station package orchestrates the robots and calculates the point based on the user input. Any user interface can get infomration about robots, points and environment as well as assign missions and actions to robots trough the OperatorInterface which then sends the missions to the conductor which handles the logic. Actions however bypass the conductor and go directly to the RobotInterface, allowing the user to send an emergency stop signal even if there is a fault in the conductor.
+The control\_station package orchestrates the robots and calculates the point based on the user input. Any user interface can get information about robots, points and environment as well as assign missions and actions to robots trough the OperatorInterface which then sends the missions to the conductor which handles the logic. Actions however bypass the conductor and go directly to the RobotInterface, allowing the user to send an emergency stop signal even if there is a fault in the conductor.
 \\ \\
 The conductor strategizes (order the points in) a mission with help of the Strategizer and tells the robot through simple instruction what to do to complete the mission. The conductor can at any time send new instructions to the robot if the mission changes or some kind of obstacle appears.
 \\ \\
-The RobotInterface keeps track of the robots and allow other parts of the control\_station to dispatch instructions to them. It also periodicly polls the robots for their status to make sure that the control\_station always have curretn status in its storage.
+The RobotInterface keeps track of the robots and allow other parts of the control\_station to dispatch instructions to them. It also periodically polls the robots for their status to make sure that the control\_station always have current status in its storage.
 \\ \\
 The PointRewarder keeps track of the current reward Procedure and periodically uses it to calculate points as well as calculating the next procedure through the current procedures update method.
 

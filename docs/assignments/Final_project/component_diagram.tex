@@ -1,28 +1,30 @@
 \section{Component Diagram}
-After identifying the main subsystems being the Robot, Control station and the Interface, the components responsible for services and functionality were created for each subsystem. They are described for each subsystem below.
+After identifying the main subsystems being the Robot, Control station and the Interface, the major components responsible for services and functionality were created for each subsystem. They are described for each subsystem below.
+
 \subsection*{Subsystem 1: Robot}
-The Robot subsystem runs on the rover and consists of sensors, actuators, a communications device and a controller.
+The Robot subsystem runs on the rover and consists of the components: sensors, actuators and a Controller.
+
 \subsubsection*{Sensors}
-This component encompasses all the different kinds of sensors which are present 
+This component encompasses all the different kinds of sensors which are present such as the camera and proximity sensor.
 
 \subsubsection*{Controller}
-The main system/program of the robot. The controller component requires sensor interfaces for input, communication interfaces for talking thith the controll station and actuator interfaces for doing stuff.
+The main system/program of the robot. The controller component requires sensor interfaces for input, controlstation interface for talking with the control station and an actuator interface for interacting with the actuators.
 
 \subsubsection{Actuators}
 Representing the different parts of the robots such as the motor,wheels and colour change.
-\newline
--- VERSION 1 EXCLUSIVE --
-\subsubsection{ControlStationInterface}
-This component exists as the gateway to the robot subsystem. 
 
 \subsection*{Subsystem 2: Control station}
 The control station orchestrates the communication between the operators and robots by offering interfaces to the other subsystems.
+
 \subsubsection*{RobotInterface}
-Works as a gateway between the control station and the robot, sending instructions for the robots such as next mission point, stop etc.
+Works as a gateway between the control station and the robot, sending instructions for the robots such as next mission point, stop etc. using the "OperatorInterface".
+
 \subsubsection*{Conductor}
-The conductors is responsible for calculating a specific instruction for the robot, given a mission, reward procedure and strategy. This component realises the assigned mission interface to get new missions and make use of the dispatch interface to send instructions.
+The conductors is responsible for calculating a specific instruction for the robot, given a mission, reward procedure and strategy. This component makes use of this information through the input received from the OperatorInterface.
+
 \subsubsection*{Point Rewarder}
-Calculates points given the information from the robot status interface. Provides the number of points and the current reward procedure through realisation of interfaces.
+Calculates points given the information from the robot status interface. Provides the number of points and the current reward procedure through the information retrieved from the storage interface.
+
 \subsubsection*{Storage}
 Keeps track of all robots and areas and provide data about the these through the Store interface. Realises the store interface to retrieve and store the data.
 
@@ -31,32 +33,34 @@ The interface subsystem provides the relevant information about the environment 
 
 \subsection*{Interface Descriptions}
 Descriptions and methods of interface connections found between the different components.
+Interface connections such as the "OperatorInterface" and the "ControlStationInteface" are not java interfaces but rather representations of the classes used as connectors between packages, containing functions to relay information between the subsystems.
 
-// Diagram Version 2 desc
 \subsubsection{Storage}
 Realization of the split storage interfaces to retieve and store data about the simulation, such as the contents of the environment and the status of robots within it.
+
 Methods:
 \begin{itemize}
     \item  public void store(Mission mission)
-    \item  public Collection<Mission> getMissions()
+    \item  public Collection\textless Mission\textgreater getMissions()
     \item public Mission getMission(int assignedRobot)
     \item public int getReward()
     \item public void addReward(int points)
     \item public void resetReward()
     \item public void store(Status robot)
     \item public Status getStatus(int id)
-    \item public Collection<Status> getStatuses()
-    \item public Collection<Integer> getRobotIds()
+    \item public Collection\textless Status\textgreater getStatuses()
+    \item public Collection\textless Integer\textgreater getRobotIds()
     \item public void store(Environment current)
     \item public Environment getEnvironment()
 \end{itemize}
 
 \subsubsection{OperatorInterface}
 Used by the User Interface to retrieve new data about the environment and send Instruction as well as mission data to be handled and relayed to the robot.
+
 Methods:
 \begin{itemize}
     \item Status getStatus(int id)
-    \item public Collection<Status> getStatuses()
+    \item public Collection\textless Status\textgreater getStatuses()
     \item public void assignMission(Mission mission, Strategy strategy)
     \item public void assignAction(int id, Instruction instruction)
     \item public int getRewardPoints() 
@@ -66,6 +70,7 @@ Methods:
 \subsubsection{ControlStationInterface}
 Provides a connection between the controlstation and the robot. Allows the control station to send and retrieve data from the robots inside the simulation.
 Methods:
+
 \begin{itemize}
     \item public Status getStatus()
 	\item public void notify(Instruction instruction)
@@ -73,6 +78,7 @@ Methods:
 
 \subsubsection{Sensor}
 Used as a general access point to retrieve sensor data.
+
 Methods:
 \begin{itemize}
     \item Coordinate getCoordinate();
@@ -83,6 +89,7 @@ Methods:
 
 \subsubsection{Actuator}
 Used to access actuators such as the motors for moving and color change
+
 Methods:
 \begin{itemize}
     \item void goTo(Coordinate coordinate);
